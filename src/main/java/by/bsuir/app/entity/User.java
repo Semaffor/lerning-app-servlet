@@ -9,6 +9,7 @@ public class User extends BaseEntity {
     public static final String PASSWORD = "password";
     public static final String ROLE = "role";
     public static final String BLOCKED = "is_blocked";
+    public static final String DELETED = "is_deleted";
 
     private String username;
     private String password;
@@ -16,11 +17,6 @@ public class User extends BaseEntity {
     private boolean blocked;
 
     private User() {}
-
-    @Override
-    public Long getId() {
-        return null;
-    }
 
     public String getUsername() {
         return username;
@@ -32,6 +28,10 @@ public class User extends BaseEntity {
 
     public Role getRole() {
         return role;
+    }
+
+    public boolean isDeleted() {
+        return deleted;
     }
 
     public boolean isBlocked() {
@@ -46,7 +46,7 @@ public class User extends BaseEntity {
         private Builder() {}
 
         public Builder setId(Long id) {
-            User.super.setId(id);
+            User.this.id = id;
             return this;
         }
 
@@ -67,6 +67,11 @@ public class User extends BaseEntity {
 
         public Builder setBlocked(boolean blocked) {
             User.this.blocked = blocked;
+            return this;
+        }
+
+        public Builder setDeleted(boolean deleted) {
+            User.this.deleted = deleted;
             return this;
         }
 
