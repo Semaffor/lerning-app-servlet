@@ -7,33 +7,22 @@ import by.bsuir.app.exception.DaoException;
 import by.bsuir.app.mapper.UserRowMapper;
 
 import java.sql.Connection;
-import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.Optional;
 
 public class UserDaoImpl extends AbstractDao<User> implements UserDao {
 
-    private static final String FIND_BY_LOGIN_AND_PASSWORD = "select * from user where " + User.NAME + " = ? and " +
-            User.PASSWORD + " = MD5(?);";
+    private static final String FIND_BY_LOGIN_AND_PASSWORD = "select * from user where %s=? and %s=MD5(?);";
+
     public UserDaoImpl(Connection connection) {
-        super(connection, new UserRowMapper());
+        super(connection, new UserRowMapper(), User.TABLE);
     }
 
     @Override
     public Optional<User> findUserByLoginAndPassword(String login, String password) throws DaoException{
-        return executeForSingleResultString(FIND_BY_LOGIN_AND_PASSWORD, new UserRowMapper(),
-        login, password);
-    }
-
-    @Override
-    public Optional<User> getById(Long id) {
-        return Optional.empty();
-    }
-
-    @Override
-    public void removeById(Long id) {
-
+        String query = String.format(FIND_BY_LOGIN_AND_PASSWORD, User.NAME, User.PASSWORD);
+        return executeForSingleResultString(query, new UserRowMapper(), login, password);
     }
 
     @Override
@@ -43,12 +32,8 @@ public class UserDaoImpl extends AbstractDao<User> implements UserDao {
         fields.put(User.PASSWORD, item.getPassword());
         fields.put(User.ROLE, item.getRole());
         fields.put(User.BLOCKED, item.isBlocked());
+        fields.put(User.DELETED, item.isDeleted());
 
         return fields;
-    }
-
-    @Override
-    protected String getTableName() {
-        return User.TABLE;
     }
 }

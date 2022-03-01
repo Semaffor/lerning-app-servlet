@@ -9,6 +9,6 @@ import java.util.Optional;
 public interface Dao<T extends Identifiable> {
     Optional<T> getById(Long id);
     List<T> getAll() throws DaoException;
-    void save(T item);
-    void removeById(Long id);
+    boolean save(T item);
+    boolean removeById(Long id);
 }

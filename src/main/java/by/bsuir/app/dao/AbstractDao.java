@@ -1,8 +1,8 @@
 package by.bsuir.app.dao;
 
+import by.bsuir.app.entity.BaseEntity;
 import by.bsuir.app.entity.Identifiable;
 import by.bsuir.app.exception.DaoException;
-import by.bsuir.app.mapper.QueryGenerator;
 import by.bsuir.app.mapper.RowMapper;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -11,26 +11,38 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-import java.util.Optional;
+import java.util.*;
 
-public abstract class AbstractDao <T extends Identifiable> implements Dao<T> {
+public abstract class AbstractDao<T extends Identifiable> implements Dao<T> {
+
+    private final static String SQL_SELECT_ALL = "select * from %s;";
+    private final static String SQL_FIND_BY_PARAM = "select * from %s where %s = ?;";
+    private final static String SQL_INSERT = "INSERT INTO %s (%s) VALUES (%s);";
+    private final static String SQL_UPDATE = "UPDATE %s SET %s WHERE id=%d;";
+
 
     private final static Logger LOGGER = LogManager.getLogger(AbstractDao.class);
-    private final static QueryGenerator queryGenerator = new QueryGenerator();
     private final Connection connection;
-    private final RowMapper<T> rowMapper;
+    private final RowMapper<T> mapper;
+    private final String table;
 
-    private final static String SQL_SELECT_ALL = "select * from ";
-
-    protected AbstractDao(Connection connection, RowMapper<T> rowMapper) {
+    protected AbstractDao(Connection connection, RowMapper<T> mapper, String table) {
         this.connection = connection;
-        this.rowMapper = rowMapper;
+        this.mapper = mapper;
+        this.table = table;
     }
 
-    protected List<T> executeQuery(String query, RowMapper<T> mapper, Object... params) throws DaoException {
+    private PreparedStatement createStatement(String query, Object... params) throws SQLException {
+        LOGGER.trace("Query: " + query);
+        PreparedStatement ps = connection.prepareStatement(query);
+
+        for (int i = 1; i <= params.length; i++) {
+            ps.setObject(i, params[i - 1]);             //TODO Why is here 1?
+        }
+        return ps;
+    }
+
+    protected List<T> executeQuery(String query, Object... params) throws DaoException {
         try (PreparedStatement statement = createStatement(query, params);
              ResultSet resultSet = statement.executeQuery()) {
             List<T> entities = new ArrayList<>();
@@ -44,7 +56,7 @@ public abstract class AbstractDao <T extends Identifiable> implements Dao<T> {
         }
     }
 
-    protected Optional<T> executeForSingleResultString(String query, RowMapper<T> mapper, Object... params) throws
+    protected Optional<T> executeForSingleResultString(String query, Object... params) throws
             DaoException {
         List<T> items = executeQuery(query, mapper, params);
         if (items.size() == 1) {
@@ -57,42 +69,55 @@ public abstract class AbstractDao <T extends Identifiable> implements Dao<T> {
     }
 
     protected int executeUpdate(String query, Object... params) throws DaoException {
-        try (PreparedStatement statement = createStatement(query, params)){
+        try (PreparedStatement statement = createStatement(query, params)) {
             return statement.executeUpdate();
         } catch (SQLException e) {
             throw new DaoException(e);
         }
     }
 
-    private PreparedStatement createStatement(String query, Object... params) throws SQLException {
-        LOGGER.trace("Query: " + query);
-        PreparedStatement ps = connection.prepareStatement(query);
-
-        for (int i = 1; i <= params.length; i++) {
-            ps.setObject(i, params[i - 1]);             //TODO Why is here 1?
-        }
-        return ps;
+    public String generateInsertQuery(Map<String, Object> fields) {
+        return String.format(SQL_INSERT,
+                table,
+                String.join(", ", fields.keySet()),
+                String.join(", ", Collections.nCopies(fields.size(), "?"))
+        );
     }
 
-    @SuppressWarnings("unchecked")
-    public List<T> getAll() throws DaoException {       //TODO 21 min, we can also create generic select by id
-        String table = getTableName();
-        RowMapper<T> mapper = (RowMapper<T>) RowMapper.create(table);       //TODO Think why
-        return executeQuery(SQL_SELECT_ALL + table, mapper);
+    private String generateUpdateQuery(Map<String, Object> fields, Long id) {
+        StringJoiner params = new StringJoiner(", ");
+        for (String fieldName: fields.keySet()) {
+            params.add(fieldName + "=?");
+        }
+        return String.format(SQL_UPDATE, table, params, id);
+    }
+
+    public List<T> getAll() throws DaoException {
+        return executeQuery(String.format(SQL_SELECT_ALL, table), mapper);
     }
 
     @Override
-    public void save(T item) {
-//        Map<String, Object> fields = getFields(item);
-//        String query = item.getId() == null ? queryGenerator.generateInsertQuery(fields) :
-//                queryGenerator.generateUpdateQuery(fields);
-//        executeUpdate(query, fields.values());
-//        if (item.getId() == null) {
-//            String query = queryGenerator.generateInsertQuery(fields);
-//        } else {
-//            //update
-//        }
+    public boolean save(T item) {
+        Map<String, Object> fields = getFields(item);
+        Long itemId = item.getId();
+        String query = itemId == null ? generateInsertQuery(fields) : generateUpdateQuery(fields, itemId);
+
+        final int resultRowCount = executeUpdate(query, fields.values());
+        return resultRowCount == 1;
     }
+
+    public Optional<T> getById(Long id) {
+        return executeForSingleResultString(String.format(SQL_FIND_BY_PARAM, table, BaseEntity.ID), id);
+    }
+
+    public boolean removeById(Long id) {
+        Optional<T> entity = getById(id);
+        if (entity.isPresent()) {
+            executeUpdate(String.format(SQL_INSERT, table, BaseEntity.DELETED, BaseEntity.ID), true, id);
+            return true;
+        }
+        return false;
+    }
+
     protected abstract Map<String, Object> getFields(T item);
-    protected abstract String getTableName();
 }
