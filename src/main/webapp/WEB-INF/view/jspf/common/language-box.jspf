@@ -1,0 +1,12 @@
+<ul>
+    <li class="dropdown">
+        <a href="javascript:void(0)" class="">
+            <img class="dropdown_header_icon" src="static/images/languages.png"/>
+        </a>
+        <div class="dropdown-content">
+            <c:set var = "path" scope = "page" value = "${pageContext.request.contextPath}/controller?command=${param.command}&lang="/>
+            <a href="${path}ru"><fmt:message key="label.lang.RU"/></a>
+            <a href="${path}be"><fmt:message key="label.lang.BE"/></a>
+            <a href="${path}en"><fmt:message key="label.lang.EN"/></a>
+    </li>
+</ul>

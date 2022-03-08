@@ -1,0 +1,40 @@
+<nav class="navbar">
+    <div class="navbar_block">
+            <img class="dropdown_header_icon" src="${pageContext.request.contextPath}/static/images/logo.png"/>
+    </div>
+    <div class="navbar_block">
+        <ul>
+            <li><a href="${pageContext.request.contextPath}/controller?command=showMain"><fmt:message key="label.nav.menu.page"/></a></li>
+            <li><a href="${pageContext.request.contextPath}/"><fmt:message key="label.nav.menu.page"/></a></li>
+        </ul>
+    </div>
+    <div class="navbar_block">
+        <ul>
+            <li class="dropdown">
+                ${username}
+                <a href="javascript:void(0)" class="dropbtn">
+                    <img class="dropdown_header_icon" src="${pageContext.request.contextPath}/static/images/user.png"/>
+                </a>
+                <div class="dropdown-content">
+                    <a href="${pageContext.request.contextPath}/"><fmt:message key="label.nav.menu.logIn"/></a>
+
+                    <c:if test="${userRole eq 'USER'}">
+                    <a href="#"><fmt:message key="label.nav.menu.user.profile"/></a>
+                    <a href="#"><fmt:message key="label.nav.menu.user.courses"/></a>
+                    </c:if>
+
+                    <c:if test="${userRole eq 'ADMIN'}">
+                    <a href="${pageContext.request.contextPath}/controller?command=manageCourses"><fmt:message key="label.nav.menu.admin.management.courses"/></a>
+                    <a href="${pageContext.request.contextPath}/controller?command=manageUsers"><fmt:message key="label.nav.menu.admin.management.users"/></a>
+                    </c:if>
+
+                    <c:if test="${userRole eq 'COUCH'}">
+                    <a href="#"><fmt:message key="label.nav.menu.admin.management.courses"/></a>
+                    </c:if>
+                    <a href="${pageContext.request.contextPath}/controller?command=logout"><fmt:message
+                            key="label.nav.menu.logout"/></a>
+            </li>
+        </ul>
+        <%@ include file="/WEB-INF/view/jspf/common/language-box.jspf" %>
+    </div>
+</nav>
