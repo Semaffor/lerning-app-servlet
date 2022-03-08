@@ -15,4 +15,6 @@ public interface CourseService {
     Optional<Course> getCourse(Long id) throws ServiceException;
     List<Course> getCourses(int currentPage, int recordsPerPage) throws ServiceException;
     List<Course> getAllCourses() throws ServiceException;
+
+    Optional<Course> findCourseByCouchUsername(String login);
 }

@@ -21,9 +21,22 @@ public class CourseServiceImpl extends Service implements CourseService {
         try (DaoHelper helper = daoHelperFactory.create()) {
             helper.startTransaction();
             CourseDao dao = helper.createCourseDao();
-            List<Course> courses = dao.getCourses();
+            List<Course> courses = dao.getAll();
             helper.endTransaction();
             return courses;
+        } catch (Exception e) {
+            throw new ServiceException(e);
+        }
+    }
+
+    @Override
+    public Optional<Course> findCourseByCouchUsername(String login) {
+        try (DaoHelper helper = daoHelperFactory.create()) {
+            helper.startTransaction();
+            CourseDao dao = helper.createCourseDao();
+            Optional<Course> course = dao.findCourseByCouchUsername(login);
+            helper.endTransaction();
+            return course;
         } catch (Exception e) {
             throw new ServiceException(e);
         }
@@ -34,7 +47,7 @@ public class CourseServiceImpl extends Service implements CourseService {
         try (DaoHelper helper = daoHelperFactory.create()) {
             helper.startTransaction();
             CourseDao dao = helper.createCourseDao();
-            Optional<Course> course = dao.getCourse(id);
+            Optional<Course> course = dao.getById(id);
             helper.endTransaction();
             return course;
         } catch (Exception e) {
@@ -60,7 +73,7 @@ public class CourseServiceImpl extends Service implements CourseService {
         try (DaoHelper helper = daoHelperFactory.create()) {
             helper.startTransaction();
             CourseDao dao = helper.createCourseDao();
-            Optional<Course> courseOptional = dao.getCourse(courseId);
+            Optional<Course> courseOptional = dao.getById(courseId);
             if (courseOptional.isPresent()) {
                 Course course = courseOptional.get();
                 course.setActive(!course.isActive());
@@ -77,7 +90,7 @@ public class CourseServiceImpl extends Service implements CourseService {
         try (DaoHelper helper = daoHelperFactory.create()) {
             helper.startTransaction();
             CourseDao dao = helper.createCourseDao();
-            Optional<Course> courseOptional = dao.getCourse(courseId);
+            Optional<Course> courseOptional = dao.getById(courseId);
             if (courseOptional.isPresent()) {
                 Course course = courseOptional.get();
                 course.setDeleted(!course.isDeleted());

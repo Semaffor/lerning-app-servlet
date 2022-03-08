@@ -7,9 +7,9 @@ import java.util.Optional;
 
 public interface CourseDao extends Dao<Course> {
 
-    List<Course> getCourses();
     List<Course> getCourses(int currentPage,int recordsPerPage);
-    Optional<Course> getCourse(Long id);
     int getNumberOfUndeletedAndActiveRows();
     boolean isUserSubscribed(String username, Long courseId);
+
+    Optional<Course> findCourseByCouchUsername(String login);
 }

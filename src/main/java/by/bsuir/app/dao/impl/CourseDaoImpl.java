@@ -17,6 +17,8 @@ import java.util.Optional;
 public class CourseDaoImpl extends AbstractDao<Course> implements CourseDao {
 
     private static final String SQL_SELECT_LIMIT = "SELECT * FROM %s WHERE %s = %s and %s = %s LIMIT ?, ?;";
+    private static final String SQL_SELECT_COURSE_BY_COUCH_USERNAME = "SELECT * FROM %s c " +
+            "JOIN %s u on c.%s = u.%s WHERE u.%s = ?";
     private final static String SQL_GET_ACTIVE_AND_UNDELETED_ROW_COUNT = "SELECT COUNT(id) as count FROM %s " +
             "where %s = %s and %s=%s;";
     private final static String SQL_IS_USER_SUBSCRIBED = "Select count(*) as count from %s uc " +
@@ -26,32 +28,6 @@ public class CourseDaoImpl extends AbstractDao<Course> implements CourseDao {
 
     public CourseDaoImpl(Connection connection) {
         super(connection, new CourseRowMapper(), Course.TABLE);
-    }
-
-    @Override
-    protected Map<String, Object> getFields(Course item) {
-        Map<String, Object> fields = new LinkedHashMap<>();
-        fields.put(Course.TITLE, item.getTitle());
-        fields.put(Course.DESCRIPTION, item.getDescription());
-        fields.put(Course.DURATION, item.getDuration());
-        fields.put(Course.TECHNOLOGY, item.getTechnology().getCode());
-        fields.put(Course.COURSE_FORMAT, item.getCourseFormat().getCode());
-        fields.put(Course.CURRENT_PUPILS_QUANTITY, item.getCurrentPupilsQuantity());
-        fields.put(Course.MAX_PUPILS_QUANTITY, item.getMaxPupilsQuantity());
-        fields.put(Course.ACTIVE, item.isActive());
-        fields.put(Course.DELETED, item.isDeleted());
-
-        return fields;
-    }
-
-    @Override
-    public List<Course> getCourses() {
-        return getAll();
-    }
-
-    @Override
-    public Optional<Course> getCourse(Long id) {
-        return getById(id);
     }
 
     @Override
@@ -79,5 +55,25 @@ public class CourseDaoImpl extends AbstractDao<Course> implements CourseDao {
         return result == 1;
     }
 
+    @Override
+    public Optional<Course> findCourseByCouchUsername(String login) {
+        return executeForSingleResultString(String.format(SQL_SELECT_COURSE_BY_COUCH_USERNAME,
+                Course.TABLE, User.TABLE, Course.COUCH_ID, User.ID, User.NAME), login);
+    }
 
+    @Override
+    protected Map<String, Object> getFields(Course item) {
+        Map<String, Object> fields = new LinkedHashMap<>();
+        fields.put(Course.TITLE, item.getTitle());
+        fields.put(Course.DESCRIPTION, item.getDescription());
+        fields.put(Course.DURATION, item.getDuration());
+        fields.put(Course.TECHNOLOGY, item.getTechnology().getCode());
+        fields.put(Course.COURSE_FORMAT, item.getCourseFormat().getCode());
+        fields.put(Course.CURRENT_PUPILS_QUANTITY, item.getCurrentPupilsQuantity());
+        fields.put(Course.MAX_PUPILS_QUANTITY, item.getMaxPupilsQuantity());
+        fields.put(Course.ACTIVE, item.isActive());
+        fields.put(Course.DELETED, item.isDeleted());
+
+        return fields;
+    }
 }
