@@ -2,6 +2,9 @@ package by.bsuir.app.dao;
 
 import by.bsuir.app.connection.ConnectionPool;
 import by.bsuir.app.connection.ProxyConnection;
+import by.bsuir.app.dao.impl.CourseDaoImpl;
+import by.bsuir.app.dao.impl.TaskDaoImpl;
+import by.bsuir.app.dao.impl.UserCourseDaoImpl;
 import by.bsuir.app.dao.impl.UserDaoImpl;
 import by.bsuir.app.exception.DaoException;
 
@@ -39,4 +42,7 @@ public class DaoHelper implements AutoCloseable{
     public UserDao createUserDao() {
         return new UserDaoImpl(connection);
     }
+    public CourseDao createCourseDao() { return new CourseDaoImpl(connection);}
+    public TaskDao createTaskDao() { return new TaskDaoImpl(connection);}
+    public UserCourseDao createUserCourseDao() { return new UserCourseDaoImpl(connection);}
 }

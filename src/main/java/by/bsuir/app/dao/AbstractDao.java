@@ -16,7 +16,8 @@ import java.util.*;
 public abstract class AbstractDao<T extends Identifiable> implements Dao<T> {
 
     private final static String SQL_SELECT_ALL = "select * from %s;";
-    private final static String SQL_FIND_BY_PARAM = "select * from %s where %s = ?;";
+    private final static String SQL_SELECT_BY_PARAM = "select * from %s where %s=?;";
+    private final static String SQL_SELECT_BY_PARAMS = "select * from %s where %s;";
     private final static String SQL_INSERT = "INSERT INTO %s (%s) VALUES (%s);";
     private final static String SQL_UPDATE = "UPDATE %s SET %s WHERE id=%d;";
 
@@ -58,13 +59,24 @@ public abstract class AbstractDao<T extends Identifiable> implements Dao<T> {
 
     protected Optional<T> executeForSingleResultString(String query, Object... params) throws
             DaoException {
-        List<T> items = executeQuery(query, mapper, params);
+        List<T> items = executeQuery(query, params);
         if (items.size() == 1) {
             return Optional.of(items.get(0));
         } else if (items.size() > 1) {
             throw new IllegalArgumentException("More one record found.");
         } else {
             return Optional.empty();
+        }
+    }
+
+    protected int executeForSingleResultInt(String query, Object... params) throws
+            DaoException {
+        try (PreparedStatement statement = createStatement(query, params);
+             ResultSet resultSet = statement.executeQuery()) {
+            resultSet.next();
+            return resultSet.getInt("count");
+        } catch (SQLException e) {
+            throw new DaoException(e);
         }
     }
 
@@ -76,7 +88,8 @@ public abstract class AbstractDao<T extends Identifiable> implements Dao<T> {
         }
     }
 
-    public String generateInsertQuery(Map<String, Object> fields) {
+    protected String generateInsertQuery(Map<String, Object> fields) {
+        LOGGER.trace("Insert row in table: " + table);
         return String.format(SQL_INSERT,
                 table,
                 String.join(", ", fields.keySet()),
@@ -84,16 +97,28 @@ public abstract class AbstractDao<T extends Identifiable> implements Dao<T> {
         );
     }
 
-    private String generateUpdateQuery(Map<String, Object> fields, Long id) {
-        StringJoiner params = new StringJoiner(", ");
-        for (String fieldName: fields.keySet()) {
-            params.add(fieldName + "=?");
-        }
+    protected String generateUpdateQuery(Map<String, Object> fields, Long id) {
+        LOGGER.trace("Update row in table: " + table);
+        StringJoiner params = generateConditionFields(fields.keySet(), ", ");
         return String.format(SQL_UPDATE, table, params, id);
     }
 
+    protected String generateSelectQuery(Set<String> fields) {
+        LOGGER.trace("Selecting all fields from table: " + table);
+        StringJoiner params = generateConditionFields(fields, " and ");
+        return String.format(SQL_SELECT_BY_PARAMS, table, params);
+    }
+
+    private StringJoiner generateConditionFields(Set<String> fields, String delimiter) {
+        StringJoiner params = new StringJoiner(delimiter);
+        for (String fieldName : fields) {
+            params.add(fieldName + "=?");
+        }
+        return params;
+    }
+
     public List<T> getAll() throws DaoException {
-        return executeQuery(String.format(SQL_SELECT_ALL, table), mapper);
+        return executeQuery(String.format(SQL_SELECT_ALL, table));
     }
 
     @Override
@@ -102,15 +127,17 @@ public abstract class AbstractDao<T extends Identifiable> implements Dao<T> {
         Long itemId = item.getId();
         String query = itemId == null ? generateInsertQuery(fields) : generateUpdateQuery(fields, itemId);
 
-        final int resultRowCount = executeUpdate(query, fields.values());
+        final int resultRowCount = executeUpdate(query, fields.values().toArray());
         return resultRowCount == 1;
     }
 
     public Optional<T> getById(Long id) {
-        return executeForSingleResultString(String.format(SQL_FIND_BY_PARAM, table, BaseEntity.ID), id);
+        LOGGER.trace(String.format("Get row with id = %d from table = %s", id, table));
+        return executeForSingleResultString(String.format(SQL_SELECT_BY_PARAM, table, BaseEntity.ID), id);
     }
 
     public boolean removeById(Long id) {
+        LOGGER.trace("Trying to delete row with id = " + id);
         Optional<T> entity = getById(id);
         if (entity.isPresent()) {
             executeUpdate(String.format(SQL_INSERT, table, BaseEntity.DELETED, BaseEntity.ID), true, id);
