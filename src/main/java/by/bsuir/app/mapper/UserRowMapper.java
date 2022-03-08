@@ -15,9 +15,8 @@ public class UserRowMapper implements RowMapper<User>{
         String password = resultSet.getString(User.PASSWORD);
         String roleString = resultSet.getString(User.ROLE);
         Role role = Role.getRoleFromString(roleString);
-
-        String isBlockedString = resultSet.getString(User.BLOCKED);
-        boolean isBlocked = Boolean.parseBoolean(isBlockedString);
+        boolean isBlocked = resultSet.getBoolean(User.BLOCKED);
+        boolean isDeleted = resultSet.getBoolean(User.DELETED);
 
         return User.getBuilder()
                 .setId(id)
@@ -25,6 +24,7 @@ public class UserRowMapper implements RowMapper<User>{
                 .setPassword(password)
                 .setRole(role)
                 .setBlocked(isBlocked)
+                .setDeleted(isDeleted)
                 .build();
     }
 }
