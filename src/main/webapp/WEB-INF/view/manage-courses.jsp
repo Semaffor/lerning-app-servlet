@@ -28,7 +28,15 @@
                 <td class="td_title">${course.title}</td>
                 <td class="td_description">${course.courseFormat}</td>
                 <td>${course.technology.getDecodingValue()}</td>
-                <td>${course.active}</td>
+                <td><c:if test="${course.active}">
+                    <div class="img_wrapper"><img class="img_status"
+                                                  src="${contextPath}/static/images/unlocked.png"/></div>
+                </c:if>
+                    <c:if test="${course.active eq 'false'}">
+                        <div class="img_wrapper"><img class="img_status"
+                                                      src="${contextPath}/static/images/padlock.png"/></div>
+                    </c:if>
+                </td>
                 <td class="td_action">
                     <div class="button_actions">
                         <form action="${contextPath}/controller?command=manageCoursesAction" method="post">
@@ -61,7 +69,7 @@
         </table>
     </div>
     <div class="table_wrapper">
-        <span class="text"><fmt:message key="label.management.course.archive"/></span>
+        <div class="text"><fmt:message key="label.management.course.archive"/></div>
         <table class="fl-table">
             <tbody>
             <c:forEach var="course" items="${deletedCourses}">
@@ -69,7 +77,15 @@
                 <td class="td_title">${course.title}</td>
                 <td class="td_description">${course.courseFormat}</td>
                 <td>${course.technology.getDecodingValue()}</td>
-                <td>${course.active}</td>
+                <td><c:if test="${course.active}">
+                    <div class="img_wrapper"><img class="img_status"
+                                                  src="${contextPath}/static/images/unlocked.png"/></div>
+                </c:if>
+                    <c:if test="${course.active eq 'false'}">
+                        <div class="img_wrapper"><img class="img_status"
+                                                      src="${contextPath}/static/images/padlock.png"/></div>
+                    </c:if>
+                </td>
                 <td class="td_action">
                     <div class="button_actions">
                         <form action="${contextPath}/controller?command=manageCoursesAction" method="post">

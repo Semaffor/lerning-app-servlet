@@ -29,8 +29,7 @@ public class ShowMainPageCommand implements Command {
         int recordsPerPage = recordsPerPageString == null ? INITIAL_PAGINATION_RECORDS_COUNT : Integer.parseInt(recordsPerPageString);
 
         List<Course> courses = courseService.getCourses(currentPage, recordsPerPage);
-
-        int rows = courseService.getNumberOfUndeletedRows();
+        int rows = courseService.getNumberOfUndeletedAndActiveRows();
         int nOfPages = (int) Math.ceil(Math.ceil((double) rows / recordsPerPage));
         request.setAttribute("noOfPages", nOfPages);
         request.setAttribute("currentPage", currentPage);

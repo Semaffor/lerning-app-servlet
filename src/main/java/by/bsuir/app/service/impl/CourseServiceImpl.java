@@ -81,6 +81,7 @@ public class CourseServiceImpl extends Service implements CourseService {
             if (courseOptional.isPresent()) {
                 Course course = courseOptional.get();
                 course.setDeleted(!course.isDeleted());
+                course.setActive(false);
                 dao.save(course);
             }
             helper.endTransaction();
@@ -103,11 +104,11 @@ public class CourseServiceImpl extends Service implements CourseService {
     }
 
     @Override
-    public int getNumberOfUndeletedRows() throws ServiceException{
+    public int getNumberOfUndeletedAndActiveRows() throws ServiceException{
         try (DaoHelper helper = daoHelperFactory.create()) {
             helper.startTransaction();
             CourseDao dao = helper.createCourseDao();
-            int rowsCount = dao.getTableUndeletedRowsCount();
+            int rowsCount = dao.getNumberOfUndeletedAndActiveRows();
             helper.endTransaction();
             return rowsCount;
         } catch (Exception e) {

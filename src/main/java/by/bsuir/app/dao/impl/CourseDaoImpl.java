@@ -16,8 +16,9 @@ import java.util.Optional;
 
 public class CourseDaoImpl extends AbstractDao<Course> implements CourseDao {
 
-    private static final String SQL_SELECT_LIMIT = "SELECT * FROM %s LIMIT ?, ?;";
-    private final static String SQL_GET_ROW_COUNT = "SELECT COUNT(id) as count FROM %s where %s != true;";
+    private static final String SQL_SELECT_LIMIT = "SELECT * FROM %s WHERE %s = %s and %s = %s LIMIT ?, ?;";
+    private final static String SQL_GET_ACTIVE_AND_UNDELETED_ROW_COUNT = "SELECT COUNT(id) as count FROM %s " +
+            "where %s = %s and %s=%s;";
     private final static String SQL_IS_USER_SUBSCRIBED = "Select count(*) as count from %s uc " +
             "join %s c on uc.%s = c.%s " +
             "join %s u on u.%s = uc.%s " +
@@ -56,12 +57,17 @@ public class CourseDaoImpl extends AbstractDao<Course> implements CourseDao {
     @Override
     public List<Course> getCourses(int currentPage, int recordsPerPage) {
         int start = currentPage * recordsPerPage - recordsPerPage;
-        return executeQuery(String.format(SQL_SELECT_LIMIT, Course.TABLE), start, recordsPerPage);
+        return executeQuery(String.format(SQL_SELECT_LIMIT, Course.TABLE,
+                Course.ACTIVE, "true",
+                Course.DELETED, "false"),
+                start, recordsPerPage);
     }
 
     @Override
-    public int getTableUndeletedRowsCount() {
-        return executeForSingleResultInt(String.format(SQL_GET_ROW_COUNT, Course.TABLE, Course.DELETED));
+    public int getNumberOfUndeletedAndActiveRows() {
+        return executeForSingleResultInt(String.format(SQL_GET_ACTIVE_AND_UNDELETED_ROW_COUNT, Course.TABLE,
+                Course.DELETED, "false",
+                Course.ACTIVE, "true"));
     }
 
     @Override

@@ -11,7 +11,7 @@ public interface CourseService {
     void changeIsActiveStatus(Long courseId);
     void changeIsDeleteStatus(Long courseId);
     boolean isUserSubscribedByUsername(String username, Long courseId);
-    int getNumberOfUndeletedRows();
+    int getNumberOfUndeletedAndActiveRows();
     Optional<Course> getCourse(Long id) throws ServiceException;
     List<Course> getCourses(int currentPage, int recordsPerPage) throws ServiceException;
     List<Course> getAllCourses() throws ServiceException;
