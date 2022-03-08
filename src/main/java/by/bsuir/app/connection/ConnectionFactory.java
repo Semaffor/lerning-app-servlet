@@ -13,10 +13,12 @@ import java.util.concurrent.ArrayBlockingQueue;
 import java.util.concurrent.BlockingQueue;
 
 public class ConnectionFactory {
+
     private final static String PROPERTIES_FILE_NAME = "db.properties";
     private String url;
     private String name;
     private String password;
+    private int initialConnectionsSize;
 
     public BlockingQueue<ProxyConnection> createProxyConnections(int connectionsCount) throws
             ConnectionException {
@@ -32,6 +34,11 @@ public class ConnectionFactory {
         return proxyConnections;
     }
 
+    public BlockingQueue<ProxyConnection> createProxyConnections() throws
+            ConnectionException {
+        return createProxyConnections(initialConnectionsSize);
+    }
+
     protected ProxyConnection createProxyConnection() throws SQLException {
         return new ProxyConnection(createConnection());
     }
@@ -41,10 +48,13 @@ public class ConnectionFactory {
     }
 
     protected Properties readProperties() throws ConnectionException {
+        return readProperties(PROPERTIES_FILE_NAME);
+    }
+    protected Properties readProperties(String propertiesPath) throws ConnectionException {
         Properties props = new Properties();
         String driverName = null;
 
-        try (InputStream inputStream = getClass().getClassLoader().getResourceAsStream(PROPERTIES_FILE_NAME)) {
+        try (InputStream inputStream = getClass().getClassLoader().getResourceAsStream(propertiesPath)) {
 
             props.load(inputStream);
             driverName = (props.getProperty("jdbc.driver"));
@@ -53,6 +63,7 @@ public class ConnectionFactory {
             url = props.getProperty("jdbc.url");
             name = props.getProperty("jdbc.name");
             password = props.getProperty("jdbc.password");
+            initialConnectionsSize = Integer.parseInt(props.getProperty("jdbc.initial_pool_size"));
 
             return props;
         } catch (ClassNotFoundException e) {

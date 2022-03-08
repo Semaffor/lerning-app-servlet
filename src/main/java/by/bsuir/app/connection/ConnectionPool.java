@@ -23,7 +23,7 @@ public class ConnectionPool {
 
     public ConnectionPool(BlockingQueue<ProxyConnection> availableConnections) {
         this.availableConnections = availableConnections;
-        this.connectionsInUse = new ArrayBlockingQueue<>(INITIAL_POOL_SIZE);
+        this.connectionsInUse = new ArrayBlockingQueue<>(availableConnections.size());
     }
 
     public static ConnectionPool getInstance() {
