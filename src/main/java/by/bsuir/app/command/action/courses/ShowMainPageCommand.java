@@ -1,4 +1,4 @@
-package by.bsuir.app.command.action;
+package by.bsuir.app.command.action.courses;
 
 import by.bsuir.app.command.Command;
 import by.bsuir.app.command.CommandResult;
@@ -30,7 +30,7 @@ public class ShowMainPageCommand implements Command {
 
         List<Course> courses = courseService.getCourses(currentPage, recordsPerPage);
 
-        int rows = courseService.getNumberOfRows();
+        int rows = courseService.getNumberOfUndeletedRows();
         int nOfPages = (int) Math.ceil(Math.ceil((double) rows / recordsPerPage));
         request.setAttribute("noOfPages", nOfPages);
         request.setAttribute("currentPage", currentPage);

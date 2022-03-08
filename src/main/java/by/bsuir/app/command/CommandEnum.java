@@ -1,12 +1,23 @@
 package by.bsuir.app.command;
 
-public enum Commands {
+public enum CommandEnum {
     LOGIN("login"),
-    SHOW_MAIN_PAGE("showMain");
+    SHOW_MAIN_PAGE("showMain"),
+    SHOW_COURSE_PAGE("showCoursePage"),
+    ITEMS("items"),
+    SUBSCRIBE("subscribe"),
+    UNSUBSCRIBE("unsubscribe"),
+    SHOW_MANAGEMENT_COURSES("manageCourses"),
+    SHOW_MANAGEMENT_USERS("manageUsers"),
+    SHOW_MANAGEMENT_COUCHES("manageCouches"),
+    MANAGEMENT_COURSES_ACTION("manageCoursesAction"),
+    MANAGEMENT_USERS_ACTION("manageUsersAction"),
+    EDIT_USER_ROLE("editUserRole"),
+    LOGOUT("logout");
 
-    private String command;
+    private final String command;
 
-    Commands(String command) {
+    CommandEnum(String command) {
         this.command = command;
     }
 
@@ -14,8 +25,8 @@ public enum Commands {
         return command;
     }
 
-    static Commands convertCommandFromString(String commandString) {
-        for(Commands command: Commands.values()) {
+    public static CommandEnum convertCommandFromString(String commandString) {
+        for(CommandEnum command: CommandEnum.values()) {
             if (commandString.equals(command.getCommand())) {
                 return command;
             }

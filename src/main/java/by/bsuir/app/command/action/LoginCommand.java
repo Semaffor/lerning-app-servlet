@@ -1,6 +1,7 @@
 package by.bsuir.app.command.action;
 
 import by.bsuir.app.command.Command;
+import by.bsuir.app.command.CommandEnum;
 import by.bsuir.app.command.CommandResult;
 import by.bsuir.app.entity.User;
 import by.bsuir.app.entity.enums.Role;
@@ -16,8 +17,11 @@ import java.util.Optional;
 public class LoginCommand implements Command {
 
     private final static Logger LOGGER = LogManager.getLogger(LoginCommand.class);
-    private final static String MAIN_PAGE_URL = "/controller?command=showMain";
-    private final static String LOGIN_PAGE = "/welcome.jsp";
+    private final static String REDIRECT_MAIN_PAGE = "/controller?command=" + CommandEnum.SHOW_MAIN_PAGE.getCommand();
+    private final static String FORWARD_LOGIN_PAGE = "/welcome.jsp";
+    private final static String PARAM_NAME_LOGIN = "username";
+    private final static String PARAM_NAME_PASSWORD = "password";
+    private final static String PARAM_NAME_ROLE = "userRole";
 
     private final UserService service;
 
@@ -27,10 +31,9 @@ public class LoginCommand implements Command {
 
     @Override
     public CommandResult execute(HttpServletRequest request, HttpServletResponse response) throws ServiceException {
-        String login = request.getParameter("username");
-        String password = request.getParameter("password");
+        String login = request.getParameter(PARAM_NAME_LOGIN);
+        String password = request.getParameter(PARAM_NAME_PASSWORD);
 
-        LOGGER.info(String.format("Inputs - login: %s, password: %s", login, password));
         Optional<User> optionalUser = service.login(login, password);
 
         String errorMessageLabel = "errorInvalid";
@@ -39,17 +42,17 @@ public class LoginCommand implements Command {
             if (!user.isBlocked()) {
                 String username = user.getUsername();
                 Role userRole = user.getRole();
-                request.getSession().setAttribute("username", user.getUsername());
-                request.getSession().setAttribute("role", userRole);
+                request.getSession().setAttribute(PARAM_NAME_LOGIN, user.getUsername());
+                request.getSession().setAttribute(PARAM_NAME_ROLE, userRole);
 
                 LOGGER.info(String.format("Successful auth - login: %s, role: %s", username, userRole));
-                return CommandResult.redirect(MAIN_PAGE_URL);
+                return CommandResult.redirect(REDIRECT_MAIN_PAGE);
             }
             errorMessageLabel = "errorBlocked";
         }
         request.setAttribute(errorMessageLabel, errorMessageLabel);
         LOGGER.info("Invalid auth.");
-        return CommandResult.forward(LOGIN_PAGE);
+        return CommandResult.forward(FORWARD_LOGIN_PAGE);
 
     }
 }
