@@ -3,8 +3,10 @@ package by.bsuir.app.entity;
 import java.util.Date;
 
 public class UserTask extends BaseEntity {
-    private static final String MARK = "mark";
-    private static final String CHECK_DATE = "check_date";
+
+    public static final String TABLE = "user_task";
+    public static final String MARK = "mark";
+    public static final String CHECK_DATE = "check_date";
 
     private Long userId;
     private Long taskId;
@@ -27,6 +29,9 @@ public class UserTask extends BaseEntity {
         return checkDate;
     }
 
+    public static Builder getBuilder() {
+        return new UserTask().new Builder();
+    }
 
     public class Builder {
         private Builder() {}

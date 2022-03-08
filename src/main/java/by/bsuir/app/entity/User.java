@@ -38,6 +38,14 @@ public class User extends BaseEntity {
         return blocked;
     }
 
+    public void setBlocked(boolean blocked) {
+        this.blocked = blocked;
+    }
+
+    public void setRole(Role role) {
+        this.role = role;
+    }
+
     public static Builder getBuilder() {
         return new User().new Builder();
     }

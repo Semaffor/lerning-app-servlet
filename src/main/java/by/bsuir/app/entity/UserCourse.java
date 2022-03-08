@@ -1,20 +1,18 @@
 package by.bsuir.app.entity;
 
-import by.bsuir.app.entity.enums.Status;
-
 import java.util.Date;
 
 public class UserCourse extends BaseEntity{
 
+    public static final String TABLE = "user_course";
     public final static String STATUS = "status";
     public final static String START_DATE = "start_date";
 
     private Long userId;
     private Long courseId;
-    private Status status;
     private Date startDate;
 
-    private UserCourse() {}
+    public UserCourse() {}
 
     public Long getUserId() {
         return userId;
@@ -22,10 +20,6 @@ public class UserCourse extends BaseEntity{
 
     public Long getCourseId() {
         return courseId;
-    }
-
-    public Status getStatus() {
-        return status;
     }
 
     public Date getStartDate() {
@@ -51,11 +45,6 @@ public class UserCourse extends BaseEntity{
 
         public Builder setCourseId(Long courseId) {
             UserCourse.this.courseId = courseId;
-            return this;
-        }
-
-        public Builder setStatus(Status status) {
-            UserCourse.this.status = status;
             return this;
         }
 

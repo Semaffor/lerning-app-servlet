@@ -15,10 +15,10 @@ public enum Status {
         return code;
     }
 
-    public static CourseFormat getStatusFromCode(int code) {
-        for (CourseFormat format: CourseFormat.values()) {
-            if (format.getCode() == code) {
-                return format;
+    public static Status getStatusFromCode(int code) {
+        for (Status status: Status.values()) {
+            if (status.getCode() == code) {
+                return status;
             }
         }
         throw new IllegalArgumentException("Incorrect status code: " + code);

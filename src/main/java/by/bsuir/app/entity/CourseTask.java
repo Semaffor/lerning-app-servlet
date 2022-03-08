@@ -2,8 +2,7 @@ package by.bsuir.app.entity;
 
 public class CourseTask extends BaseEntity {
 
-    private final static String COURSE_ID = "course_id";
-    private final static String TASK_ID = "task_id";
+    public static final String TABLE = "course_task";
 
     private Long courseId;
     private Long taskId;

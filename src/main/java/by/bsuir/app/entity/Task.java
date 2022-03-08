@@ -4,6 +4,7 @@ import java.util.Date;
 
 public class Task extends BaseEntity {
 
+    public static final String TABLE = "task";
     public final static String TITLE = "title";
     public final static String DESCRIPTION = "description";
     public final static String DEADLINE = "deadline";

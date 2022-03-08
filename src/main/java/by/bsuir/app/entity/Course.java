@@ -5,6 +5,7 @@ import by.bsuir.app.entity.enums.TechnologyType;
 
 public class Course extends BaseEntity {
 
+    public static final String TABLE = "course";
     public static final String COUCH_ID = "couch_id";
     public static final String TITLE = "title";
     public static final String DESCRIPTION = "description";
@@ -68,6 +69,15 @@ public class Course extends BaseEntity {
 
     public Long getCouchId() {
         return couchId;
+    }
+
+    public void setActive(boolean active) {
+        this.active = active;
+    }
+
+    @Override
+    public void setDeleted(boolean deleted) {
+        this.deleted = deleted;
     }
 
     public static Builder getBuilder() {
