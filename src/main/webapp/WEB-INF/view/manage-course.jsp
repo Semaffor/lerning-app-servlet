@@ -30,7 +30,7 @@
                 <fmt:message key="label.management.course.active"/>: ${course.active}
             </div>
             <button id="forOpenEdit"><fmt:message key="label.couch.courses.edit"/></button>
-            <button id="forOpenCreateTask"><fmt:message key="label.couch.courses.create.task"/></button>
+            <button id="forOpenCreateTask"><fmt:message key="label.couch.courses.task.create"/></button>
             <div class="notification_wrapper">
             <c:if test="${not empty incorrectValues}">
                 <div class="notification error"> <fmt:message key="label.couch.courses.edit.unsuccessfully"/></div>
@@ -46,9 +46,9 @@
             <form class="course editor" action="${contextPath}/controller?command=${command}" method="POST">
                 <input type="hidden" name="courseId" value="${course.id}">
                 <fmt:message key="label.management.course.title"/>:
-                <input type="text" name="title" value="${course.title}">
+                <input type="text" name="title_course" value="${course.title}">
                 <fmt:message key="label.management.course.description"/>:
-                <textarea name="description">${course.description}</textarea>
+                <textarea name="description_course">${course.description}</textarea>
                 <fmt:message key="label.management.course.duration"/>:
                 <input type="number" name="duration" value="${course.duration}" max="100" min="1">
                 <fmt:message key="label.management.course.technology"/>:
@@ -81,8 +81,17 @@
             </form>
         </div>
         <div id="form_creator">
-            <form action="${contextPath}/controller?command=${command}" method="POST">
-
+            <form action="${contextPath}/controller?command=createTask" method="POST">
+                <input type="hidden" name="courseId" value="${course.id}">
+                <fmt:message key="label.couch.tasks.title"/>
+                <input type="text" name="title_task" maxlength="45" >
+                <fmt:message key="label.couch.tasks.description"/>
+                <textarea name="description_task" maxlength="255"></textarea>
+                <fmt:message key="label.couch.tasks.deadline"/>
+                <input type="datetime-local" name="deadline">
+                <div class="button_wrapper">
+                    <input type="submit" value="Submit">
+                </div>
             </form>
         </div>
     </div>

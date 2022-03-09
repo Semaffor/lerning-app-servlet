@@ -1,38 +1,46 @@
 <nav class="navbar">
     <div class="navbar_block">
-            <img class="dropdown_header_icon" src="${pageContext.request.contextPath}/static/images/logo.png"/>
+        <img class="dropdown_header_icon" src="${pageContext.request.contextPath}/static/images/logo.png"/>
     </div>
     <div class="navbar_block">
         <ul>
-            <li><a href="${pageContext.request.contextPath}/controller?command=showMain"><fmt:message key="label.nav.menu.page"/></a></li>
+            <li><a href="${pageContext.request.contextPath}/controller?command=showMain"><fmt:message
+                    key="label.nav.menu.page"/></a></li>
             <li><a href="${pageContext.request.contextPath}/"><fmt:message key="label.nav.menu.page"/></a></li>
         </ul>
     </div>
     <div class="navbar_block">
         <ul>
             <li class="dropdown">
-                ${username}
                 <a href="javascript:void(0)" class="dropbtn">
+                    ${username}
                     <img class="dropdown_header_icon" src="${pageContext.request.contextPath}/static/images/user.png"/>
                 </a>
+                    <c:set var="contextPath" value="${pageContext.request.contextPath}"/>
                 <div class="dropdown-content">
+                    <c:if test="${empty userRole}">
                     <a href="${pageContext.request.contextPath}/"><fmt:message key="label.nav.menu.logIn"/></a>
-
+                    </c:if>
                     <c:if test="${userRole eq 'USER'}">
-                    <a href="#"><fmt:message key="label.nav.menu.user.profile"/></a>
-                    <a href="#"><fmt:message key="label.nav.menu.user.courses"/></a>
+                    <a href="${contextPath}/controller?command=showMyCourses"><fmt:message key="label.nav.menu.user.courses"/></a>
                     </c:if>
 
                     <c:if test="${userRole eq 'ADMIN'}">
-                    <a href="${pageContext.request.contextPath}/controller?command=manageCourses"><fmt:message key="label.nav.menu.admin.management.courses"/></a>
-                    <a href="${pageContext.request.contextPath}/controller?command=manageUsers"><fmt:message key="label.nav.menu.admin.management.users"/></a>
+                    <a href="${contextPath}/controller?command=manageCourses"><fmt:message
+                            key="label.nav.menu.admin.management.courses"/></a>
+                    <a href="${contextPath}/controller?command=manageUsers"><fmt:message
+                            key="label.nav.menu.admin.management.users"/></a>
                     </c:if>
 
                     <c:if test="${userRole eq 'COUCH'}">
-                    <a href="#"><fmt:message key="label.nav.menu.admin.management.courses"/></a>
+                    <a href="${contextPath}/controller?command=manageCourse"><fmt:message key="label.nav.menu.couch.courses.management"/></a>
+                    <a href="${contextPath}/controller?command=checkTasks"><fmt:message key="label.nav.menu.couch.courses.review"/></a>
                     </c:if>
-                    <a href="${pageContext.request.contextPath}/controller?command=logout"><fmt:message
-                            key="label.nav.menu.logout"/></a>
+                        <c:if test="${not empty userRole}">
+                        <a href="${pageContext.request.contextPath}/controller?command=logout"><fmt:message
+                                key="label.nav.menu.logout"/></a>
+                        </c:if>
+
             </li>
         </ul>
         <%@ include file="/WEB-INF/view/jspf/common/language-box.jspf" %>

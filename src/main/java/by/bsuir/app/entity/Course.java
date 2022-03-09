@@ -3,6 +3,8 @@ package by.bsuir.app.entity;
 import by.bsuir.app.entity.enums.CourseFormat;
 import by.bsuir.app.entity.enums.TechnologyType;
 
+import java.util.Objects;
+
 public class Course extends BaseEntity {
 
     public static final String TABLE = "course";
@@ -19,8 +21,8 @@ public class Course extends BaseEntity {
 
     private String title;
     private String description;
-    private TechnologyType technology;
     private int duration;
+    private TechnologyType technology;
     private CourseFormat courseFormat;
     private int currentPupilsQuantity;
     private int maxPupilsQuantity;
@@ -73,6 +75,10 @@ public class Course extends BaseEntity {
 
     public void setActive(boolean active) {
         this.active = active;
+    }
+
+    public void setCurrentPupilsQuantity(int currentPupilsQuantity) {
+        this.currentPupilsQuantity = currentPupilsQuantity;
     }
 
     @Override

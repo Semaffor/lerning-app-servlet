@@ -1,15 +1,16 @@
 package by.bsuir.app.command;
 
 import by.bsuir.app.command.action.admin.*;
-import by.bsuir.app.command.action.couch.EditCourseCommand;
-import by.bsuir.app.command.action.couch.ShowManageCourseCommand;
-import by.bsuir.app.command.action.couch.ShowTasksForCheckCommand;
+import by.bsuir.app.command.action.couch.*;
 import by.bsuir.app.command.action.general.CoursePageCommand;
 import by.bsuir.app.command.action.general.LoginCommand;
 import by.bsuir.app.command.action.general.LogoutCommand;
 import by.bsuir.app.command.action.general.ShowMainPageCommand;
+import by.bsuir.app.command.action.user.ShowMyCoursesCommand;
 import by.bsuir.app.command.action.user.SubscriptionCommand;
 import by.bsuir.app.dao.DaoHelperFactory;
+import by.bsuir.app.dao.impl.UserCourseDaoImpl;
+import by.bsuir.app.service.DateHandler;
 import by.bsuir.app.service.impl.*;
 
 public class CommandFactory {
@@ -40,10 +41,18 @@ public class CommandFactory {
                 return new EditRoleCommand(new UserServiceImpl(daoHelper));
             case SHOW_MANAGEMENT_COURSE:
                 return new ShowManageCourseCommand(new CourseServiceImpl(daoHelper));
-            case SHOW_CHECK_TASKS:
-                return new ShowTasksForCheckCommand(new UserTaskServiceImpl(daoHelper));
+            case SHOW_SUBMITTED_TASKS:
+                return new ShowSubmittedTasksCommand(new UserTaskServiceImpl(daoHelper));
             case EDIT_COURSE:
                 return new EditCourseCommand(new CourseServiceImpl(daoHelper));
+            case CREATE_TASK:
+                return new CreateTaskCommand(new TaskServiceImpl(daoHelper), new DateHandler());
+            case CHECK_TASK:
+                return new ShowCheckTaskCommand(new TaskServiceImpl(daoHelper));
+            case SUBMIT_CHECK:
+                return new SubmitTaskCheckCommand(new UserTaskServiceImpl(daoHelper));
+            case SHOW_MY_COURSES:
+                return new ShowMyCoursesCommand(new UserCourseServiceImpl(daoHelper));
             case LOGOUT:
                 return new LogoutCommand();
             default:

@@ -6,12 +6,18 @@ public class UserTask extends BaseEntity {
 
     public static final String TABLE = "user_task";
     public static final String MARK = "mark";
+    public static final String ANSWER = "answer";
+    public static final String FEEDBACK = "feedback";
+    public static final String SUBMITTED_DATE = "submitted_date";
     public static final String CHECK_DATE = "check_date";
 
     private Long userId;
     private Long taskId;
     private int mark;
+    private Date submittedDate;
     private Date checkDate;
+    private String answer;
+    private String feedback;
 
     public Long getUserId() {
         return userId;
@@ -27,6 +33,38 @@ public class UserTask extends BaseEntity {
 
     public Date getCheckDate() {
         return checkDate;
+    }
+
+    public String getAnswer() {
+        return answer;
+    }
+
+    public Date getSubmittedDate() {
+        return submittedDate;
+    }
+
+    public void setMark(int mark) {
+        this.mark = mark;
+    }
+
+    public void setSubmittedDate(Date submittedDate) {
+        this.submittedDate = submittedDate;
+    }
+
+    public void setCheckDate(Date checkDate) {
+        this.checkDate = checkDate;
+    }
+
+    public void setAnswer(String answer) {
+        this.answer = answer;
+    }
+
+    public String getFeedback() {
+        return feedback;
+    }
+
+    public void setFeedback(String feedback) {
+        this.feedback = feedback;
     }
 
     public static Builder getBuilder() {
@@ -63,6 +101,21 @@ public class UserTask extends BaseEntity {
 
         public Builder setDeleted(boolean deleted) {
             UserTask.this.deleted = deleted;
+            return this;
+        }
+
+        public Builder setAnswer(String answer) {
+            UserTask.this.answer = answer;
+            return this;
+        }
+
+        public Builder setSubmittedDate(Date submittedDate) {
+            UserTask.this.submittedDate = submittedDate;
+            return this;
+        }
+
+        public Builder setFeedback(String feedback) {
+            UserTask.this.feedback = feedback;
             return this;
         }
 

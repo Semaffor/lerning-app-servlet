@@ -15,7 +15,10 @@ public class UserTaskRowMapper implements RowMapper<UserTask> {
         Long userId = resultSet.getLong(UserTask.USER_ID);
         Long taskId = resultSet.getLong(UserTask.TASK_ID);
         int mark = resultSet.getInt(UserTask.MARK);
+        String answer = resultSet.getString(UserTask.ANSWER);
+        String feedback = resultSet.getString(UserTask.FEEDBACK);
         Date checkDate = resultSet.getDate(UserTask.CHECK_DATE);
+        Date submittedDate = resultSet.getDate(UserTask.SUBMITTED_DATE);
         boolean isDeleted = resultSet.getBoolean(UserCourse.DELETED);
 
         return UserTask.getBuilder()
@@ -23,7 +26,10 @@ public class UserTaskRowMapper implements RowMapper<UserTask> {
                 .setUserId(userId)
                 .setTaskId(taskId)
                 .setMark(mark)
+                .setAnswer(answer)
+                .setFeedback(feedback)
                 .setCheckDate(checkDate)
+                .setSubmittedDate(submittedDate)
                 .setDeleted(isDeleted)
                 .build();
     }

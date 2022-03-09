@@ -9,13 +9,17 @@ public enum CommandEnum {
     UNSUBSCRIBE("unsubscribe"),
     SHOW_MANAGEMENT_COURSES("manageCourses"),
     SHOW_MANAGEMENT_COURSE("manageCourse"),
-    SHOW_CHECK_TASKS("checkTasks"),
+    SHOW_SUBMITTED_TASKS("checkTasks"),
     SHOW_MANAGEMENT_USERS("manageUsers"),
     SHOW_MANAGEMENT_COUCHES("manageCouches"),
     MANAGEMENT_COURSES_ACTION("manageCoursesAction"),
     MANAGEMENT_USERS_ACTION("manageUsersAction"),
     EDIT_USER_ROLE("editUserRole"),
     EDIT_COURSE("editCourse"),
+    CREATE_TASK("createTask"),
+    CHECK_TASK("checkTask"),
+    SUBMIT_CHECK("submitCheck"),
+    SHOW_MY_COURSES("showMyCourses"),
 
     LOGOUT("logout");
 

@@ -117,6 +117,19 @@ public class CourseServiceImpl extends Service implements CourseService {
     }
 
     @Override
+    public boolean save(Course course) {
+        try (DaoHelper helper = daoHelperFactory.create()) {
+            helper.startTransaction();
+            CourseDao dao = helper.createCourseDao();
+            boolean isSubscribed = dao.save(course);
+            helper.endTransaction();
+            return isSubscribed;
+        } catch (Exception e) {
+            throw new ServiceException(e);
+        }
+    }
+
+    @Override
     public int getNumberOfUndeletedAndActiveRows() throws ServiceException{
         try (DaoHelper helper = daoHelperFactory.create()) {
             helper.startTransaction();

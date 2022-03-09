@@ -36,8 +36,8 @@ public class EditCourseCommand implements Command {
             Enumeration<String> parameterNames = request.getParameterNames();
             System.out.println(parameterNames);
             Long courseId = Long.parseLong(request.getParameter("courseId"));
-            String title = request.getParameter("title");
-            String description = request.getParameter("description");
+            String title = request.getParameter("title_course");
+            String description = request.getParameter("description_course");
             int duration = getInt(request.getParameter("duration"));
             int chosenTechnologyCode = getInt(request.getParameter("chosenTechnology"));
             int chosenFormatCode = getInt(request.getParameter("chosenFormat"));

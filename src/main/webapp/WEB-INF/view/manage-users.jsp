@@ -5,8 +5,8 @@
 <head>
     <%@ include file="jspf/common/head.jspf" %>
     <%@ include file="jspf/head-and-foot-deps.jspf" %>
+    <title><fmt:message key="page.title.main"/></title>
     <link rel="stylesheet" href="${contextPath}/static/css/manage-page.css">
-    <title>Aduliner</title>
 </head>
 <body>
 <%@ include file="jspf/common/navbar.jspf" %>

@@ -1,4 +1,4 @@
-.editor, #form {
+.editor, #form_edit, #form_creator {
     display: none;
 }
 .body_elements {
@@ -18,6 +18,7 @@ input, select, textarea {
 }
 textarea {
     resize: none;
+    min-height: 100px;
     height: fit-content;
 }
 input[type=submit] {
@@ -38,7 +39,7 @@ input[type=submit]:hover {
     background-color: #45a049;
 }
 
-#form {
+#form_edit, #form_creator {
     border-radius: 5px;
     background-color: #f2f2f2;
     padding: 20px;

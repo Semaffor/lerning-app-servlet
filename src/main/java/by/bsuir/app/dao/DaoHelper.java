@@ -7,7 +7,7 @@ import by.bsuir.app.exception.DaoException;
 
 import java.sql.SQLException;
 
-public class DaoHelper implements AutoCloseable{
+public class DaoHelper implements AutoCloseable {
     private ProxyConnection connection;
 
     public DaoHelper(ConnectionPool pool) {
@@ -39,11 +39,24 @@ public class DaoHelper implements AutoCloseable{
     public UserDao createUserDao() {
         return new UserDaoImpl(connection);
     }
-    public CourseDao createCourseDao() { return new CourseDaoImpl(connection);}
-    public TaskDao createTaskDao() { return new TaskDaoImpl(connection);}
-    public UserCourseDao createUserCourseDao() { return new UserCourseDaoImpl(connection);}
+
+    public CourseDao createCourseDao() {
+        return new CourseDaoImpl(connection);
+    }
+
+    public TaskDao createTaskDao() {
+        return new TaskDaoImpl(connection);
+    }
+
+    public UserCourseDao createUserCourseDao() {
+        return new UserCourseDaoImpl(connection);
+    }
 
     public UserTaskDao createUserTaskDao() {
         return new UserTaskDaoImpl(connection);
+    }
+
+    public UserTaskCustomDao createUserTaskCustomDao() {
+        return new UserTaskCustomDaoImpl(connection);
     }
 }

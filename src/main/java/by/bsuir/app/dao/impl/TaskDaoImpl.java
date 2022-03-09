@@ -6,6 +6,7 @@ import by.bsuir.app.entity.Task;
 import by.bsuir.app.mapper.TaskRowMapper;
 
 import java.sql.Connection;
+import java.util.LinkedHashMap;
 import java.util.Map;
 
 public class TaskDaoImpl extends AbstractDao<Task> implements TaskDao {
@@ -16,6 +17,12 @@ public class TaskDaoImpl extends AbstractDao<Task> implements TaskDao {
 
     @Override
     protected Map<String, Object> getFields(Task item) {
-        return null;
+        Map<String, Object> fields = new LinkedHashMap<>();
+        fields.put(Task.TITLE, item.getTitle());
+        fields.put(Task.DESCRIPTION, item.getDescription());
+        fields.put(Task.COURSE_ID, item.getCourseId());
+        fields.put(Task.DEADLINE, item.getDeadline());
+        fields.put(Task.DELETED, item.isDeleted());
+        return fields;
     }
 }

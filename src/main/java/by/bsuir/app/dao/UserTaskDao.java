@@ -5,5 +5,4 @@ import by.bsuir.app.entity.UserTask;
 import java.util.List;
 
 public interface UserTaskDao extends Dao<UserTask> {
-    List<UserTask> findCourseTasksOnReviewByCouchId(Long couchId);
 }
