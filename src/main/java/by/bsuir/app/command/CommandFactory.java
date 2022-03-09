@@ -1,11 +1,12 @@
 package by.bsuir.app.command;
 
-import by.bsuir.app.command.action.*;
 import by.bsuir.app.command.action.admin.*;
 import by.bsuir.app.command.action.couch.EditCourseCommand;
 import by.bsuir.app.command.action.couch.ShowManageCourseCommand;
 import by.bsuir.app.command.action.couch.ShowTasksForCheckCommand;
 import by.bsuir.app.command.action.general.CoursePageCommand;
+import by.bsuir.app.command.action.general.LoginCommand;
+import by.bsuir.app.command.action.general.LogoutCommand;
 import by.bsuir.app.command.action.general.ShowMainPageCommand;
 import by.bsuir.app.command.action.user.SubscriptionCommand;
 import by.bsuir.app.dao.DaoHelperFactory;
