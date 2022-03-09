@@ -8,11 +8,15 @@ public enum CommandEnum {
     SUBSCRIBE("subscribe"),
     UNSUBSCRIBE("unsubscribe"),
     SHOW_MANAGEMENT_COURSES("manageCourses"),
+    SHOW_MANAGEMENT_COURSE("manageCourse"),
+    SHOW_CHECK_TASKS("checkTasks"),
     SHOW_MANAGEMENT_USERS("manageUsers"),
     SHOW_MANAGEMENT_COUCHES("manageCouches"),
     MANAGEMENT_COURSES_ACTION("manageCoursesAction"),
     MANAGEMENT_USERS_ACTION("manageUsersAction"),
     EDIT_USER_ROLE("editUserRole"),
+    EDIT_COURSE("editCourse"),
+
     LOGOUT("logout");
 
     private final String command;

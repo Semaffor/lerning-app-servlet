@@ -1,8 +1,10 @@
-package by.bsuir.app.command.action.courses;
+package by.bsuir.app.command.action.couch;
 
 import by.bsuir.app.command.Command;
 import by.bsuir.app.command.CommandResult;
 import by.bsuir.app.entity.Course;
+import by.bsuir.app.entity.enums.CourseFormat;
+import by.bsuir.app.entity.enums.TechnologyType;
 import by.bsuir.app.exception.ServiceException;
 import by.bsuir.app.service.CourseService;
 
@@ -25,6 +27,8 @@ public class ShowManageCourseCommand implements Command {
         if (courseOptional.isPresent()) {
             Course course = courseOptional.get();
             request.setAttribute("course", course);
+            request.setAttribute("technologies", TechnologyType.values());
+            request.setAttribute("formats", CourseFormat.values());
         }
         return CommandResult.forward(FORWARD_MANAGE_COURSE_PAGE);
     }

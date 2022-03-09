@@ -1,4 +1,4 @@
-package by.bsuir.app.command.action.courses;
+package by.bsuir.app.command.action.user;
 
 import by.bsuir.app.command.Command;
 import by.bsuir.app.command.CommandEnum;

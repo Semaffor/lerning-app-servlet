@@ -1,35 +1,35 @@
-package by.bsuir.app.command.action.users;
+package by.bsuir.app.command.action.admin;
 
 import by.bsuir.app.command.Command;
 import by.bsuir.app.command.CommandEnum;
 import by.bsuir.app.command.CommandResult;
 import by.bsuir.app.entity.enums.FormAction;
 import by.bsuir.app.exception.ServiceException;
-import by.bsuir.app.service.UserService;
+import by.bsuir.app.service.CourseService;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-public class ManageUsersCommand implements Command {
+public class ManageCoursesCommand implements Command {
     private static final String REDIRECT_SHOW_MANAGE_COURSES_PAGE =
-            "/controller?command=" + CommandEnum.SHOW_MANAGEMENT_USERS.getCommand();
-    private final UserService userService;
+            "/controller?command=" + CommandEnum.SHOW_MANAGEMENT_COURSES.getCommand();
+    private final CourseService courseService;
 
-    public ManageUsersCommand(UserService userService) {
-        this.userService = userService;
+    public ManageCoursesCommand(CourseService courseService) {
+        this.courseService = courseService;
     }
 
     @Override
     public CommandResult execute(HttpServletRequest request, HttpServletResponse response) throws ServiceException {
         String actionString = request.getParameter("formAction");
         FormAction action = FormAction.getFormActionFromString(actionString);
-        String userIdString = request.getParameter("userId");
-        Long userId = Long.valueOf(userIdString);
+        String courseIdString = request.getParameter("courseId");
+        Long courseId = Long.valueOf(courseIdString);
 
         if (FormAction.ENABLE.equals(action) || FormAction.DISABLE.equals(action)) {
-            userService.changeIsBlockedStatus(userId);
+            courseService.changeIsActiveStatus(courseId);
         } else {
-            userService.changeIsDeletedStatus(userId);
+            courseService.changeIsDeleteStatus(courseId);
         }
         return CommandResult.redirect(REDIRECT_SHOW_MANAGE_COURSES_PAGE);
     }
