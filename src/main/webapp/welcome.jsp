@@ -6,6 +6,7 @@
     <jsp:include page="WEB-INF/view/jspf/common/head.jspf"/>
     <title>Log In</title>
     <link rel="stylesheet" href="static/css/welcome.css">
+    <link rel="stylesheet" href="static/css/label.css">
     <link rel="stylesheet" href="static/css/dropbox.css">
 </head>
 <body>

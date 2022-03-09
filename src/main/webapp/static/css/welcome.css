@@ -9,42 +9,6 @@
 
 }
 
-.notification
-.warning,
-.error {
-    border: 1px solid;
-    margin: 10px auto;
-    padding: 15px 10px 15px 50px;
-    background-repeat: no-repeat;
-    background-position: 10px center;
-    max-width: 460px;
-}
-
-.error {
-    color: #D8000C;
-    background-color: #FFBABA;
-    /*background-image: url("../images/errorIcon.png");*/
-}
-
-.error:before {
-    font-family: FontAwesome;
-    content: '\f057';
-    font-size: 24px;
-    color: #D8000C;
-}
-
-.warning {
-    color: #9F6000;
-    background-color: #FEEFB3;
-    /*background-image: url('../images/warningIcon.png');*/
-}
-
-.notification {
-    color: black;
-    background-color: #56bfe8;
-    /*background-image: url('../images/lock.png');*/
-}
-
 .container-wrapper {
     display: grid;
     height: 100vh;
