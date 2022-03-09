@@ -1,4 +1,4 @@
-package by.bsuir.app.command.action;
+package by.bsuir.app.command.action.general;
 
 import by.bsuir.app.command.Command;
 import by.bsuir.app.command.CommandResult;

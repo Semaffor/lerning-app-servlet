@@ -5,7 +5,7 @@
 <head>
     <%@ include file="jspf/common/head.jspf" %>
     <%@ include file="jspf/head-and-foot-deps.jspf" %>
-    <link rel="stylesheet" href="/static/css/course-page.css">
+    <link rel="stylesheet" href="/static/css/courses-page.css">
     <title>${course.title}</title>
 </head>
 <body>
@@ -25,8 +25,7 @@
             <fmt:message key="label.item.availability"/>${course.active}
         </p>
     </div>
-    1${subscribe}
-    2${unsubscribe}
+    <c:if test="${userRole eq 'USER'}">
     <c:if test="${not empty subscribe}">
         <form action="${pageContext.request.contextPath}/controller?command=subscribe" method="post">
             <input type="hidden" name="courseId" value="${course.id}">
@@ -45,6 +44,7 @@
             <fmt:message key="label.item.subscription"/>
         </c:if>
     </div>
+    </c:if>
 </div>
 <%@ include file="jspf/common/footer.jspf" %>
 <script src="/static/js/common.js"></script>
