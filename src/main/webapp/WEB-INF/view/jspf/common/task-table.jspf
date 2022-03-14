@@ -36,8 +36,14 @@
                 </c:choose>
             </td>
             <c:if test="${userRole eq 'USER'}">
-                <th>${task.feedback}</th>
+                <th>
+                    <c:if test="${empty task.feedback}">
+                        <fmt:message key="label.couch.tasks.pending"/>
+                    </c:if>
+                        ${task.feedback}
+                </th>
             </c:if>
+
             <c:if test="${userRole eq 'COUCH'}">
                 <td width="200px">
                     <c:choose>

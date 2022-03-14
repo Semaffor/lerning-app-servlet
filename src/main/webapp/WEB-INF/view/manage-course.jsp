@@ -5,7 +5,7 @@
 <head>
     <%@ include file="jspf/common/head.jspf" %>
     <%@ include file="jspf/head-and-foot-deps.jspf" %>
-    <title><fmt:message key="page.title.course.management"/></title>
+    <title><fmt:message key="label.nav.menu.admin.management.courses"/></title>
     <link rel="stylesheet" href="${contextPath}/static/css/course-page.css">
     <link rel="stylesheet" href="${contextPath}/static/css/label.css">
 </head>
@@ -85,7 +85,7 @@
                 <input type="hidden" name="courseId" value="${course.id}">
                 <fmt:message key="label.couch.tasks.title"/>
                 <input type="text" name="title_task" maxlength="45" >
-                <fmt:message key="label.couch.tasks.description"/>
+                <fmt:message key="label.management.course.description"/>
                 <textarea name="description_task" maxlength="255"></textarea>
                 <fmt:message key="label.couch.tasks.deadline"/>
                 <input type="datetime-local" name="deadline">

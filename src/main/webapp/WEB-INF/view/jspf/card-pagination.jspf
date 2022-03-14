@@ -1,7 +1,7 @@
 <div class="main">
 
     <div class="selector">
-        <label>Select records per page:</label>
+        <label><fmt:message key="label.main.courses.per-page"/> </label>
         <c:set var="path" scope="page" value="${pageContext.request.contextPath}/controller?command=showMain&"/>
         <a href="${path}currentPage=1&recordsPerPage=5"
            type="submit">5</a>

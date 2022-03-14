@@ -6,14 +6,13 @@
         <ul>
             <li><a href="${pageContext.request.contextPath}/controller?command=showMain"><fmt:message
                     key="label.nav.menu.page"/></a></li>
-            <li><a href="${pageContext.request.contextPath}/"><fmt:message key="label.nav.menu.page"/></a></li>
         </ul>
     </div>
     <div class="navbar_block">
         <ul>
             <li class="dropdown">
                 <a href="javascript:void(0)" class="dropbtn">
-                    ${username}
+                    <div class="nickname">${username}</div>
                     <img class="dropdown_header_icon" src="${pageContext.request.contextPath}/static/images/user.png"/>
                 </a>
                     <c:set var="contextPath" value="${pageContext.request.contextPath}"/>
@@ -33,7 +32,7 @@
                     </c:if>
 
                     <c:if test="${userRole eq 'COUCH'}">
-                    <a href="${contextPath}/controller?command=manageCourse"><fmt:message key="label.nav.menu.couch.courses.management"/></a>
+                    <a href="${contextPath}/controller?command=manageCourse"><fmt:message key="label.nav.menu.admin.management.courses"/></a>
                     <a href="${contextPath}/controller?command=checkTasks"><fmt:message key="label.nav.menu.couch.courses.review"/></a>
                     </c:if>
                         <c:if test="${not empty userRole}">

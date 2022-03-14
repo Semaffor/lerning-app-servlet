@@ -17,11 +17,13 @@
         <div id="form_task_creator">
             <form action="${contextPath}/controller?command=${command}" method="POST">
                 <input type="hidden" name="userTaskId" value="${task.id}">
+                ${courseId}
+                <input type="hidden" name="courseId" value="${courseId}">
                 <p>
                 <fmt:message key="label.couch.tasks.title"/>: ${task.title}
                 </p>
                 <p>
-                <fmt:message key="label.couch.tasks.description"/>: ${task.description}
+                <fmt:message key="label.management.course.description"/>: ${task.description}
                 </p>
                 <fmt:message key="label.couch.tasks.solution"/>:
                 <c:if test="${userRole eq 'USER'}">

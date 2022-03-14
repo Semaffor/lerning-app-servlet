@@ -31,6 +31,7 @@
                     <div class="button_actions">
                         <form action="${contextPath}/controller?command=doTask" method="post">
                             <button><fmt:message key="label.student.task.start"/></button>
+                            <input type="hidden" name="courseId" value="${param.number}">
                             <input type="hidden" name="taskId" value="${task.id}">
                         </form>
                     </div>

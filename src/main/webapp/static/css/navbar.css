@@ -23,6 +23,7 @@
 
 /*Style the navigation bar links*/
 .navbar a {
+    display: flex;
     color: white;
     padding: 8px 20px;
     text-decoration: none;
@@ -104,11 +105,7 @@ li.dropdown {
 }
 
 .dropdown_header_icon {
-    width: 20px;
-}
-
-.dropdown_header_icon {
-    width: 25px;
+    width: 30px;
     padding: 1px 1px;
 }
 
@@ -125,4 +122,8 @@ li.dropdown {
 .navbar_block:last-child {
     padding-right: 120px;
     justify-content: flex-end;
+}
+
+.nickname {
+    padding: 7px 10px 0 0;
 }

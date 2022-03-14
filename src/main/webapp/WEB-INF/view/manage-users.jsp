@@ -5,7 +5,7 @@
 <head>
     <%@ include file="jspf/common/head.jspf" %>
     <%@ include file="jspf/head-and-foot-deps.jspf" %>
-    <title><fmt:message key="page.title.main"/></title>
+    <title><fmt:message key="label.nav.menu.page"/></title>
     <link rel="stylesheet" href="${contextPath}/static/css/manage-page.css">
 </head>
 <body>
