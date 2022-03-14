@@ -1,6 +1,7 @@
 package by.bsuir.app.command.action.general;
 
 import by.bsuir.app.command.Command;
+import by.bsuir.app.command.CommandEnum;
 import by.bsuir.app.command.CommandResult;
 import by.bsuir.app.entity.Course;
 import by.bsuir.app.exception.ServiceException;
@@ -35,6 +36,7 @@ public class ShowMainPageCommand implements Command {
         request.setAttribute("currentPage", currentPage);
         request.setAttribute("recordsPerPage", recordsPerPage);
         request.setAttribute("courses", courses);
+        request.setAttribute("command", CommandEnum.ITEMS.getCommand());
 
         return CommandResult.forward(FORWARD_MAIN_PAGE);
     }

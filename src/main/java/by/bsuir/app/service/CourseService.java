@@ -18,4 +18,5 @@ public interface CourseService {
     List<Course> getAllCourses() throws ServiceException;
 
     Optional<Course> findCourseByCouchUsername(String login);
+    List<Course> findSubscriptionsByUsername(String username);
 }

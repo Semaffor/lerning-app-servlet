@@ -3,6 +3,7 @@ package by.bsuir.app.service.impl;
 import by.bsuir.app.dao.CourseDao;
 import by.bsuir.app.dao.DaoHelper;
 import by.bsuir.app.dao.DaoHelperFactory;
+import by.bsuir.app.dao.UserCourseDao;
 import by.bsuir.app.entity.Course;
 import by.bsuir.app.exception.ServiceException;
 import by.bsuir.app.service.CourseService;
@@ -37,6 +38,19 @@ public class CourseServiceImpl extends Service implements CourseService {
             Optional<Course> course = dao.findCourseByCouchUsername(login);
             helper.endTransaction();
             return course;
+        } catch (Exception e) {
+            throw new ServiceException(e);
+        }
+    }
+
+    @Override
+    public List<Course> findSubscriptionsByUsername(String username) {
+        try (DaoHelper helper = daoHelperFactory.create()) {
+            helper.startTransaction();
+            CourseDao dao = helper.createCourseDao();
+            List<Course> userCourses = dao.findSubscriptionsByUsername(username);
+            helper.endTransaction();
+            return userCourses;
         } catch (Exception e) {
             throw new ServiceException(e);
         }

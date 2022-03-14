@@ -41,4 +41,17 @@ public class TaskServiceImpl extends Service implements TaskService {
             throw new ServiceException(e);
         }
     }
+
+    @Override
+    public List<Task> findCourseAvailableTasks(Long courseId) {
+        try (DaoHelper helper = daoHelperFactory.create()) {
+            helper.startTransaction();
+            TaskDao dao = helper.createTaskDao();
+            List<Task> tasks = dao.findUnconfirmedByUserCourseTasks(courseId);
+            helper.endTransaction();
+            return tasks;
+        } catch (Exception e) {
+            throw new ServiceException(e);
+        }
+    }
 }

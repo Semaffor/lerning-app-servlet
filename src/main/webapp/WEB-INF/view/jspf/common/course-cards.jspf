@@ -1,0 +1,29 @@
+<div class="container">
+    <c:if test="${empty courses}">
+        <div class="center_message">
+            <fmt:message key="label.main.courses.empty"/>
+        </div>
+    </c:if>
+    <c:forEach items="${courses}" var="course">
+        <div class="card">
+            <a class="card__url" href="${contextPath}/controller?command=${command}&number=${course.id}">
+                <div class="card-header">
+                    <img src="https://c0.wallpaperflare.com/preview/483/210/436/car-green-4x4-jeep.jpg"
+                         alt="rover"/>
+                </div>
+                <div class="card-body">
+                    <span class="tag tag-purple">${course.technology.getDecodingValue()}</span>
+                    <p class="card__title">
+                            ${course.title}
+                    </p>
+                    <p class="card__description">
+                            ${course.description}
+                    </p>
+                    <p class="card__button">
+                        <a href="#">weqeqw</a>
+                    </p>
+                </div>
+            </a>
+        </div>
+    </c:forEach>
+</div>

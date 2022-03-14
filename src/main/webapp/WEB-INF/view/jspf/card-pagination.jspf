@@ -1,0 +1,45 @@
+<div class="main">
+
+    <div class="selector">
+        <label>Select records per page:</label>
+        <c:set var="path" scope="page" value="${pageContext.request.contextPath}/controller?command=showMain&"/>
+        <a href="${path}currentPage=1&recordsPerPage=5"
+           type="submit">5</a>
+        <a href="${path}currentPage=1&recordsPerPage=10"
+           type="submit">10</a>
+        <a href="${path}currentPage=1&recordsPerPage=20"
+           type="submit">20</a>
+    </div>
+
+    <%@ include file="common/course-cards.jspf" %>
+    <div class="pagination">
+        <ul class="pagination">
+            <c:if test="${currentPage != null && currentPage != 1}">
+                <li class="page-item">
+                    <a href="${contextPath}/controller?command=showMain&recordsPerPage=${recordsPerPage}&currentPage=${currentPage-1}">&laquo;</a>
+                </li>
+            </c:if>
+
+            <c:forEach begin="1" end="${noOfPages}" var="i">
+                <c:choose>
+                    <c:when test="${currentPage eq i}">
+                        <li class="page-item active"><a class="page-link">
+                                ${i} <span class="sr-only"></span></a>
+                        </li>
+                    </c:when>
+                    <c:otherwise>
+                        <li class="page-item">
+                            <a class="page-link" href="${contextPath}/controller?command=showMain&recordsPerPage=${recordsPerPage}&currentPage=${i}">${i}</a>
+                        </li>
+                    </c:otherwise>
+                </c:choose>
+            </c:forEach>
+
+            <c:if test="${currentPage lt noOfPages}">
+                <li class="page-item"><a class="page-link"
+                                         href="${contextPath}/controller?command=showMain&recordsPerPage=${recordsPerPage}&currentPage=${currentPage+1}">&raquo;</a>
+                </li>
+            </c:if>
+        </ul>
+    </div>
+</div>

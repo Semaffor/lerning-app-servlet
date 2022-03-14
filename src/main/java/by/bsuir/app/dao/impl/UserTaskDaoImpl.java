@@ -20,7 +20,8 @@ public class UserTaskDaoImpl extends AbstractDao<UserTask> implements UserTaskDa
         Map<String, Object> fields = new LinkedHashMap<>();
         fields.put(UserTask.USER_ID, item.getUserId());
         fields.put(UserTask.TASK_ID, item.getTaskId());
-        fields.put(UserTask.ANSWER, item.getAnswer());
+        fields.put(UserTask.MARK, item.getMark());
+        fields.put(UserTask.SOLUTION, item.getAnswer());
         fields.put(UserTask.FEEDBACK, item.getFeedback());
         fields.put(UserTask.SUBMITTED_DATE, item.getSubmittedDate());
         fields.put(UserTask.CHECK_DATE, item.getCheckDate());

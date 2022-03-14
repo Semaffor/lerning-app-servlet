@@ -7,7 +7,6 @@ import by.bsuir.app.entity.enums.CourseFormat;
 import by.bsuir.app.entity.enums.TechnologyType;
 import by.bsuir.app.exception.ServiceException;
 import by.bsuir.app.service.CourseService;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.util.Optional;

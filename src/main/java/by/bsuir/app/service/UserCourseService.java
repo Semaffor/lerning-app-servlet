@@ -1,6 +1,5 @@
 package by.bsuir.app.service;
 
-import by.bsuir.app.entity.Task;
 import by.bsuir.app.entity.UserCourse;
 
 import java.util.List;

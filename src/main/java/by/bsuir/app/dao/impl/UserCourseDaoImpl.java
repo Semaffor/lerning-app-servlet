@@ -2,6 +2,8 @@ package by.bsuir.app.dao.impl;
 
 import by.bsuir.app.dao.AbstractDao;
 import by.bsuir.app.dao.UserCourseDao;
+import by.bsuir.app.entity.Course;
+import by.bsuir.app.entity.User;
 import by.bsuir.app.entity.UserCourse;
 import by.bsuir.app.mapper.UserCourseRowMapper;
 
@@ -31,7 +33,6 @@ public class UserCourseDaoImpl extends AbstractDao<UserCourse> implements UserCo
     @Override
     protected Map<String, Object> getFields(UserCourse item) {
         Map<String, Object> fields = new LinkedHashMap<>();
-//        fields.put(UserCourse.ID, item.getId());
         fields.put(UserCourse.USER_ID, item.getUserId());
         fields.put(UserCourse.COURSE_ID, item.getCourseId());
         fields.put(UserCourse.DELETED, item.isDeleted());

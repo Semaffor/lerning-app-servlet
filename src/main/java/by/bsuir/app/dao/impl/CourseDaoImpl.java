@@ -25,6 +25,10 @@ public class CourseDaoImpl extends AbstractDao<Course> implements CourseDao {
             "join %s c on uc.%s = c.%s " +
             "join %s u on u.%s = uc.%s " +
             "where u.%s = ? and c.%s = ? and uc.%s =?;";
+    private static final String SQL_FIND_USER_SUBSCRIPTIONS = "select * from %s as c\n" +
+            "join %s uc on c.%s = uc.%s\n" +
+            "join %s u on u.%s = uc.%s\n" +
+            "where %s = ?;";
 
     public CourseDaoImpl(Connection connection) {
         super(connection, new CourseRowMapper(), Course.TABLE);
@@ -76,4 +80,15 @@ public class CourseDaoImpl extends AbstractDao<Course> implements CourseDao {
 
         return fields;
     }
+
+
+    @Override
+    public List<Course> findSubscriptionsByUsername(String username) {
+        return executeQuery(String.format(SQL_FIND_USER_SUBSCRIPTIONS,
+                Course.TABLE,
+                UserCourse.TABLE,UserCourse.ID, User.COURSE_ID,
+                User.TABLE, User.ID,User.USER_ID,
+                User.NAME), username);
+    }
+
 }

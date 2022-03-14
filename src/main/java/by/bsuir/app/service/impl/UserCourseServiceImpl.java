@@ -5,7 +5,6 @@ import by.bsuir.app.dao.DaoHelper;
 import by.bsuir.app.dao.DaoHelperFactory;
 import by.bsuir.app.dao.UserCourseDao;
 import by.bsuir.app.entity.Course;
-import by.bsuir.app.entity.Task;
 import by.bsuir.app.entity.UserCourse;
 import by.bsuir.app.exception.ServiceException;
 import by.bsuir.app.service.Service;

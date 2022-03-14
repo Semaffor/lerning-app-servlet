@@ -1,6 +1,7 @@
 .editor, #form_edit, #form_creator {
     display: none;
 }
+
 .body_elements {
     width: 80vw;
     margin: 0 auto;
@@ -8,7 +9,7 @@
     padding: 20px;
 }
 input, select, textarea {
-    width: 100%;
+    width: 70%;
     padding: 12px 20px;
     margin: 8px 0;
     display: inline-block;
@@ -60,4 +61,8 @@ button {
 .notification_wrapper {
     width: 400px;
     margin: 0 auto;
+}
+
+#mark {
+    width: 30%;
 }

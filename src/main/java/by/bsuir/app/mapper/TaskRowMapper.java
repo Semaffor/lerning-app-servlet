@@ -2,7 +2,6 @@ package by.bsuir.app.mapper;
 
 import by.bsuir.app.entity.BaseEntity;
 import by.bsuir.app.entity.Task;
-import by.bsuir.app.entity.UserCourse;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;

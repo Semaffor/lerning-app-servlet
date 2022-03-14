@@ -20,6 +20,9 @@ public enum CommandEnum {
     CHECK_TASK("checkTask"),
     SUBMIT_CHECK("submitCheck"),
     SHOW_MY_COURSES("showMyCourses"),
+    SHOW_COURSE_TASKS("showUnconfirmedTasks"),
+    DO_TASK("doTask"),
+    CONFIRM_TASK("submitTask"),
 
     LOGOUT("logout");
 

@@ -6,10 +6,10 @@ import by.bsuir.app.command.action.general.CoursePageCommand;
 import by.bsuir.app.command.action.general.LoginCommand;
 import by.bsuir.app.command.action.general.LogoutCommand;
 import by.bsuir.app.command.action.general.ShowMainPageCommand;
-import by.bsuir.app.command.action.user.ShowMyCoursesCommand;
-import by.bsuir.app.command.action.user.SubscriptionCommand;
+import by.bsuir.app.command.action.user.*;
 import by.bsuir.app.dao.DaoHelperFactory;
-import by.bsuir.app.dao.impl.UserCourseDaoImpl;
+import by.bsuir.app.dao.UserTaskDao;
+import by.bsuir.app.dao.impl.UserTaskDaoImpl;
 import by.bsuir.app.service.DateHandler;
 import by.bsuir.app.service.impl.*;
 
@@ -48,11 +48,17 @@ public class CommandFactory {
             case CREATE_TASK:
                 return new CreateTaskCommand(new TaskServiceImpl(daoHelper), new DateHandler());
             case CHECK_TASK:
-                return new ShowCheckTaskCommand(new TaskServiceImpl(daoHelper));
+                return new ShowCheckTaskCommand(new UserTaskServiceImpl(daoHelper));
             case SUBMIT_CHECK:
                 return new SubmitTaskCheckCommand(new UserTaskServiceImpl(daoHelper));
             case SHOW_MY_COURSES:
-                return new ShowMyCoursesCommand(new UserCourseServiceImpl(daoHelper));
+                return new ShowMyCoursesCommand(new CourseServiceImpl(daoHelper));
+            case SHOW_COURSE_TASKS:
+                return new ShowAvailableCourseTasks(new TaskServiceImpl(daoHelper), new UserTaskServiceImpl(daoHelper));
+            case DO_TASK:
+                return new DoTaskCommand(new TaskServiceImpl(daoHelper));
+            case CONFIRM_TASK:
+                return new ConfirmTaskCommand(new UserTaskServiceImpl(daoHelper));
             case LOGOUT:
                 return new LogoutCommand();
             default:

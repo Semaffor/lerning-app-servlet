@@ -11,6 +11,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.ParseException;
 import java.util.*;
 
 public abstract class AbstractDao<T extends Identifiable> implements Dao<T> {
@@ -20,6 +21,7 @@ public abstract class AbstractDao<T extends Identifiable> implements Dao<T> {
     private final static String SQL_SELECT_BY_PARAMS = "select * from %s where %s;";
     private final static String SQL_INSERT = "INSERT INTO %s (%s) VALUES (%s);";
     private final static String SQL_UPDATE = "UPDATE %s SET %s WHERE id=%d;";
+    private final static String SQL_ALIAS = "%s.%s as %s";
 
 
     private final static Logger LOGGER = LogManager.getLogger(AbstractDao.class);
@@ -52,7 +54,7 @@ public abstract class AbstractDao<T extends Identifiable> implements Dao<T> {
                 entities.add(entity);
             }
             return entities;
-        } catch (SQLException e) {
+        } catch (SQLException | ParseException e) {
             throw new DaoException(e);
         }
     }
@@ -101,6 +103,19 @@ public abstract class AbstractDao<T extends Identifiable> implements Dao<T> {
         LOGGER.trace("Update row in table: " + table);
         StringJoiner params = generateConditionFields(fields.keySet(), ", ");
         return String.format(SQL_UPDATE, table, params, id);
+    }
+
+    protected String generateSingleAlias(String rowName, String aliasTablePrefix) {
+        return String.format(SQL_ALIAS, aliasTablePrefix, rowName, rowName);
+    }
+
+    protected String generateAliases(String aliasTablePrefix, String... fieldNames) {
+        LOGGER.trace("Generate aliases for prefix: " + aliasTablePrefix);
+        StringJoiner aliases = new StringJoiner(", ");
+        for (String fieldName : fieldNames) {
+            aliases.add(generateSingleAlias(fieldName, aliasTablePrefix));
+        }
+        return aliases.toString();
     }
 
     protected String generateSelectQuery(Set<String> fields) {

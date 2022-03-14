@@ -1,0 +1,63 @@
+<div class="table_wrapper">
+    <table class="fl-table">
+        <thead>
+        <tr>
+            <c:if test="${userRole eq 'COUCH'}">
+                <th><fmt:message key="label.couch.tasks.username.student"/></th>
+            </c:if>
+            <th><fmt:message key="label.couch.tasks.title"/></th>
+            <th><fmt:message key="label.couch.tasks.date.submitted"/></th>
+            <th><fmt:message key="label.couch.tasks.date.checked"/></th>
+            <th><fmt:message key="label.couch.tasks.mark"/></th>
+            <c:if test="${userRole eq 'USER'}">
+                <th><fmt:message key="label.couch.tasks.feedback"/></th>
+            </c:if>
+            <c:if test="${userRole eq 'COUCH'}">
+                <th><fmt:message key="label.management.action"/></th>
+            </c:if>
+        </tr>
+        </thead>
+        <tbody>
+        <c:forEach var="task" items="${userTasks}">
+        <tr>
+            <c:if test="${userRole eq 'COUCH'}">
+                <td>${task.studentUsername}</td>
+            </c:if>
+            <td>${task.title}</td>
+            <c:set var="datePattern"><fmt:message key='label.pattern.date'/></c:set>
+            <td><fmt:formatDate value="${task.submittedDate}" pattern="${datePattern}"/></td>
+            <td><fmt:formatDate value="${task.checkDate}" pattern="${datePattern}"/></td>
+            <td>
+                <c:choose>
+                    <c:when test="${task.mark eq 0}">
+                        <fmt:message key="label.empty"/>
+                    </c:when>
+                    <c:otherwise>${task.mark}</c:otherwise>
+                </c:choose>
+            </td>
+            <c:if test="${userRole eq 'USER'}">
+                <th>${task.feedback}</th>
+            </c:if>
+            <c:if test="${userRole eq 'COUCH'}">
+                <td width="200px">
+                    <c:choose>
+                        <c:when test="${task.mark eq 0}">
+                            <div class="button_actions">
+                                <form action="${contextPath}/controller?command=checkTask" method="post">
+                                    <button><fmt:message key="label.couch.courses.task.check"/></button>
+                                    <input type="hidden" name="userTaskId" value="${task.id}">
+                                </form>
+                            </div>
+                        </c:when>
+                        <c:otherwise>
+                            <fmt:message key="label.couch.tasks.checked"/>
+                        </c:otherwise>
+                    </c:choose>
+                </td>
+            </c:if>
+
+        </tr>
+        </c:forEach>
+        <tbody>
+    </table>
+</div>

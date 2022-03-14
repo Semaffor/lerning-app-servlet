@@ -9,6 +9,7 @@ import by.bsuir.app.service.UserTaskService;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class ShowSubmittedTasksCommand implements Command {
     private static final String FORWARD_SHOW_CHECK_TASKS_PAGE = "/WEB-INF/view/show-tasks.jsp";
@@ -22,7 +23,7 @@ public class ShowSubmittedTasksCommand implements Command {
     public CommandResult execute(HttpServletRequest request, HttpServletResponse response) throws ServiceException {
         String login = (String) request.getSession().getAttribute("username");
         List<UserTaskDTO> tasksOnReview = userTaskService.findCourseTasksOnReviewByCouchUsername(login);
-        request.setAttribute("tasks", tasksOnReview);
+        request.setAttribute("userTasks", tasksOnReview);
         return CommandResult.forward(FORWARD_SHOW_CHECK_TASKS_PAGE);
     }
 }

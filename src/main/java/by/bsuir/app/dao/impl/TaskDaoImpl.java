@@ -2,14 +2,23 @@ package by.bsuir.app.dao.impl;
 
 import by.bsuir.app.dao.AbstractDao;
 import by.bsuir.app.dao.TaskDao;
+import by.bsuir.app.entity.BaseEntity;
+import by.bsuir.app.entity.Course;
 import by.bsuir.app.entity.Task;
+import by.bsuir.app.entity.UserTask;
 import by.bsuir.app.mapper.TaskRowMapper;
 
 import java.sql.Connection;
 import java.util.LinkedHashMap;
+import java.util.List;
 import java.util.Map;
 
 public class TaskDaoImpl extends AbstractDao<Task> implements TaskDao {
+    private static final String SQL_TASK_TABLE_ALIAS = "t";
+    private static final String SQL_FIND_COURSE_TASKS_NOT_CONFIRMED_BY_USER = "select %s from %s t " +
+            "join %s c on t.%s = c.%s " +
+            "left join %s ut on ut.%s = t.%s " +
+            "where %s IS NULL and c.%s = ?;";
 
     public TaskDaoImpl(Connection connection) {
         super(connection, new TaskRowMapper(), Task.TABLE);
@@ -24,5 +33,16 @@ public class TaskDaoImpl extends AbstractDao<Task> implements TaskDao {
         fields.put(Task.DEADLINE, item.getDeadline());
         fields.put(Task.DELETED, item.isDeleted());
         return fields;
+    }
+
+    @Override
+    public List<Task> findUnconfirmedByUserCourseTasks(Long courseId) {
+        String id = BaseEntity.ID;
+        return executeQuery(String.format(SQL_FIND_COURSE_TASKS_NOT_CONFIRMED_BY_USER,
+                generateAliases(SQL_TASK_TABLE_ALIAS, id, Task.TITLE, Task.DESCRIPTION, Task.DEADLINE, Task.DELETED),
+                Task.TABLE,
+                Course.TABLE, Course.COURSE_ID, id,
+                UserTask.TABLE, Task.TASK_ID, id,
+                UserTask.SOLUTION, id), courseId);
     }
 }

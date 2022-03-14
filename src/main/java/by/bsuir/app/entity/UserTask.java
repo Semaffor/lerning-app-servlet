@@ -6,10 +6,11 @@ public class UserTask extends BaseEntity {
 
     public static final String TABLE = "user_task";
     public static final String MARK = "mark";
-    public static final String ANSWER = "answer";
+    public static final String SOLUTION = "solution";
     public static final String FEEDBACK = "feedback";
     public static final String SUBMITTED_DATE = "submitted_date";
     public static final String CHECK_DATE = "check_date";
+    public static final String DEADLINE = "deadline";
 
     private Long userId;
     private Long taskId;

@@ -15,7 +15,7 @@ public class UserTaskRowMapper implements RowMapper<UserTask> {
         Long userId = resultSet.getLong(UserTask.USER_ID);
         Long taskId = resultSet.getLong(UserTask.TASK_ID);
         int mark = resultSet.getInt(UserTask.MARK);
-        String answer = resultSet.getString(UserTask.ANSWER);
+        String answer = resultSet.getString(UserTask.SOLUTION);
         String feedback = resultSet.getString(UserTask.FEEDBACK);
         Date checkDate = resultSet.getDate(UserTask.CHECK_DATE);
         Date submittedDate = resultSet.getDate(UserTask.SUBMITTED_DATE);

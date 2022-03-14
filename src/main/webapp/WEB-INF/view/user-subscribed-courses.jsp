@@ -12,7 +12,7 @@
 <%@ include file="jspf/common/navbar.jspf" %>
 
 <div class="body_wrapper">
-    <%@ include file="jspf/card-pagination.jspf" %>
+    <%@ include file="jspf/common/course-cards.jspf" %>
 </div>
 
 <%@ include file="jspf/common/footer.jspf" %>

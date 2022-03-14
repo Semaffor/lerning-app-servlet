@@ -33,7 +33,7 @@
     </div>
 
     <div class="text"><fmt:message key="label.error.404"/> </div>
-    <a class="button" href="#">Back Home</a>
+    <a class="button" href="${contextPath}/controller?command=showMain">Back Home</a>
 </div>
 </body>
 </html>
