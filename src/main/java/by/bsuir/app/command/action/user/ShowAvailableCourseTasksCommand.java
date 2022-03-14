@@ -12,12 +12,12 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.util.List;
 
-public class ShowAvailableCourseTasks implements Command {
+public class ShowAvailableCourseTasksCommand implements Command {
     private final static String FORWARD_SHOW_AVAILABLE_COURSE_TASKS = "/WEB-INF/view/show-tasks-user.jsp";
     private final TaskService taskService;
     private final UserTaskService userTaskService;
 
-    public ShowAvailableCourseTasks(TaskService taskService, UserTaskService userTaskService) {
+    public ShowAvailableCourseTasksCommand(TaskService taskService, UserTaskService userTaskService) {
         this.taskService = taskService;
         this.userTaskService = userTaskService;
     }

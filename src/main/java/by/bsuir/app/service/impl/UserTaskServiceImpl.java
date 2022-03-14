@@ -85,7 +85,7 @@ public class UserTaskServiceImpl extends Service implements UserTaskService {
                 UserTask userTask = userTaskOptional.get();
                 userTask.setMark(mark);
                 userTask.setFeedback(feedback);
-                userTask.setSubmittedDate(new Date());
+                userTask.setCheckDate(new Date());
                 userTaskDao.save(userTask);
             }
             helper.endTransaction();

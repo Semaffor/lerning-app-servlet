@@ -8,8 +8,6 @@ import by.bsuir.app.command.action.general.LogoutCommand;
 import by.bsuir.app.command.action.general.ShowMainPageCommand;
 import by.bsuir.app.command.action.user.*;
 import by.bsuir.app.dao.DaoHelperFactory;
-import by.bsuir.app.dao.UserTaskDao;
-import by.bsuir.app.dao.impl.UserTaskDaoImpl;
 import by.bsuir.app.service.DateHandler;
 import by.bsuir.app.service.impl.*;
 
@@ -54,7 +52,7 @@ public class CommandFactory {
             case SHOW_MY_COURSES:
                 return new ShowMyCoursesCommand(new CourseServiceImpl(daoHelper));
             case SHOW_COURSE_TASKS:
-                return new ShowAvailableCourseTasks(new TaskServiceImpl(daoHelper), new UserTaskServiceImpl(daoHelper));
+                return new ShowAvailableCourseTasksCommand(new TaskServiceImpl(daoHelper), new UserTaskServiceImpl(daoHelper));
             case DO_TASK:
                 return new DoTaskCommand(new TaskServiceImpl(daoHelper));
             case CONFIRM_TASK:

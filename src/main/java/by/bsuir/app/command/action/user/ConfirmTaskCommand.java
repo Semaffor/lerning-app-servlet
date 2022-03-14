@@ -22,8 +22,9 @@ public class ConfirmTaskCommand implements Command {
         String username = (String) request.getSession().getAttribute("username");
         Long taskId = Long.valueOf(request.getParameter("userTaskId"));
         String solution = request.getParameter("solution");
+        Long courseId = Long.valueOf(request.getParameter("courseId"));
 
         userTaskService.confirmTask(username, taskId, solution);
-        return CommandResult.redirect(REDIRECT_CONFIRM_TASK);
+        return CommandResult.redirect(REDIRECT_CONFIRM_TASK + "&number=" + courseId);
     }
 }
