@@ -1,11 +1,8 @@
 <%@ include file="jspf/common/page.jspf" %>
 <%@ include file="jspf/common/taglib.jspf" %>
 
-<html lang="${param.lang}">
-<head>
-    <%@ include file="jspf/common/head.jspf" %>
-    <%@ include file="jspf/head-and-foot-deps.jspf" %>
-    <title><fmt:message key="label.nav.menu.page"/></title>
+<%@ include file="jspf/common/lang-header-footer.jspf" %>
+
     <link rel="stylesheet" href="${contextPath}/static/css/manage-page.css">
 </head>
 <body>

@@ -4,9 +4,11 @@
             <img class="dropdown_header_icon" src="static/images/languages.png"/>
         </a>
         <div class="dropdown-content">
-            <c:set var = "path" scope = "page" value = "${pageContext.request.contextPath}/controller?command=${param.command}&lang="/>
-            <a href="${path}ru"><fmt:message key="label.lang.RU"/></a>
-            <a href="${path}be"><fmt:message key="label.lang.BE"/></a>
-            <a href="${path}en"><fmt:message key="label.lang.EN"/></a>
+            <form class="lang_form"action="${pageContext.request.contextPath}/controller?command=buildURI" method="post">
+                <input type="hidden" name="params" value="${param}">
+                <button class="button_locale" name="lang" value="ru"><fmt:message key="label.lang.RU"/></button>
+                <button class="button_locale" name="lang" value="be"><fmt:message key="label.lang.BE"/></button>
+                <button class="button_locale" name="lang" value="en"><fmt:message key="label.lang.EN"/></button>
+            </form>
     </li>
 </ul>

@@ -13,7 +13,7 @@ import java.util.List;
 
 public class ShowMainPageCommand implements Command {
 
-    private final static String FORWARD_MAIN_PAGE = "/WEB-INF/view/main-page.jsp";
+    private final static String FORWARD_MAIN_PAGE = "/WEB-INF/view/course-catalog.jsp";
     private final static int INITIAL_PAGINATION_PAGE = 1;
     private final static int INITIAL_PAGINATION_RECORDS_COUNT = 5;
     private final CourseService courseService;

@@ -23,6 +23,7 @@ public enum CommandEnum {
     SHOW_COURSE_TASKS("showUnconfirmedTasks"),
     DO_TASK("doTask"),
     CONFIRM_TASK("submitTask"),
+    BUILD_URI("buildURI"),
 
     LOGOUT("logout");
 

@@ -1,10 +1,10 @@
 <%@include file="WEB-INF/view/jspf/common/page.jspf" %>
 <%@include file="WEB-INF/view/jspf/common/taglib.jspf" %>
 
-<html lang="${param.lang}">
+<html lang="${sessionScope.lang}">
 <head>
     <jsp:include page="WEB-INF/view/jspf/common/head.jspf"/>
-    <title>Log In</title>
+    <title><fmt:message key="label.nav.menu.logIn"/></title>
     <link rel="stylesheet" href="static/css/welcome.css">
     <link rel="stylesheet" href="static/css/label.css">
     <link rel="stylesheet" href="static/css/dropbox.css">

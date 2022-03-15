@@ -1,16 +1,12 @@
 <%@ include file="jspf/common/page.jspf" %>
 <%@ include file="jspf/common/taglib.jspf" %>
 
-<html lang="${param.lang}">
-<head>
-    <%@ include file="jspf/common/head.jspf" %>
-    <%@ include file="jspf/head-and-foot-deps.jspf" %>
+<%@ include file="jspf/common/lang-header-footer.jspf" %>
     <link rel="stylesheet" href="/static/css/courses-page.css">
     <title>${course.title}</title>
 </head>
 <body>
 <%@ include file="jspf/common/navbar.jspf" %>
-
 <div class="body_wrapper">
     <div class="item info">
         <h2 class="item title">${course.title}</h2>

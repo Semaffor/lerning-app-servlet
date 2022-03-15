@@ -17,7 +17,19 @@ ul {
     text-decoration: none;
     text-align: center;
 }
+.button_locale {
+    padding: 10px 20px;
+    text-decoration: none;
+    text-align: center;
+    border: medium none;
+    float: left;
+    background: transparent none;
+}
 
+.lang_form {
+    display: flex;
+    flex-direction: column;
+}
 .dropdown-content {
     display: none;
     position: absolute;
@@ -35,7 +47,7 @@ ul {
     text-align: left;
 }
 
-.dropdown-content a:hover {background-color: #f1f1f1;}
+.dropdown-content a:hover, .button_locale:hover {background-color: #cdcbcb;}
 
 .dropdown:hover .dropdown-content {
     display: block;

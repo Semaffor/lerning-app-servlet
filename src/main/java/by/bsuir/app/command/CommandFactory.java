@@ -2,10 +2,7 @@ package by.bsuir.app.command;
 
 import by.bsuir.app.command.action.admin.*;
 import by.bsuir.app.command.action.couch.*;
-import by.bsuir.app.command.action.general.CoursePageCommand;
-import by.bsuir.app.command.action.general.LoginCommand;
-import by.bsuir.app.command.action.general.LogoutCommand;
-import by.bsuir.app.command.action.general.ShowMainPageCommand;
+import by.bsuir.app.command.action.general.*;
 import by.bsuir.app.command.action.user.*;
 import by.bsuir.app.dao.DaoHelperFactory;
 import by.bsuir.app.service.DateHandler;
@@ -57,6 +54,8 @@ public class CommandFactory {
                 return new DoTaskCommand(new TaskServiceImpl(daoHelper));
             case CONFIRM_TASK:
                 return new ConfirmTaskCommand(new UserTaskServiceImpl(daoHelper));
+            case BUILD_URI:
+                return new BuildURICommand();
             case LOGOUT:
                 return new LogoutCommand();
             default:
