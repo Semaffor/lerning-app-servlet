@@ -7,13 +7,14 @@
 </head>
 <body>
 <%@ include file="jspf/common/navbar.jspf" %>
-
+<%--${ pageContext.request.characterEncoding }--%>
+<%--${sessionScope.lang}--%>
 <div class="body_wrapper">
     <div class="body_elements">
         <div id="form_task_creator">
             <form action="${contextPath}/controller?command=${command}" method="POST">
                 <input type="hidden" name="userTaskId" value="${task.id}">
-                ${courseId}
+<%--                ${courseId}--%>
                 <input type="hidden" name="courseId" value="${courseId}">
                 <p>
                 <fmt:message key="label.couch.tasks.title"/>: ${task.title}
@@ -28,7 +29,7 @@
                 <c:if test="${userRole eq 'COUCH'}">
                     <p>${task.solution}</p>
                 <fmt:message key="label.couch.tasks.mark"/>:
-                <input id="mark" type="number" min="0" max="10" name="mark">
+                <input id="mark" type="number" min="1" max="10" name="mark" required>
                 <fmt:message key="label.couch.tasks.feedback"/>:
                 <textarea name="feedback" maxlength="255"></textarea>
                 </c:if>

@@ -4,7 +4,7 @@ public enum CommandEnum {
     LOGIN("login"),
     SHOW_MAIN_PAGE("showMain"),
     SHOW_COURSE_PAGE("showCoursePage"),
-    ITEMS("items"),
+    ITEMS("items"),//TODO??
     SUBSCRIBE("subscribe"),
     UNSUBSCRIBE("unsubscribe"),
     SHOW_MANAGEMENT_COURSES("manageCourses"),

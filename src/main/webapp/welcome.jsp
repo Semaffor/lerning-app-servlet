@@ -15,11 +15,10 @@
 </div>
 <div class="container-wrapper">
     <div class="container">
-
         <form action="${pageContext.request.contextPath}controller?command=login" method="post">
             <div class="title"><fmt:message key="label.login.enter.title"/></div>
 
-            <c:if test="${not empty logout}">
+            <c:if test="${not empty param.logout}">
                 <div class="label notification"><fmt:message key="label.login.message.logout"/></div>
             </c:if>
             <div class="input-box underline">
@@ -43,9 +42,9 @@
                 <input type="submit" value="<fmt:message key="label.login.enter"/>">
             </div>
         </form>
-        <div class="title forgot">
-            <a class="underlineHover" href="#"><fmt:message key="label.login.forgot.password"/></a>
-        </div>
+<%--        <div class="title forgot">--%>
+<%--            <a class="underlineHover" href="#"><fmt:message key="label.login.forgot.password"/></a>--%>
+<%--        </div>--%>
 
     </div>
 </div>

@@ -127,3 +127,19 @@ li.dropdown {
 .nickname {
     padding: 7px 10px 0 0;
 }
+.button_locale {
+    margin: 0;
+    padding: 10px 20px;
+    text-decoration: none;
+    text-align: center;
+    border: medium none;
+    float: left;
+    background: transparent none;
+}
+
+.button_locale:hover {background-color: #cdcbcb;}
+
+.lang_form {
+    display: flex;
+    flex-direction: column;
+}
