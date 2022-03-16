@@ -59,6 +59,7 @@ public class AuthFilter implements Filter {
                 CommandEnum.SHOW_MANAGEMENT_COURSE,
                 CommandEnum.EDIT_COURSE,
                 CommandEnum.CREATE_TASK,
+                CommandEnum.ITEMS,
                 CommandEnum.CHECK_TASK,
                 CommandEnum.SUBMIT_CHECK
         ));
