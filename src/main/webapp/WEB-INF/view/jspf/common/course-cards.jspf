@@ -8,8 +8,7 @@
         <div class="card">
             <a class="card__url" href="${contextPath}/controller?command=${command}&number=${course.id}">
                 <div class="card-header">
-                    <img src="https://c0.wallpaperflare.com/preview/483/210/436/car-green-4x4-jeep.jpg"
-                         alt="rover"/>
+                    <img src="${contextPath}/${course.photoURI}" alt="course_photo"/>
                 </div>
                 <div class="card-body">
                     <span class="tag tag-purple">${course.technology.getDecodingValue()}</span>
@@ -18,9 +17,6 @@
                     </p>
                     <p class="card__description">
                             ${course.description}
-                    </p>
-                    <p class="card__button">
-                        <a href="#">weqeqw</a>
                     </p>
                 </div>
             </a>

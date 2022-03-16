@@ -21,6 +21,7 @@ public class CourseRowMapper implements RowMapper<Course> {
         CourseFormat courseFormat = CourseFormat.getFormatFromCode(courseFormatCode);
         int currentPupilsQuantity = resultSet.getInt(Course.CURRENT_PUPILS_QUANTITY);
         int maxPupilsQuantity = resultSet.getInt(Course.MAX_PUPILS_QUANTITY);
+        String photo_URI = resultSet.getString(Course.PHOTO);
         boolean isActive = resultSet.getBoolean(Course.ACTIVE);
         boolean isDeleted = resultSet.getBoolean(Course.DELETED);
 
@@ -36,6 +37,7 @@ public class CourseRowMapper implements RowMapper<Course> {
                 .setActive(isActive)
                 .setCouchId(couchId)
                 .setDeleted(isDeleted)
+                .setPhotoURI(photo_URI)
                 .build();
     }
 }
