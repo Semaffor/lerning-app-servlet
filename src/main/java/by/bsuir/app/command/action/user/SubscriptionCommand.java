@@ -16,8 +16,6 @@ import java.util.Optional;
 
 public class SubscriptionCommand implements Command {
     private static final String REDIRECT_ITEM_PAGE = "controller?command=%s&number=%d";
-    private final static String FORWARD_ERROR_PAGE = "/WEB-INF/view/errors/error404.jsp";
-
     private static final String ATTRIBUTE_SUBSCRIBE = "subscribe";
     private static final String ATTRIBUTE_UNSUBSCRIBE = "unsubscribe";
     private final UserCourseService userCourseService;
@@ -55,6 +53,6 @@ public class SubscriptionCommand implements Command {
             request.setAttribute(message, message);
             return CommandResult.redirect(String.format(REDIRECT_ITEM_PAGE, CommandEnum.ITEMS.getCommand(), courseId));
         }
-        return CommandResult.forward(FORWARD_ERROR_PAGE);
+        return CommandResult.forward(FORWARD_ERROR_404_PAGE);
     }
 }

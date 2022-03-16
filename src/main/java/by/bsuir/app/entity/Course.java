@@ -14,7 +14,7 @@ public class Course extends BaseEntity {
     public static final String TECHNOLOGY = "technology";
     public static final String CURRENT_PUPILS_QUANTITY = "current_pupils_quantity";
     public static final String MAX_PUPILS_QUANTITY = "max_pupils_quantity";
-    public static final String PHOTO = "photo_URI";
+    public static final String PHOTO = "photo_uri";
     public static final String ACTIVE = "is_active";
     public static final String DELETED = "is_deleted";
 
@@ -28,7 +28,7 @@ public class Course extends BaseEntity {
     private boolean active;
     private boolean deleted;
     private Long couchId;
-    private String photoURI;
+    private String photoUri;
 
     private Course() {
     }
@@ -73,8 +73,8 @@ public class Course extends BaseEntity {
         return couchId;
     }
 
-    public String getPhotoURI() {
-        return photoURI;
+    public String getPhotoUri() {
+        return photoUri;
     }
 
     public void setActive(boolean active) {
@@ -154,7 +154,7 @@ public class Course extends BaseEntity {
         }
 
         public Builder setPhotoURI(String photoURL) {
-            Course.this.photoURI = photoURL;
+            Course.this.photoUri = photoURL;
             return this;
         }
         public Course build() {

@@ -4,6 +4,6 @@ import by.bsuir.app.connection.ConnectionPool;
 
 public class DaoHelperFactory {
     public DaoHelper create() {
-        return new DaoHelper(ConnectionPool.getInstance());
+            return new DaoHelper(ConnectionPool.getInstance());
     }
 }

@@ -1,4 +1,4 @@
-package by.bsuir.app.service;
+package by.bsuir.app.validator;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -8,9 +8,9 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class DateHandler {
+    private final static Logger LOGGER  = LoggerFactory.getLogger(DateHandler.class);
     private static final SimpleDateFormat input = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
     private static final SimpleDateFormat output = new SimpleDateFormat("dd-MM-yyyy'T'HH:mm:ss");
-    private final Logger LOGGER  = LoggerFactory.getLogger(this.getClass());
 
     public Date convertFromString(String date) throws ParseException {
         if (date == null) {

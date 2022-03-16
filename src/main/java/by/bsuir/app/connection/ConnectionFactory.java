@@ -15,16 +15,27 @@ import java.util.concurrent.BlockingQueue;
 public class ConnectionFactory {
 
     private final static String PROPERTIES_FILE_NAME = "db.properties";
+    private final static String DRIVER = "jdbc.driver";
+    private final static String URL = "jdbc.url";
+    private final static String NAME = "jdbc.name";
+    private final static String PASSWORD = "jdbc.password";
+    private final static String POOL_SIZE = "jdbc.initial_pool_size";
     private String url;
     private String name;
     private String password;
     private int initialConnectionsSize;
 
-    public BlockingQueue<ProxyConnection> createProxyConnections(int connectionsCount) throws
-            ConnectionException {
+    public ConnectionFactory() {
+        this(PROPERTIES_FILE_NAME);
+    }
+
+    public ConnectionFactory(String propertiesPath) {
+        readProperties(propertiesPath);
+    }
+
+    public BlockingQueue<ProxyConnection> createProxyConnections(int connectionsCount) throws ConnectionException {
         BlockingQueue<ProxyConnection> proxyConnections = new ArrayBlockingQueue<>(connectionsCount);
         try {
-            readProperties();
             for (int i = 0; i < connectionsCount; i++) {
                 proxyConnections.add(createProxyConnection());
             }
@@ -34,36 +45,32 @@ public class ConnectionFactory {
         return proxyConnections;
     }
 
-    public BlockingQueue<ProxyConnection> createProxyConnections() throws
-            ConnectionException {
+    public BlockingQueue<ProxyConnection> createProxyConnections() throws ConnectionException {
         return createProxyConnections(initialConnectionsSize);
     }
 
-    protected ProxyConnection createProxyConnection() throws SQLException {
+    private ProxyConnection createProxyConnection() throws SQLException {
         return new ProxyConnection(createConnection());
     }
 
-    protected Connection createConnection() throws SQLException {
+    private Connection createConnection() throws SQLException {
         return DriverManager.getConnection(url, name, password);
     }
 
-    protected Properties readProperties() throws ConnectionException {
-        return readProperties(PROPERTIES_FILE_NAME);
-    }
-    protected Properties readProperties(String propertiesPath) throws ConnectionException {
+    private Properties readProperties(String propertiesPath) throws ConnectionException {
         Properties props = new Properties();
         String driverName = null;
 
         try (InputStream inputStream = getClass().getClassLoader().getResourceAsStream(propertiesPath)) {
 
             props.load(inputStream);
-            driverName = (props.getProperty("jdbc.driver"));
+            driverName = (props.getProperty(DRIVER));
             Class.forName(driverName);
 
-            url = props.getProperty("jdbc.url");
-            name = props.getProperty("jdbc.name");
-            password = props.getProperty("jdbc.password");
-            initialConnectionsSize = Integer.parseInt(props.getProperty("jdbc.initial_pool_size"));
+            url = props.getProperty(URL);
+            name = props.getProperty(NAME);
+            password = props.getProperty(PASSWORD);
+            initialConnectionsSize = Integer.parseInt(props.getProperty(POOL_SIZE));
 
             return props;
         } catch (ClassNotFoundException e) {

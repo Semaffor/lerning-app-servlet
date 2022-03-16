@@ -5,6 +5,7 @@ import by.bsuir.app.dao.DaoHelper;
 import by.bsuir.app.dao.DaoHelperFactory;
 import by.bsuir.app.dao.UserCourseDao;
 import by.bsuir.app.entity.Course;
+import by.bsuir.app.exception.DaoException;
 import by.bsuir.app.exception.ServiceException;
 import by.bsuir.app.service.CourseService;
 import by.bsuir.app.service.Service;
@@ -25,7 +26,7 @@ public class CourseServiceImpl extends Service implements CourseService {
             List<Course> courses = dao.getAll();
             helper.endTransaction();
             return courses;
-        } catch (Exception e) {
+        } catch (DaoException e) {
             throw new ServiceException(e);
         }
     }
@@ -38,7 +39,7 @@ public class CourseServiceImpl extends Service implements CourseService {
             Optional<Course> course = dao.findCourseByCouchUsername(login);
             helper.endTransaction();
             return course;
-        } catch (Exception e) {
+        } catch (DaoException e) {
             throw new ServiceException(e);
         }
     }
@@ -51,7 +52,7 @@ public class CourseServiceImpl extends Service implements CourseService {
             List<Course> userCourses = dao.findSubscriptionsByUsername(username);
             helper.endTransaction();
             return userCourses;
-        } catch (Exception e) {
+        } catch (DaoException e) {
             throw new ServiceException(e);
         }
     }
@@ -64,7 +65,7 @@ public class CourseServiceImpl extends Service implements CourseService {
             Optional<Course> course = dao.getById(id);
             helper.endTransaction();
             return course;
-        } catch (Exception e) {
+        } catch (DaoException e) {
             throw new ServiceException(e);
         }
     }
@@ -77,7 +78,7 @@ public class CourseServiceImpl extends Service implements CourseService {
             List<Course> courses = dao.getCourses(currentPage, recordsPerPage);
             helper.endTransaction();
             return courses;
-        } catch (Exception e) {
+        } catch (DaoException e) {
             throw new ServiceException(e);
         }
     }
@@ -94,7 +95,7 @@ public class CourseServiceImpl extends Service implements CourseService {
                 dao.save(course);
             }
             helper.endTransaction();
-        } catch (Exception e) {
+        } catch (DaoException e) {
             throw new ServiceException(e);
         }
     }
@@ -112,7 +113,7 @@ public class CourseServiceImpl extends Service implements CourseService {
                 dao.save(course);
             }
             helper.endTransaction();
-        } catch (Exception e) {
+        } catch (DaoException e) {
             throw new ServiceException(e);
         }
     }
@@ -125,7 +126,7 @@ public class CourseServiceImpl extends Service implements CourseService {
             boolean isSubscribed = dao.isUserSubscribed(username, courseId);
             helper.endTransaction();
             return isSubscribed;
-        } catch (Exception e) {
+        } catch (DaoException e) {
             throw new ServiceException(e);
         }
     }
@@ -138,7 +139,7 @@ public class CourseServiceImpl extends Service implements CourseService {
             boolean isSubscribed = dao.save(course);
             helper.endTransaction();
             return isSubscribed;
-        } catch (Exception e) {
+        } catch (DaoException e) {
             throw new ServiceException(e);
         }
     }
@@ -151,7 +152,7 @@ public class CourseServiceImpl extends Service implements CourseService {
             int rowsCount = dao.getNumberOfUndeletedAndActiveRows();
             helper.endTransaction();
             return rowsCount;
-        } catch (Exception e) {
+        } catch (DaoException e) {
             throw new ServiceException(e);
         }
     }

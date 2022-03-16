@@ -15,8 +15,9 @@ import java.io.IOException;
 
 public class Controller extends HttpServlet {
 
-    private static final CommandFactory commandFactory = new CommandFactory();
-    private final Logger LOGGER = LoggerFactory.getLogger(Controller.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(Controller.class);
+    private static final String FORWARD_ERROR_PAGE = "/errors/error404.jsp";
+    private final CommandFactory commandFactory = new CommandFactory();
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -40,7 +41,7 @@ public class Controller extends HttpServlet {
         } catch (Exception e) {
             LOGGER.error(e + ": " + e.getMessage());
             req.setAttribute("errorMessage", e.getMessage());
-            dispatch(req, resp, CommandResult.forward("/errors/error404.jsp"));
+            dispatch(req, resp, CommandResult.forward(FORWARD_ERROR_PAGE));
         }
 
     }

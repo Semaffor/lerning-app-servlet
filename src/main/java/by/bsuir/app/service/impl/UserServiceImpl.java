@@ -5,6 +5,7 @@ import by.bsuir.app.dao.DaoHelperFactory;
 import by.bsuir.app.dao.UserDao;
 import by.bsuir.app.entity.User;
 import by.bsuir.app.entity.enums.Role;
+import by.bsuir.app.exception.DaoException;
 import by.bsuir.app.exception.ServiceException;
 import by.bsuir.app.service.Service;
 import by.bsuir.app.service.UserService;
@@ -26,7 +27,7 @@ public class UserServiceImpl extends Service implements UserService {
             Optional<User> user = dao.findUserByLoginAndPassword(login, password);
             helper.endTransaction();
             return user;
-        } catch (Exception e) {
+        } catch (DaoException e) {
             throw new ServiceException(e);
         }
     }
@@ -39,7 +40,7 @@ public class UserServiceImpl extends Service implements UserService {
             Optional<User> user = dao.findByUsername(username);
             helper.endTransaction();
             return user;
-        } catch (Exception e) {
+        } catch (DaoException e) {
             throw new ServiceException(e);
         }
     }
@@ -52,7 +53,7 @@ public class UserServiceImpl extends Service implements UserService {
             List<User> users = dao.getAll();
             helper.endTransaction();
             return users;
-        } catch (Exception e) {
+        } catch (DaoException e) {
             throw new ServiceException(e);
         }
     }
@@ -69,7 +70,7 @@ public class UserServiceImpl extends Service implements UserService {
                 dao.save(user);
             }
             helper.endTransaction();
-        } catch (Exception e) {
+        } catch (DaoException e) {
             throw new ServiceException(e);
         }
     }
@@ -86,7 +87,7 @@ public class UserServiceImpl extends Service implements UserService {
                 dao.save(user);
             }
             helper.endTransaction();
-        } catch (Exception e) {
+        } catch (DaoException e) {
             throw new ServiceException(e);
         }
     }
@@ -103,7 +104,7 @@ public class UserServiceImpl extends Service implements UserService {
                 dao.save(user);
             }
             helper.endTransaction();
-        } catch (Exception e) {
+        } catch (DaoException e) {
             throw new ServiceException(e);
         }
     }

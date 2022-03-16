@@ -1,8 +1,8 @@
 package by.bsuir.app.connection;
 
 import by.bsuir.app.exception.ConnectionException;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.concurrent.ArrayBlockingQueue;
 import java.util.concurrent.BlockingQueue;
@@ -11,15 +11,15 @@ import java.util.concurrent.locks.ReentrantLock;
 
 public class ConnectionPool {
 
-    private static final Logger LOGGER = LogManager.getLogger(ConnectionPool.class);
-    private static final int INITIAL_POOL_SIZE = 10;
+    private final static Logger LOGGER = LoggerFactory.getLogger(ConnectionPool.class);
+    private final static int INITIAL_POOL_SIZE = 10;
 
-    private static ConnectionPool INSTANCE;
+    private static ConnectionPool instance;
     private final BlockingQueue<ProxyConnection> availableConnections;
     private final BlockingQueue<ProxyConnection> connectionsInUse;
 
-    private static final Lock lock = new ReentrantLock();
-    private static final ConnectionFactory connectionFactory = new ConnectionFactory();
+    private final static Lock lock = new ReentrantLock();
+    private final static ConnectionFactory connectionFactory = new ConnectionFactory();
 
     public ConnectionPool(BlockingQueue<ProxyConnection> availableConnections) {
         this.availableConnections = availableConnections;
@@ -27,15 +27,15 @@ public class ConnectionPool {
     }
 
     public static ConnectionPool getInstance() {
-        ConnectionPool localInstance = INSTANCE;
+        ConnectionPool localInstance = instance;
         if (localInstance == null) {
             lock.lock();
-            localInstance = INSTANCE;
+            localInstance = instance;
             try {
                 if (localInstance == null) {
                     BlockingQueue<ProxyConnection> proxyConnections = connectionFactory.createProxyConnections(
                             INITIAL_POOL_SIZE);
-                    INSTANCE = localInstance = new ConnectionPool(proxyConnections);
+                    instance = localInstance = new ConnectionPool(proxyConnections);
                 }
             } catch (ConnectionException e) {
                 LOGGER.error(e.getMessage(), e);

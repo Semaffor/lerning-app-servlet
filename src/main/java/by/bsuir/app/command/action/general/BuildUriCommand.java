@@ -7,11 +7,14 @@ import by.bsuir.app.exception.ServiceException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-public class BuildURICommand implements Command {
+public class BuildUriCommand implements Command {
+
+    private final static String DELIMITERS = "[{},]";
+
     @Override
     public CommandResult execute(HttpServletRequest request, HttpServletResponse response) throws ServiceException {
         String urlParamsWithHooks = request.getParameter("params");
-        String urlParamsWithoutHooks = urlParamsWithHooks.replaceAll("[{},]", "");
+        String urlParamsWithoutHooks = urlParamsWithHooks.replaceAll(DELIMITERS, "");
 
         if (urlParamsWithoutHooks.length() != 0) {
             String urlParams = urlParamsWithoutHooks.replaceAll("\\s", "&");

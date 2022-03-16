@@ -1,8 +1,10 @@
 package by.bsuir.app.service.impl;
 
-import by.bsuir.app.dao.*;
-import by.bsuir.app.entity.Course;
+import by.bsuir.app.dao.DaoHelper;
+import by.bsuir.app.dao.DaoHelperFactory;
+import by.bsuir.app.dao.TaskDao;
 import by.bsuir.app.entity.Task;
+import by.bsuir.app.exception.DaoException;
 import by.bsuir.app.exception.ServiceException;
 import by.bsuir.app.service.Service;
 import by.bsuir.app.service.TaskService;
@@ -24,7 +26,7 @@ public class TaskServiceImpl extends Service implements TaskService {
             boolean result = dao.save(task);
             helper.endTransaction();
             return result;
-        } catch (Exception e) {
+        } catch (DaoException e) {
             throw new ServiceException(e);
         }
     }
@@ -37,7 +39,7 @@ public class TaskServiceImpl extends Service implements TaskService {
             Optional<Task> task = dao.getById(taskId);
             helper.endTransaction();
             return task;
-        } catch (Exception e) {
+        } catch (DaoException e) {
             throw new ServiceException(e);
         }
     }
@@ -50,7 +52,7 @@ public class TaskServiceImpl extends Service implements TaskService {
             List<Task> tasks = dao.findUnconfirmedByUserCourseTasks(courseId);
             helper.endTransaction();
             return tasks;
-        } catch (Exception e) {
+        } catch (DaoException e) {
             throw new ServiceException(e);
         }
     }

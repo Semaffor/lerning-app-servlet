@@ -1,10 +1,10 @@
 package by.bsuir.app.service.impl;
 
 import by.bsuir.app.dao.*;
-import by.bsuir.app.entity.Task;
 import by.bsuir.app.entity.User;
 import by.bsuir.app.entity.UserTask;
 import by.bsuir.app.entity.UserTaskDTO;
+import by.bsuir.app.exception.DaoException;
 import by.bsuir.app.exception.ServiceException;
 import by.bsuir.app.service.Service;
 import by.bsuir.app.service.UserTaskService;
@@ -34,7 +34,7 @@ public class UserTaskServiceImpl extends Service implements UserTaskService {
             }
             helper.endTransaction();
             return tasks;
-        } catch (Exception e) {
+        } catch (DaoException e) {
             throw new ServiceException(e);
         }
     }
@@ -47,7 +47,7 @@ public class UserTaskServiceImpl extends Service implements UserTaskService {
             List<UserTaskDTO> tasks = userTaskDao.findConfirmedUserCourseTasks(username, courseId);
             helper.endTransaction();
             return tasks;
-        } catch (Exception e) {
+        } catch (DaoException e) {
             throw new ServiceException(e);
         }
     }
@@ -70,7 +70,7 @@ public class UserTaskServiceImpl extends Service implements UserTaskService {
                 userTaskDao.save(userTask);
             }
             helper.endTransaction();
-        } catch (Exception e) {
+        } catch (DaoException e) {
             throw new ServiceException(e);
         }
     }
@@ -89,7 +89,7 @@ public class UserTaskServiceImpl extends Service implements UserTaskService {
                 userTaskDao.save(userTask);
             }
             helper.endTransaction();
-        } catch (Exception e) {
+        } catch (DaoException e) {
             throw new ServiceException(e);
         }
     }
@@ -102,7 +102,7 @@ public class UserTaskServiceImpl extends Service implements UserTaskService {
             Optional<UserTaskDTO> task = dao.findUserTaskByTaskId(userTaskId);
             helper.endTransaction();
             return task;
-        } catch (Exception e) {
+        } catch (DaoException e) {
             throw new ServiceException(e);
         }
     }

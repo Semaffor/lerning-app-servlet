@@ -10,7 +10,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class ShowManageCoursesCommand implements Command {
     private static final String FORWARD_MANAGE_COURSES_PAGE = "/WEB-INF/view/manage-courses.jsp";

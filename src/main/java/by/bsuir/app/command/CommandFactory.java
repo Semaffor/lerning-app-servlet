@@ -5,12 +5,12 @@ import by.bsuir.app.command.action.couch.*;
 import by.bsuir.app.command.action.general.*;
 import by.bsuir.app.command.action.user.*;
 import by.bsuir.app.dao.DaoHelperFactory;
-import by.bsuir.app.service.DateHandler;
 import by.bsuir.app.service.impl.*;
+import by.bsuir.app.validator.DataValidator;
 
 public class CommandFactory {
 
-    private final static DaoHelperFactory daoHelper = new DaoHelperFactory();
+    private final DaoHelperFactory daoHelper = new DaoHelperFactory();
 
     public Command createCommand(String commandString) {
         CommandEnum command = CommandEnum.convertCommandFromString(commandString);
@@ -39,13 +39,13 @@ public class CommandFactory {
             case SHOW_SUBMITTED_TASKS:
                 return new ShowSubmittedTasksCommand(new UserTaskServiceImpl(daoHelper));
             case EDIT_COURSE:
-                return new EditCourseCommand(new CourseServiceImpl(daoHelper));
+                return new EditCourseCommand(new CourseServiceImpl(daoHelper), new DataValidator());
             case CREATE_TASK:
-                return new CreateTaskCommand(new TaskServiceImpl(daoHelper), new DateHandler());
+                return new CreateTaskCommand(new TaskServiceImpl(daoHelper), new DataValidator());
             case CHECK_TASK:
                 return new ShowCheckTaskCommand(new UserTaskServiceImpl(daoHelper));
             case SUBMIT_CHECK:
-                return new SubmitTaskCheckCommand(new UserTaskServiceImpl(daoHelper));
+                return new SubmitTaskCheckCommand(new UserTaskServiceImpl(daoHelper), new DataValidator());
             case SHOW_MY_COURSES:
                 return new ShowMyCoursesCommand(new CourseServiceImpl(daoHelper));
             case SHOW_COURSE_TASKS:
@@ -55,7 +55,7 @@ public class CommandFactory {
             case CONFIRM_TASK:
                 return new ConfirmTaskCommand(new UserTaskServiceImpl(daoHelper));
             case BUILD_URI:
-                return new BuildURICommand();
+                return new BuildUriCommand();
             case LOGOUT:
                 return new LogoutCommand();
             default:

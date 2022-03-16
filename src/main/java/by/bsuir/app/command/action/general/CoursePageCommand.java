@@ -13,7 +13,6 @@ import java.util.Optional;
 public class CoursePageCommand implements Command {
 
     private final static String FORWARD_COURSE_PAGE = "/WEB-INF/view/course-page.jsp";
-    private final static String FORWARD_ERROR_PAGE = "/WEB-INF/view/errors/error404.jsp";
     private final CourseService courseService;
 
     public CoursePageCommand(CourseService courseService) {
@@ -36,7 +35,7 @@ public class CoursePageCommand implements Command {
 
             return CommandResult.forward(FORWARD_COURSE_PAGE);
         } else {
-            return CommandResult.forward(FORWARD_ERROR_PAGE);
+            return CommandResult.forward(FORWARD_ERROR_404_PAGE);
         }
     }
 }

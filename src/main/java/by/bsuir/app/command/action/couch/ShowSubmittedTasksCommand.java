@@ -9,7 +9,6 @@ import by.bsuir.app.service.UserTaskService;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class ShowSubmittedTasksCommand implements Command {
     private static final String FORWARD_SHOW_CHECK_TASKS_PAGE = "/WEB-INF/view/show-tasks.jsp";

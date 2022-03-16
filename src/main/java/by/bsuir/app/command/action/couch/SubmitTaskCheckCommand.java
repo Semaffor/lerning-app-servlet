@@ -5,6 +5,7 @@ import by.bsuir.app.command.CommandEnum;
 import by.bsuir.app.command.CommandResult;
 import by.bsuir.app.exception.ServiceException;
 import by.bsuir.app.service.UserTaskService;
+import by.bsuir.app.validator.DataValidator;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -18,12 +19,12 @@ public class SubmitTaskCheckCommand implements Command {
             "/controller?command=" + CommandEnum.SHOW_SUBMITTED_TASKS.getCommand();
     private static final String FORWARD_SUBMIT_TASK_PAGE = "/WEB-INF/view/change-task.jsp";
     private static final String ERROR_ATTRIBUTE = "invalidData";
-    private static final int MAX_DESCRIPTION_LENGTH = 255;
-
     private final UserTaskService userTaskService;
+    private final DataValidator dataValidator;
 
-    public SubmitTaskCheckCommand(UserTaskService userTaskService) {
+    public SubmitTaskCheckCommand(UserTaskService userTaskService, DataValidator dataValidator) {
         this.userTaskService = userTaskService;
+        this.dataValidator = dataValidator;
     }
 
     @Override
@@ -33,9 +34,9 @@ public class SubmitTaskCheckCommand implements Command {
             int mark = Integer.parseInt(request.getParameter("mark"));
             String feedback = request.getParameter("feedback");
 
-            if (mark > 10 || mark < 0 || feedback.length() > MAX_DESCRIPTION_LENGTH || feedback.isEmpty()) {
-                throw new IllegalArgumentException(ERROR_ATTRIBUTE);
-            }
+            dataValidator.checkDescription(feedback);
+            dataValidator.checkMark(mark);
+
             userTaskService.reviewTask(taskId, mark, feedback);
 
         } catch (Exception e) {

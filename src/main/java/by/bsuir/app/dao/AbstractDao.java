@@ -40,7 +40,7 @@ public abstract class AbstractDao<T extends Identifiable> implements Dao<T> {
         PreparedStatement ps = connection.prepareStatement(query);
 
         for (int i = 1; i <= params.length; i++) {
-            ps.setObject(i, params[i - 1]);             //TODO Why is here 1?
+            ps.setObject(i, params[i - 1]);
         }
         return ps;
     }

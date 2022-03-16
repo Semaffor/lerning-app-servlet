@@ -8,15 +8,20 @@ import by.bsuir.app.exception.DaoException;
 import java.sql.SQLException;
 
 public class DaoHelper implements AutoCloseable {
-    private ProxyConnection connection;
+
+    private final ProxyConnection connection;
 
     public DaoHelper(ConnectionPool pool) {
         this.connection = pool.getConnection();
     }
 
     @Override
-    public void close() throws Exception {
-        connection.close();
+    public void close() throws DaoException {
+        try {
+            connection.close();
+        } catch (Exception e) {
+            throw new DaoException(e);
+        }
     }
 
     public void startTransaction() throws DaoException {

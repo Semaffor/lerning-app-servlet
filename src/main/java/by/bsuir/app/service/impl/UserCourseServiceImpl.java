@@ -6,11 +6,11 @@ import by.bsuir.app.dao.DaoHelperFactory;
 import by.bsuir.app.dao.UserCourseDao;
 import by.bsuir.app.entity.Course;
 import by.bsuir.app.entity.UserCourse;
+import by.bsuir.app.exception.DaoException;
 import by.bsuir.app.exception.ServiceException;
 import by.bsuir.app.service.Service;
 import by.bsuir.app.service.UserCourseService;
 
-import java.util.List;
 import java.util.Optional;
 
 public class UserCourseServiceImpl  extends Service implements UserCourseService {
@@ -43,7 +43,7 @@ public class UserCourseServiceImpl  extends Service implements UserCourseService
             }
             helper.endTransaction();
             return result;
-        } catch (Exception e) {
+        } catch (DaoException e) {
             throw new ServiceException(e);
         }
     }
@@ -56,7 +56,7 @@ public class UserCourseServiceImpl  extends Service implements UserCourseService
             Optional<UserCourse> userCourse = dao.findByCompositeKey(userId, courseId);
             helper.endTransaction();
             return userCourse;
-        } catch (Exception e) {
+        } catch (DaoException e) {
             throw new ServiceException(e);
         }
     }
