@@ -8,7 +8,7 @@
         <div class="card">
             <a class="card__url" href="${contextPath}/controller?command=${command}&number=${course.id}">
                 <div class="card-header">
-                    <img src="${contextPath}/${course.photoURI}" alt="course_photo"/>
+                    <img src="${contextPath}/${course.photoUri}" alt="course_photo"/>
                 </div>
                 <div class="card-body">
                     <span class="tag tag-purple">${course.technology.getDecodingValue()}</span>

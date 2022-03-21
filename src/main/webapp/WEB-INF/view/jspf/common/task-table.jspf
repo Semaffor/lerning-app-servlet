@@ -50,7 +50,7 @@
                         <c:when test="${task.mark eq 0}">
                             <div class="button_actions">
                                 <form action="${contextPath}/controller?command=checkTask" method="post">
-                                    <button><fmt:message key="label.couch.courses.task.check"/></button>
+                                    <button class="buttons"><fmt:message key="label.couch.courses.task.check"/></button>
                                     <input type="hidden" name="userTaskId" value="${task.id}">
                                 </form>
                             </div>
@@ -61,9 +61,10 @@
                     </c:choose>
                 </td>
             </c:if>
-
         </tr>
         </c:forEach>
         <tbody>
     </table>
+</div>
+<div class="text"><c:if test="${empty userTasks}"><fmt:message key="label.couch.tasks.empty.done"/> </c:if>
 </div>

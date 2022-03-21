@@ -7,14 +7,11 @@
 </head>
 <body>
 <%@ include file="jspf/common/navbar.jspf" %>
-<%--${ pageContext.request.characterEncoding }--%>
-<%--${sessionScope.lang}--%>
 <div class="body_wrapper">
     <div class="body_elements">
         <div id="form_task_creator">
-            <form action="${contextPath}/controller?command=${command}" method="POST">
+            <form class="course_editor" action="${contextPath}/controller?command=${command}" method="POST">
                 <input type="hidden" name="userTaskId" value="${task.id}">
-<%--                ${courseId}--%>
                 <input type="hidden" name="courseId" value="${courseId}">
                 <p>
                 <fmt:message key="label.couch.tasks.title"/>: ${task.title}
@@ -27,16 +24,14 @@
                 <textarea name="solution" maxlength="255"></textarea>
                 </c:if>
                 <c:if test="${userRole eq 'COUCH'}">
-                    <p>${task.solution}</p>
+                    <p>${task.solution}</p><br/>
                 <fmt:message key="label.couch.tasks.mark"/>:
                 <input id="mark" type="number" min="1" max="10" name="mark" required>
                 <fmt:message key="label.couch.tasks.feedback"/>:
                 <textarea name="feedback" maxlength="255"></textarea>
                 </c:if>
 
-                <div class="button_wrapper">
-                    <input type="submit" value="Submit">
-                </div>
+                    <input class="buttons button-green" type="submit" value="Submit">
             </form>
             <c:if test="${not empty invalidData}">
                 <div class="warning">

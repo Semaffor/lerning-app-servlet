@@ -49,10 +49,10 @@
     </filter-mapping>
 
     <jsp-config>
-        <jsp-property-group>
-            <url-pattern>*.jsp</url-pattern>
-            <page-encoding>UTF-8</page-encoding>
-        </jsp-property-group>
+        <taglib>
+            <taglib-uri>customtags</taglib-uri>
+            <taglib-location>/WEB-INF/tld/custom.tld</taglib-location>
+        </taglib>
     </jsp-config>
 
     <filter>
@@ -64,5 +64,4 @@
         <filter-name>AuthFilter</filter-name>
         <url-pattern>/controller</url-pattern>
     </filter-mapping>
-
 </web-app>

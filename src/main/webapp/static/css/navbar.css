@@ -9,7 +9,6 @@
 .navbar {
     display: flex;
     background-color: #333;
-    /*position: fixed;*/
     height: 5.5%;
     width: 100%;
 }
@@ -17,8 +16,9 @@
 .navbar_block {
     align-items: center;
     display: flex;
-    width: 33%;
+    width: fit-content;
     justify-content: center;
+    width: -webkit-fill-available;
 }
 
 /*Style the navigation bar links*/
@@ -116,11 +116,13 @@ li.dropdown {
 
 .navbar_block:first-child {
     padding-left: 120px;
+    width: 300px;
     justify-content: flex-start;
 }
 
 .navbar_block:last-child {
     padding-right: 120px;
+    width: 250px;
     justify-content: flex-end;
 }
 

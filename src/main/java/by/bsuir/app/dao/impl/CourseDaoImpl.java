@@ -18,17 +18,17 @@ public class CourseDaoImpl extends AbstractDao<Course> implements CourseDao {
 
     private static final String SQL_SELECT_LIMIT = "SELECT * FROM %s WHERE %s = %s and %s = %s LIMIT ?, ?;";
     private static final String SQL_SELECT_COURSE_BY_COUCH_USERNAME = "SELECT * FROM %s c " +
-            "JOIN %s u on c.%s = u.%s WHERE u.%s = ?";
+            "JOIN %s u on c.couch_id = u.id WHERE u.%s = ?";
     private final static String SQL_GET_ACTIVE_AND_UNDELETED_ROW_COUNT = "SELECT COUNT(id) as count FROM %s " +
-            "where %s = %s and %s=%s;";
+            "where is_deleted = false and is_active = true;";
     private final static String SQL_IS_USER_SUBSCRIBED = "Select count(*) as count from %s uc " +
-            "join %s c on uc.%s = c.%s " +
-            "join %s u on u.%s = uc.%s " +
-            "where u.%s = ? and c.%s = ? and uc.%s =?;";
+            "join %s c on uc.course_id = c.id " +
+            "join %s u on u.id = uc.user_id " +
+            "where u.username = ? and c.id = ? and uc.is_deleted =?;";
     private static final String SQL_FIND_USER_SUBSCRIPTIONS = "select * from %s as c\n" +
-            "join %s uc on c.%s = uc.%s\n" +
-            "join %s u on u.%s = uc.%s\n" +
-            "where %s = ?;";
+            "join %s uc on c.id = uc.course_id\n" +
+            "join %s u on u.id = uc.user_id\n" +
+            "where username = ?;";
 
     public CourseDaoImpl(Connection connection) {
         super(connection, new CourseRowMapper(), Course.TABLE);
@@ -45,24 +45,20 @@ public class CourseDaoImpl extends AbstractDao<Course> implements CourseDao {
 
     @Override
     public int getNumberOfUndeletedAndActiveRows() {
-        return executeForSingleResultInt(String.format(SQL_GET_ACTIVE_AND_UNDELETED_ROW_COUNT, Course.TABLE,
-                Course.DELETED, "false",
-                Course.ACTIVE, "true"));
+        return executeForSingleResultInt(String.format(SQL_GET_ACTIVE_AND_UNDELETED_ROW_COUNT, Course.TABLE));
     }
 
     @Override
     public boolean isUserSubscribed(String username, Long courseId) {
-        String id = BaseEntity.ID;
         int result = executeForSingleResultInt(String.format(SQL_IS_USER_SUBSCRIBED, UserCourse.TABLE, Course.TABLE,
-                BaseEntity.COURSE_ID, id, User.TABLE, id, BaseEntity.USER_ID, User.NAME, id, UserCourse.DELETED),
-                username, courseId, false);
+                User.TABLE), username, courseId, false);
         return result == 1;
     }
 
     @Override
     public Optional<Course> findCourseByCouchUsername(String login) {
         return executeForSingleResultString(String.format(SQL_SELECT_COURSE_BY_COUCH_USERNAME,
-                Course.TABLE, User.TABLE, Course.COUCH_ID, User.ID, User.NAME), login);
+                Course.TABLE, User.TABLE, User.NAME), login);
     }
 
     @Override
@@ -84,11 +80,8 @@ public class CourseDaoImpl extends AbstractDao<Course> implements CourseDao {
 
     @Override
     public List<Course> findSubscriptionsByUsername(String username) {
-        return executeQuery(String.format(SQL_FIND_USER_SUBSCRIPTIONS,
-                Course.TABLE,
-                UserCourse.TABLE,UserCourse.ID, User.COURSE_ID,
-                User.TABLE, User.ID,User.USER_ID,
-                User.NAME), username);
+        return executeQuery(String.format(SQL_FIND_USER_SUBSCRIPTIONS, Course.TABLE, UserCourse.TABLE, User.TABLE),
+                username);
     }
 
 }

@@ -24,6 +24,7 @@ public enum CommandEnum {
     DO_TASK("doTask"),
     CONFIRM_TASK("submitTask"),
     BUILD_URI("buildURI"),
+    ACTIVATE_COURSE("activateCourse"),
 
     LOGOUT("logout");
 

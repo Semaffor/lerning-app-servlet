@@ -19,7 +19,6 @@ public class EditCourseCommand implements Command {
     private static final Logger LOGGER = LoggerFactory.getLogger(EditCourseCommand.class);
     private static final String REDIRECT_MANAGE_COURSE_PAGE = "/controller?command=" + CommandEnum.SHOW_MANAGEMENT_COURSE
             .getCommand();
-    ;
     private static final String INCORRECT_VALUES = "incorrectValues";
     private static final String SUCCESS_VALUE = "success";
     private final CourseService courseService;

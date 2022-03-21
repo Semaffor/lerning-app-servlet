@@ -3,8 +3,8 @@
 
 <%@ include file="jspf/common/lang-header-footer.jspf" %>
 
-    <link rel="stylesheet" href="${contextPath}/static/css/manage-page.css">
-    <title>Aduliner</title>
+<link rel="stylesheet" href="${contextPath}/static/css/manage-page.css">
+<title>Aduliner</title>
 </head>
 <body>
 <%@ include file="jspf/common/navbar.jspf" %>
@@ -41,24 +41,38 @@
                             <c:if test="${course.active eq 'true'}">
                                 <input type="hidden" name="formAction" value="disable">
                                 <input type="hidden" name="courseId" value="${course.id}">
-                                <button class="buttons"><fmt:message
+                                <button class="buttons button-red"><fmt:message
                                         key="label.management.course.action.disable"/></button>
                             </c:if>
                             <c:if test="${course.active eq 'false'}">
                                 <input type="hidden" name="formAction" value="enable">
                                 <input type="hidden" name="courseId" value="${course.id}">
-                                <button class="buttons"><fmt:message
+                                <button class="buttons button-green"><fmt:message
                                         key="label.management.course.action.enable"/></button>
                             </c:if>
                         </form>
-                        <form action="${contextPath}/controller?command=manageCoursesAction" method="post">
-                            <c:if test="${course.deleted eq 'false'}">
-                                <input type="hidden" name="formAction" value="delete">
-                                <input type="hidden" name="courseId" value="${course.id}">
-                                <button class="buttons"><fmt:message
-                                        key="label.management.course.action.delete"/></button>
-                            </c:if>
-                        </form>
+
+                        <button class="buttons button-red openModal"><fmt:message
+                                key="label.management.course.action.delete"/></button>
+                        <div id="myModal" class="modal">
+                            <!-- Modal content -->
+                            <div class="modal-content">
+                                <h3 class="modal-text"><fmt:message key="label.modal.question.confirm"/> "${course.title}"?</h3>
+
+                                <form id="delete_form" action="${contextPath}/controller?command=manageCoursesAction"
+                                      method="post">
+                                    <c:if test="${course.deleted eq 'false'}">
+                                        <input type="hidden" name="formAction" value="delete">
+                                        <input type="hidden" name="courseId" value="${course.id}">
+                                        <button class="buttons button-red"><fmt:message
+                                                key="label.management.course.action.delete"/></button>
+                                        <button type="button" id="closeModal" class="buttons">
+                                            <fmt:message key="label.modal.action.deny"/></button>
+                                    </c:if>
+                                </form>
+                            </div>
+                        </div>
+
                     </div>
                 </td>
             </tr>
@@ -98,10 +112,6 @@
             <tbody>
         </table>
     </div>
-</div>
-
-<div class="modal-window">
-    Are you sure?
 </div>
 
 <%@ include file="jspf/common/footer.jspf" %>

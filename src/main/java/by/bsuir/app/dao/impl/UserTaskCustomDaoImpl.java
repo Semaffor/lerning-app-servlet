@@ -12,12 +12,12 @@ import java.util.Optional;
 
 public class UserTaskCustomDaoImpl extends AbstractDao<UserTaskDTO> implements UserTaskCustomDao {
     private static final String COMMON_JOINS =
-            "JOIN %s t on t.%s = ut.%s " +
-            "JOIN %s u on u.%s = ut.%s ";
+            "JOIN %s t on t.id = ut.task_id " +
+                    "JOIN %s u on u.id = ut.user_id ";
     private static final String SQL_FIND_TASKS_BY_COUCH_USERNAME = "SELECT * from %s ut " + COMMON_JOINS +
-            "JOIN %s c on c.%s = t.%s " +
-            "where c.%s = ?;";
-    private static final String SQL_USER_TASK_BY_ID = "SELECT * FROM %s ut " + COMMON_JOINS + " WHERE ut.%s = ?;";
+            "JOIN %s c on c.id = t.course_id " +
+            "where c.couch_id = ?;";
+    private static final String SQL_USER_TASK_BY_ID = "SELECT * FROM %s ut " + COMMON_JOINS + " WHERE ut.id = ?;";
     private static final String SQL_FIND_CONFIRMED_COURSE_TASKS = "select * from %s ut\n" + COMMON_JOINS +
             "where u.%s = ? and t.%s = ?;";
 
@@ -27,37 +27,24 @@ public class UserTaskCustomDaoImpl extends AbstractDao<UserTaskDTO> implements U
 
     @Override
     protected Map<String, Object> getFields(UserTaskDTO item) {
-        throw new UnsupportedOperationException();      //Is it correct if I don't need this one method?
+        throw new UnsupportedOperationException("Don't need this one method for DTO class.");
     }
 
     @Override
     public List<UserTaskDTO> findCourseTasksOnReviewByCouchId(Long couchId) {
-        String id = BaseEntity.ID;
         return executeQuery(String.format(SQL_FIND_TASKS_BY_COUCH_USERNAME,
-                UserTask.TABLE,
-                Task.TABLE, id, BaseEntity.TASK_ID,
-                User.TABLE, id, BaseEntity.USER_ID,
-                Course.TABLE, id, BaseEntity.COURSE_ID,
-                Course.COUCH_ID), couchId);
+                UserTask.TABLE, Task.TABLE, User.TABLE, Course.TABLE), couchId);
     }
 
     @Override
     public Optional<UserTaskDTO> findUserTaskByTaskId(Long userTaskId) {
-        String id = BaseEntity.ID;
         return executeForSingleResultString(String.format(SQL_USER_TASK_BY_ID,
-                UserTask.TABLE,
-                Task.TABLE, id, BaseEntity.TASK_ID,
-                User.TABLE, id, BaseEntity.USER_ID,
-                id), userTaskId);
+                UserTask.TABLE, Task.TABLE, User.TABLE), userTaskId);
     }
 
     @Override
     public List<UserTaskDTO> findConfirmedUserCourseTasks(String username, Long courseId) {
-        String id = BaseEntity.ID;
         return executeQuery(String.format(SQL_FIND_CONFIRMED_COURSE_TASKS,
-                UserTask.TABLE,
-                Task.TABLE, id, BaseEntity.TASK_ID,
-                User.TABLE, id, BaseEntity.USER_ID,
-                User.NAME, BaseEntity.COURSE_ID), username, courseId);
+                UserTask.TABLE, Task.TABLE, User.TABLE, User.NAME, BaseEntity.COURSE_ID), username, courseId);
     }
 }

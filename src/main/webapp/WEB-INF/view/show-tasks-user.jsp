@@ -3,8 +3,8 @@
 
 <%@ include file="jspf/common/lang-header-footer.jspf" %>
 
-    <title><fmt:message key="page.title.site.name"/></title>
-    <link rel="stylesheet" href="${contextPath}/static/css/manage-page.css">
+<title><fmt:message key="page.title.site.name"/></title>
+<link rel="stylesheet" href="${contextPath}/static/css/manage-page.css">
 </head>
 <body>
 <%@ include file="jspf/common/navbar.jspf" %>
@@ -28,7 +28,7 @@
                 <td width="300px">
                     <div class="button_actions">
                         <form action="${contextPath}/controller?command=doTask" method="post">
-                            <button><fmt:message key="label.student.task.start"/></button>
+                            <button class="buttons"><fmt:message key="label.student.task.start"/></button>
                             <input type="hidden" name="courseId" value="${param.number}">
                             <input type="hidden" name="taskId" value="${task.id}">
                         </form>
@@ -39,10 +39,12 @@
             <tbody>
         </table>
     </div>
+    <div class="text"><c:if test="${empty tasks}"><fmt:message key="label.couch.tasks.empty.available"/> </c:if></div>
+
     <div class="text">
-    <fmt:message key="label.student.task.submitted"/>
+        <fmt:message key="label.student.task.submitted"/>
     </div>
-    <%@include file="jspf/common/task-table.jspf"%>
+    <%@include file="jspf/common/task-table.jspf" %>
 </div>
 
 

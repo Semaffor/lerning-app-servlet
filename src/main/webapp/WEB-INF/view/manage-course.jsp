@@ -1,3 +1,4 @@
+<%@ taglib prefix="if" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ include file="jspf/common/page.jspf" %>
 <%@ include file="jspf/common/taglib.jspf" %>
 
@@ -13,21 +14,31 @@
     <div class="body_elements">
         <c:if test="${empty course}">
             <h2><fmt:message key="label.couch.courses.empty"/></h2>
-            <button id="forOpenEdit"><fmt:message key="label.couch.courses.create.course"/></button>
+            <button class="buttons" id="forOpenEdit"><fmt:message key="label.couch.courses.create.course"/></button>
         </c:if>
         <c:if test="${not empty course}">
-            <div class="course block">
-                <fmt:message key="label.management.course.title"/>: ${course.title}
-                <fmt:message key="label.management.course.description"/>: ${course.description}
-                <fmt:message key="label.management.course.duration"/>: ${course.duration}
-                <fmt:message key="label.management.course.technology"/>: ${course.technology.getDecodingValue()}
-                <fmt:message key="label.management.course.format"/>: ${course.courseFormat}
-                <fmt:message key="label.management.course.current-pupils-quantity"/>: ${course.currentPupilsQuantity}
-                <fmt:message key="label.management.course.max-pupils-quantity"/>: ${course.maxPupilsQuantity}
-                <fmt:message key="label.management.course.active"/>: ${course.active}
+            <div class="course_block">
+                <div class="course_item"><fmt:message key="label.management.course.title"/>: ${course.title}</div>
+                <div class="course_item"><fmt:message key="label.management.course.description"/>: ${course.description}</div>
+                <div class="course_item"><fmt:message key="label.management.course.duration"/>: ${course.duration}
+                    <fmt:message key="label.management.course.duration.days"/>
+                </div>
+                <div class="course_item"><fmt:message key="label.management.course.technology"/>: ${course.technology.getDecodingValue()}</div>
+                <div class="course_item"><fmt:message key="label.management.course.format"/>: ${course.courseFormat}</div>
+                <div class="course_item"><fmt:message key="label.management.course.current-pupils-quantity"/>: ${course.currentPupilsQuantity}</div>
+                <div class="course_item"><fmt:message key="label.management.course.max-pupils-quantity"/>: ${course.maxPupilsQuantity}</div>
+                <div class="course_item"><fmt:message key="label.management.course.active"/>:
+                        <c:if test="${course.active eq true}"><fmt:message key="label.management.course.active"/></c:if>
+                        <c:if test="${course.active eq false}"><fmt:message key="label.management.course.inactive"/></c:if></div>
             </div>
-            <button id="forOpenEdit"><fmt:message key="label.couch.courses.edit"/></button>
-            <button id="forOpenCreateTask"><fmt:message key="label.couch.courses.task.create"/></button>
+            <button id="forOpenEdit" class="buttons"><fmt:message key="label.couch.courses.edit"/></button>
+            <button id="forOpenCreateTask" class="buttons"><fmt:message key="label.couch.courses.task.create"/></button>
+            <c:if test="${course.active eq false}">
+                <form action="${contextPath}/controller?command=activateCourse" method="post">
+                    <input type="hidden" name="courseId" value="${course.id}">
+                    <button class="buttons button-green"><fmt:message key="label.management.course.action.enable"/> </button>
+                </form>
+            </c:if>
             <div class="notification_wrapper">
             <c:if test="${not empty incorrectValues}">
                 <div class="notification error"> <fmt:message key="label.couch.courses.edit.unsuccessfully"/></div>
@@ -40,14 +51,14 @@
         <div id="form_edit">
             <c:if test="${not empty course}"><c:set var="command" value="editCourse"/></c:if>
             <c:if test="${empty course}"><c:set var="command" value="createCourse"/></c:if>
-            <form class="course editor" action="${contextPath}/controller?command=${command}" method="POST">
+            <form class="course_editor" action="${contextPath}/controller?command=${command}" method="POST">
                 <input type="hidden" name="courseId" value="${course.id}">
                 <fmt:message key="label.management.course.title"/>:
                 <input type="text" name="title_course" value="${course.title}">
                 <fmt:message key="label.management.course.description"/>:
                 <textarea name="description_course">${course.description}</textarea>
                 <fmt:message key="label.management.course.duration"/>:
-                <input type="number" name="duration" value="${course.duration}" max="100" min="1">
+                <input type="number" name="duration" value="${course.duration}" max="100" min="10">
                 <fmt:message key="label.management.course.technology"/>:
                 <select name="chosenTechnology">
                     <c:forEach var="technology" items="${technologies}">
@@ -72,13 +83,11 @@
                 </select>
                 <fmt:message key="label.management.course.max-pupils-quantity"/>:
                 <input type="number" name="maxPupilsQuantity" value="${course.maxPupilsQuantity}" max="100" min="10">
-                <div class="button_wrapper">
                     <input type="submit" value="Submit">
-                </div>
             </form>
         </div>
         <div id="form_creator">
-            <form action="${contextPath}/controller?command=createTask" method="POST">
+            <form class="course_editor" action="${contextPath}/controller?command=createTask" method="POST">
                 <input type="hidden" name="courseId" value="${course.id}">
                 <fmt:message key="label.couch.tasks.title"/>
                 <input type="text" name="title_task" maxlength="45" >
@@ -86,9 +95,7 @@
                 <textarea name="description_task" maxlength="255"></textarea>
                 <fmt:message key="label.couch.tasks.deadline"/>
                 <input type="datetime-local" name="deadline">
-                <div class="button_wrapper">
                     <input type="submit" value="Submit">
-                </div>
             </form>
         </div>
     </div>

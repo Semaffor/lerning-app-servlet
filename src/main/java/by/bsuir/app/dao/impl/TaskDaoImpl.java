@@ -16,9 +16,9 @@ import java.util.Map;
 public class TaskDaoImpl extends AbstractDao<Task> implements TaskDao {
     private static final String SQL_TASK_TABLE_ALIAS = "t";
     private static final String SQL_FIND_COURSE_TASKS_NOT_CONFIRMED_BY_USER = "select %s from %s t " +
-            "join %s c on t.%s = c.%s " +
-            "left join %s ut on ut.%s = t.%s " +
-            "where %s IS NULL and c.%s = ?;";
+            "join %s c on t.course_id = c.id " +
+            "left join %s ut on ut.task_id = t.id " +
+            "where solution IS NULL and c.id = ?;";
 
     public TaskDaoImpl(Connection connection) {
         super(connection, new TaskRowMapper(), Task.TABLE);
@@ -40,9 +40,6 @@ public class TaskDaoImpl extends AbstractDao<Task> implements TaskDao {
         String id = BaseEntity.ID;
         return executeQuery(String.format(SQL_FIND_COURSE_TASKS_NOT_CONFIRMED_BY_USER,
                 generateAliases(SQL_TASK_TABLE_ALIAS, id, Task.TITLE, Task.DESCRIPTION, Task.DEADLINE, Task.DELETED),
-                Task.TABLE,
-                Course.TABLE, Course.COURSE_ID, id,
-                UserTask.TABLE, Task.TASK_ID, id,
-                UserTask.SOLUTION, id), courseId);
+                Task.TABLE, Course.TABLE, UserTask.TABLE), courseId);
     }
 }

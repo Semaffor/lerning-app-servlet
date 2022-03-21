@@ -3,7 +3,7 @@
 
 <%@ include file="jspf/common/lang-header-footer.jspf" %>
 
-    <link rel="stylesheet" href="${contextPath}/static/css/manage-page.css">
+<link rel="stylesheet" href="${contextPath}/static/css/manage-page.css">
 </head>
 <body>
 <%@ include file="jspf/common/navbar.jspf" %>
@@ -35,7 +35,7 @@
                                 </c:if>
                             </c:forEach>
                         </select>
-                        <button><fmt:message key="label.management.user.edit"/></button>
+                        <button class="buttons"><fmt:message key="label.management.user.edit"/></button>
                     </form>
 
                 </td>
@@ -55,24 +55,36 @@
                             <c:if test="${user.blocked eq 'true'}">
                                 <input type="hidden" name="formAction" value="disable">
                                 <input type="hidden" name="userId" value="${user.id}">
-                                <button class="buttons"><fmt:message
+                                <button class="buttons button-green"><fmt:message
                                         key="label.management.course.action.enable"/></button>
                             </c:if>
                             <c:if test="${user.blocked eq 'false'}">
                                 <input type="hidden" name="formAction" value="enable">
                                 <input type="hidden" name="userId" value="${user.id}">
-                                <button class="buttons"><fmt:message
+                                <button class="buttons button-red"><fmt:message
                                         key="label.management.course.action.disable"/></button>
                             </c:if>
                         </form>
-                        <form action="${contextPath}/controller?command=manageCouchesAction" method="post">
-                            <c:if test="${user.deleted eq 'false'}">
-                                <input type="hidden" name="formAction" value="delete">
-                                <input type="hidden" name="userId" value="${user.id}">
-                                <button class="buttons"><fmt:message
-                                        key="label.management.course.action.delete"/></button>
-                            </c:if>
-                        </form>
+                        <button class="buttons button-red openModal"><fmt:message
+                                key="label.management.course.action.delete"/></button>
+                        <div id="myModal" class="modal">
+                            <!-- Modal content -->
+                            <div class="modal-content">
+
+                                <h3 class="modal-text"><fmt:message key="label.modal.question.confirm"/>
+                                    "${user.username}"?</h3>
+                                <form action="${contextPath}/controller?command=manageUsersAction" method="post">
+                                    <c:if test="${user.deleted eq 'false'}">
+                                        <input type="hidden" name="formAction" value="delete">
+                                        <input type="hidden" name="userId" value="${user.id}">
+                                        <button class="buttons button-red"><fmt:message
+                                                key="label.management.course.action.delete"/></button>
+                                        <button type="button" id="closeModal" class="buttons">
+                                            <fmt:message key="label.modal.action.deny"/></button>
+                                    </c:if>
+                                </form>
+                            </div>
+                        </div>
                     </div>
                 </td>
             </tr>
@@ -84,12 +96,10 @@
 
 <div class="modal-window">
     Are you sure?
+
 </div>
 
 <%@ include file="jspf/common/footer.jspf" %>
-<%--<script src="${pageContext.request.contextPath}/static/js/jquery-3.6.0.min.js"></script>--%>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-
 <script src="${pageContext.request.contextPath}/static/js/common.js"></script>
 </body>
 </html>

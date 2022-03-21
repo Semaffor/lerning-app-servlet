@@ -56,6 +56,8 @@ public class CommandFactory {
                 return new ConfirmTaskCommand(new UserTaskServiceImpl(daoHelper));
             case BUILD_URI:
                 return new BuildUriCommand();
+            case ACTIVATE_COURSE:
+                return new ActivateCourseCommand(new CourseServiceImpl(daoHelper));
             case LOGOUT:
                 return new LogoutCommand();
             default:

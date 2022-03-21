@@ -8,6 +8,7 @@
     text-align: center;
     padding: 20px;
 }
+
 input, select, textarea {
     width: 70%;
     padding: 12px 20px;
@@ -17,11 +18,13 @@ input, select, textarea {
     border-radius: 4px;
     box-sizing: border-box;
 }
+
 textarea {
     resize: none;
     min-height: 100px;
     height: fit-content;
 }
+
 input[type=submit] {
     text-align: center;
     width: 20%;
@@ -65,4 +68,17 @@ button {
 
 #mark {
     width: 30%;
+}
+
+.course_block {
+}
+
+.course_item {
+    margin-top: 10px;
+}
+
+.course_editor {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
