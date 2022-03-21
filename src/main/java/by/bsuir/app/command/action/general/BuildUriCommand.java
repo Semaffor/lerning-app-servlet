@@ -16,7 +16,7 @@ public class BuildUriCommand implements Command {
         String urlParamsWithHooks = request.getParameter("params");
         String urlParamsWithoutHooks = urlParamsWithHooks.replaceAll(DELIMITERS, "");
 
-        if (urlParamsWithoutHooks.length() != 0) {
+        if (urlParamsWithoutHooks.contains("command")) {
             String urlParams = urlParamsWithoutHooks.replaceAll("\\s", "&");
             String url = "controller?" + urlParams;
             return CommandResult.redirect(url);

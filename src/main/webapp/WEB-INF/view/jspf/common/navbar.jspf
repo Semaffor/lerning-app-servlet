@@ -5,7 +5,11 @@
     <div class="navbar_block">
         <ul>
             <li><a href="${pageContext.request.contextPath}/controller?command=showMain"><fmt:message
-                    key="label.nav.menu.page"/></a></li>
+                    key="label.nav.menu.page"/></a>
+            </li>
+            <c:if test="${empty userRole}"><li>
+                <a href="${pageContext.request.contextPath}/"><fmt:message key="label.nav.menu.logIn"/></a>
+            </c:if></li>
             <c:if test="${userRole eq 'USER'}">
                 <li>
                     <a href="${contextPath}/controller?command=showMyCourses"><fmt:message
@@ -45,9 +49,10 @@
                 </a>
                 <div class="dropdown-content">
                     <c:if test="${not empty userRole}">
-                    <a href="${pageContext.request.contextPath}/controller?command=logout"><fmt:message
-                            key="label.nav.menu.logout"/></a>
+                        <a href="${pageContext.request.contextPath}/controller?command=logout"><fmt:message
+                                key="label.nav.menu.logout"/></a>
                     </c:if>
+                </div>
             </li>
         </ul>
         <%@ include file="/WEB-INF/view/jspf/common/language-box.jspf" %>

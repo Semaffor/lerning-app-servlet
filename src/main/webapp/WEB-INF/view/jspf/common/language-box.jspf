@@ -10,5 +10,6 @@
                 <button class="button_locale" name="lang" value="be"><fmt:message key="label.lang.BE"/></button>
                 <button class="button_locale" name="lang" value="en"><fmt:message key="label.lang.EN"/></button>
             </form>
+        </div>
     </li>
 </ul>

@@ -26,6 +26,7 @@ public class AuthFilter implements Filter {
     public void init(FilterConfig fConfig) throws ServletException {
         commonCommands.addAll(Arrays.asList(
                 CommandEnum.LOGIN,
+                CommandEnum.ITEMS,
                 CommandEnum.SHOW_MAIN_PAGE,
                 CommandEnum.BUILD_URI));
 

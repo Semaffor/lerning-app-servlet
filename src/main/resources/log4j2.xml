@@ -14,6 +14,7 @@
             </PatternLayout>
             <Policies>
                 <!-- rollover every 5-th day and when the file reaches 10 MegaBytes -->
+
                 <SizeBasedTriggeringPolicy size="10 MB"/>
                 <TimeBasedTriggeringPolicy interval="5" modulate="true"/>
             </Policies>
