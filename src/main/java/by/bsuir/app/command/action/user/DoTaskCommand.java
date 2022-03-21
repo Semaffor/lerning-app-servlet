@@ -13,7 +13,7 @@ import java.util.Optional;
 
 public class DoTaskCommand implements Command {
     private final static String FORWARD_SHOW_AVAILABLE_COURSE_TASKS = "/WEB-INF/view/change-task.jsp";
-    private final static String REDIRECT_CONFIRM_TASK = "/controller?command=" + CommandEnum.SHOW_COURSE_TASKS.getCommand();
+    private final static String REDIRECT_CONFIRM_TASK = LINK_COMMAND + CommandEnum.SHOW_COURSE_TASKS.getCommand();
 
     private final TaskService taskService;
 

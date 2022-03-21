@@ -18,7 +18,7 @@ import java.util.Date;
 public class CreateTaskCommand implements Command {
     private static final Logger LOGGER = LoggerFactory.getLogger(CreateTaskCommand.class);
 
-    private static final String REDIRECT_MANAGE_COURSE_PAGE = "/controller?command=" + CommandEnum.SHOW_MANAGEMENT_COURSE
+    private static final String REDIRECT_MANAGE_COURSE_PAGE = LINK_COMMAND + CommandEnum.SHOW_MANAGEMENT_COURSE
             .getCommand();
     private static final String INCORRECT_VALUES = "incorrectValues";
     private static final String SUCCESS_VALUE = "success";

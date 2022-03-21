@@ -15,7 +15,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.util.Optional;
 
 public class SubscriptionCommand implements Command {
-    private static final String REDIRECT_ITEM_PAGE = "controller?command=%s&number=%d";
+    private static final String REDIRECT_ITEM_PAGE = LINK_COMMAND + "%s&number=%d";
     private static final String ATTRIBUTE_SUBSCRIBE = "subscribe";
     private static final String ATTRIBUTE_UNSUBSCRIBE = "unsubscribe";
     private final UserCourseService userCourseService;

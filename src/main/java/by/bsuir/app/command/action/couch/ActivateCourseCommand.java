@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 
 public class ActivateCourseCommand implements Command {
     private final CourseService courseService;
-    private static final String REDIRECT_MANAGE_COURSE_PAGE = "/controller?command=manageCourse";
+    private static final String REDIRECT_MANAGE_COURSE_PAGE = LINK_COMMAND + "manageCourse";
 
     public ActivateCourseCommand(CourseService courseService) {
         this.courseService = courseService;

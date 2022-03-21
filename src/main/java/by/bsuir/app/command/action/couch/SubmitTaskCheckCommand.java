@@ -16,7 +16,7 @@ public class SubmitTaskCheckCommand implements Command {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(SubmitTaskCheckCommand.class);
     private static final String REDIRECT_SHOW_CHECK_TASKS_PAGE =
-            "/controller?command=" + CommandEnum.SHOW_SUBMITTED_TASKS.getCommand();
+            LINK_COMMAND + CommandEnum.SHOW_SUBMITTED_TASKS.getCommand();
     private static final String FORWARD_SUBMIT_TASK_PAGE = "/WEB-INF/view/change-task.jsp";
     private static final String ERROR_ATTRIBUTE = "invalidData";
     private final UserTaskService userTaskService;

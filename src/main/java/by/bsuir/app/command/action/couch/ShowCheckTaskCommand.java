@@ -14,7 +14,7 @@ import java.util.Optional;
 public class ShowCheckTaskCommand implements Command {
     private static final String FORWARD_CHECK_TASK_PAGE = "/WEB-INF/view/change-task.jsp";
     private static final String REDIRECT_SHOW_SUBMITTED_TASKS_PAGE =
-            "/controller?command=" + CommandEnum.SHOW_SUBMITTED_TASKS.getCommand();
+            LINK_COMMAND + CommandEnum.SHOW_SUBMITTED_TASKS.getCommand();
 
     private final UserTaskService userTaskService;
 

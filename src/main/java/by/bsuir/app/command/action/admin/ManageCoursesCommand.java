@@ -12,7 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 
 public class ManageCoursesCommand implements Command {
     private static final String REDIRECT_SHOW_MANAGE_COURSES_PAGE =
-            "/controller?command=" + CommandEnum.SHOW_MANAGEMENT_COURSES.getCommand();
+            LINK_COMMAND + CommandEnum.SHOW_MANAGEMENT_COURSES.getCommand();
     private final CourseService courseService;
 
     public ManageCoursesCommand(CourseService courseService) {

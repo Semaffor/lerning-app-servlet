@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 public class ConfirmTaskCommand implements Command {
-    private final static String REDIRECT_CONFIRM_TASK = "/controller?command=" + CommandEnum.SHOW_COURSE_TASKS.getCommand();
+    private final static String REDIRECT_CONFIRM_TASK = LINK_COMMAND + CommandEnum.SHOW_COURSE_TASKS.getCommand();
     private final UserTaskService userTaskService;
 
     public ConfirmTaskCommand(UserTaskService userTaskService) {
