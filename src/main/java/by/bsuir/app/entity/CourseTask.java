@@ -1,5 +1,10 @@
 package by.bsuir.app.entity;
 
+/**
+ * Database table mapping.
+ *
+ * @see BaseEntity
+ */
 public class CourseTask extends BaseEntity {
 
     public static final String TABLE = "course_task";

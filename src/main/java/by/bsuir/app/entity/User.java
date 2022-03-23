@@ -2,6 +2,11 @@ package by.bsuir.app.entity;
 
 import by.bsuir.app.entity.enums.Role;
 
+/**
+ * Database table mapping.
+ *
+ * @see BaseEntity
+ */
 public class User extends BaseEntity {
 
     public static final String TABLE = "user";
@@ -16,7 +21,8 @@ public class User extends BaseEntity {
     private Role role;
     private boolean blocked;
 
-    private User() {}
+    private User() {
+    }
 
     public String getUsername() {
         return username;
@@ -51,7 +57,8 @@ public class User extends BaseEntity {
     }
 
     public class Builder {
-        private Builder() {}
+        private Builder() {
+        }
 
         public Builder setId(Long id) {
             User.this.id = id;

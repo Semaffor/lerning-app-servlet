@@ -2,8 +2,13 @@ package by.bsuir.app.entity;
 
 import java.util.Date;
 
-public class UserTaskDTO extends BaseEntity{
-    
+/**
+ * Class which mapping custom sql query result set.
+ *
+ * @see BaseEntity
+ */
+public class UserTaskDTO extends BaseEntity {
+
     private String title;
     private String description;
     private String studentUsername;
@@ -14,7 +19,8 @@ public class UserTaskDTO extends BaseEntity{
     private Date checkDate;
     private Date submittedDate;
 
-    private UserTaskDTO() {}
+    private UserTaskDTO() {
+    }
 
     public String getStudentUsername() {
         return studentUsername;
@@ -57,7 +63,8 @@ public class UserTaskDTO extends BaseEntity{
     }
 
     public class Builder {
-        private Builder() {}
+        private Builder() {
+        }
 
         public UserTaskDTO.Builder setTitle(String title) {
             UserTaskDTO.this.title = title;
@@ -108,6 +115,7 @@ public class UserTaskDTO extends BaseEntity{
             UserTaskDTO.this.checkDate = checkDate;
             return this;
         }
+
         public UserTaskDTO build() {
             return UserTaskDTO.this;
         }

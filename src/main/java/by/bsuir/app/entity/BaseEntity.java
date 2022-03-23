@@ -2,6 +2,12 @@ package by.bsuir.app.entity;
 
 import java.io.Serializable;
 
+/**
+ * Abstract class to exclude similar fields from entities.
+ *
+ * @see Serializable
+ * @see Identifiable
+ */
 public abstract class BaseEntity implements Serializable, Identifiable {
 
     public static final String ID = "id";

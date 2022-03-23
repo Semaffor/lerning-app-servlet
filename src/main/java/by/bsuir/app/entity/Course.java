@@ -3,6 +3,11 @@ package by.bsuir.app.entity;
 import by.bsuir.app.entity.enums.CourseFormat;
 import by.bsuir.app.entity.enums.TechnologyType;
 
+/**
+ * Database table mapping.
+ *
+ * @see BaseEntity
+ */
 public class Course extends BaseEntity {
 
     public static final String TABLE = "course";
@@ -157,6 +162,7 @@ public class Course extends BaseEntity {
             Course.this.photoUri = photoURL;
             return this;
         }
+
         public Course build() {
             return Course.this;
         }

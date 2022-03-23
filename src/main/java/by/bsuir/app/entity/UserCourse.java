@@ -2,7 +2,12 @@ package by.bsuir.app.entity;
 
 import java.util.Date;
 
-public class UserCourse extends BaseEntity{
+/**
+ * Database table mapping.
+ *
+ * @see BaseEntity
+ */
+public class UserCourse extends BaseEntity {
 
     public static final String TABLE = "user_course";
     public final static String STATUS = "status";
@@ -12,7 +17,8 @@ public class UserCourse extends BaseEntity{
     private Long courseId;
     private Date startDate;
 
-    public UserCourse() {}
+    public UserCourse() {
+    }
 
     public Long getUserId() {
         return userId;
@@ -31,7 +37,8 @@ public class UserCourse extends BaseEntity{
     }
 
     public class Builder {
-        private Builder() {}
+        private Builder() {
+        }
 
         public Builder setId(Long id) {
             UserCourse.this.id = id;

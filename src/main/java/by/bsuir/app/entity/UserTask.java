@@ -2,6 +2,10 @@ package by.bsuir.app.entity;
 
 import java.util.Date;
 
+/**
+ * Database table mapping.
+ * @see BaseEntity
+ */
 public class UserTask extends BaseEntity {
 
     public static final String TABLE = "user_task";

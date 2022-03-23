@@ -2,6 +2,11 @@ package by.bsuir.app.entity;
 
 import java.util.Date;
 
+/**
+ * Database table mapping.
+ *
+ * @see BaseEntity
+ */
 public class Task extends BaseEntity {
 
     public static final String TABLE = "task";
@@ -14,7 +19,8 @@ public class Task extends BaseEntity {
     private Long courseId;
     private Date deadline;
 
-    private Task() {}
+    private Task() {
+    }
 
     public String getTitle() {
         return title;

@@ -1,5 +1,8 @@
 package by.bsuir.app.command;
 
+/**
+ * Helps to redirect and forward user between pages and actions.
+ */
 public class CommandResult {
     private final String page;
     private final boolean isRedirect;
