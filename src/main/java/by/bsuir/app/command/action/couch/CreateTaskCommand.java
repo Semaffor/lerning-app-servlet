@@ -20,8 +20,8 @@ public class CreateTaskCommand implements Command {
 
     private static final String REDIRECT_MANAGE_COURSE_PAGE = LINK_COMMAND + CommandEnum.SHOW_MANAGEMENT_COURSE
             .getCommand();
-    private static final String INCORRECT_VALUES = "incorrectValues";
-    private static final String SUCCESS_VALUE = "success";
+    private static final String INCORRECT_VALUES = "successTask=false";
+    private static final String SUCCESS_VALUE = "successTask=true";
     private final DataValidator dataValidator;
     private final TaskService taskService;
 
@@ -32,6 +32,7 @@ public class CreateTaskCommand implements Command {
 
     @Override
     public CommandResult execute(HttpServletRequest request, HttpServletResponse response) throws ServiceException {
+        String attribute = null;
         try {
             Long courseId = Long.valueOf(request.getParameter("courseId"));
             String title = request.getParameter("title_task");
@@ -51,11 +52,12 @@ public class CreateTaskCommand implements Command {
                     .build();
 
             taskService.save(task);
+            attribute = SUCCESS_VALUE;
         } catch (Exception e) {
             LOGGER.error(e.getMessage(), e);
-            request.setAttribute(e.getMessage(), INCORRECT_VALUES);
+            attribute = INCORRECT_VALUES;
         }
-        return CommandResult.redirect(REDIRECT_MANAGE_COURSE_PAGE);
+        return CommandResult.redirect(REDIRECT_MANAGE_COURSE_PAGE + "&" + attribute);
     }
 
 

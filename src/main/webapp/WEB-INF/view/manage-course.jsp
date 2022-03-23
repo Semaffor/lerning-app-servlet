@@ -40,10 +40,16 @@
                 </form>
             </c:if>
             <div class="notification_wrapper">
-            <c:if test="${not empty incorrectValues}">
+                <c:if test="${not empty param.incorrectValues}">
+                    <div class="notification error"> <fmt:message key="label.couch.courses.edit.task.unsuccessful"/></div>
+                </c:if>
+                <c:if test="${not empty param.incorrectValues}">
+                    <div class="notification error"> <fmt:message key="label.couch.courses.edit.task.successful"/></div>
+                </c:if>
+            <c:if test="${not empty param.incorrectValues}">
                 <div class="notification error"> <fmt:message key="label.couch.courses.edit.unsuccessfully"/></div>
             </c:if>
-            <c:if test="${not empty success}">
+            <c:if test="${not empty param.success}">
                 <div class="notification"><fmt:message key="label.couch.courses.edit.success"/></div>
             </c:if>
             </div>

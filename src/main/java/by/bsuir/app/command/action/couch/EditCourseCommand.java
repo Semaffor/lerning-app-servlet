@@ -14,13 +14,14 @@ import org.slf4j.LoggerFactory;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 public class EditCourseCommand implements Command {
     private static final Logger LOGGER = LoggerFactory.getLogger(EditCourseCommand.class);
     private static final String REDIRECT_MANAGE_COURSE_PAGE = LINK_COMMAND + CommandEnum.SHOW_MANAGEMENT_COURSE
             .getCommand();
-    private static final String INCORRECT_VALUES = "incorrectValues";
-    private static final String SUCCESS_VALUE = "success";
+    private static final String INCORRECT_VALUES = "incorrectValues=false";
+    private static final String SUCCESS_VALUE = "success=true";
     private final CourseService courseService;
     private final DataValidator dataValidator;
 
@@ -31,6 +32,7 @@ public class EditCourseCommand implements Command {
 
     @Override
     public CommandResult execute(HttpServletRequest request, HttpServletResponse response) throws ServiceException {
+        String attribute = null;
         try {
             Long courseId = Long.parseLong(request.getParameter("courseId"));
             String title = request.getParameter("title_course");
@@ -53,12 +55,12 @@ public class EditCourseCommand implements Command {
                     .build();
 
             courseService.save(course);
-            request.setAttribute(SUCCESS_VALUE, SUCCESS_VALUE);
+            attribute = SUCCESS_VALUE;
         } catch (Exception e) {
             LOGGER.error(e.getMessage(), e);
-            request.setAttribute(INCORRECT_VALUES, INCORRECT_VALUES);
+            attribute = INCORRECT_VALUES;
         }
-        return CommandResult.redirect(REDIRECT_MANAGE_COURSE_PAGE);
+        return CommandResult.redirect(REDIRECT_MANAGE_COURSE_PAGE + "&" + attribute);
     }
 
     private int getInt(String str) {
