@@ -3,6 +3,7 @@ package by.bsuir.app.dao;
 import by.bsuir.app.entity.Task;
 
 import java.util.List;
+import java.util.Optional;
 
 /**
  * One of DAO interface that extends main Dao, contains specific class methods.
@@ -17,4 +18,12 @@ public interface TaskDao extends Dao<Task> {
      * @return list of tasks which user can do.
      */
     List<Task> findUnconfirmedByUserCourseTasks(Long courseId);
+
+    /**
+     * Finds course tasks which has special title.
+     *
+     * @param title - natural key of task in database.
+     * @return {@code Optional} if exists not nullable optional.
+     */
+    Optional<Task> findByTitle(String title);
 }

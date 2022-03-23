@@ -41,16 +41,16 @@
             </c:if>
             <div class="notification_wrapper">
                 <c:if test="${not empty param.incorrectValues}">
-                    <div class="notification error"> <fmt:message key="label.couch.courses.edit.task.unsuccessful"/></div>
+                    <div class="notification error"> <fmt:message key="label.couch.courses.task.create.unsuccessful"/></div>
                 </c:if>
                 <c:if test="${not empty param.incorrectValues}">
-                    <div class="notification error"> <fmt:message key="label.couch.courses.edit.task.successful"/></div>
+                    <div class="notification error"> <fmt:message key="label.couch.courses.task.create.successful"/></div>
                 </c:if>
             <c:if test="${not empty param.incorrectValues}">
                 <div class="notification error"> <fmt:message key="label.couch.courses.edit.unsuccessfully"/></div>
             </c:if>
             <c:if test="${not empty param.success}">
-                <div class="notification"><fmt:message key="label.couch.courses.edit.success"/></div>
+                <div class="notification"><fmt:message key="label.couch.courses.task.edit.success"/></div>
             </c:if>
             </div>
         </c:if>
@@ -96,14 +96,29 @@
             <form class="course_editor" action="${contextPath}/controller?command=createTask" method="POST">
                 <input type="hidden" name="courseId" value="${course.id}">
                 <fmt:message key="label.couch.tasks.title"/>
-                <input type="text" name="title_task" maxlength="45" >
+                <input type="text" name="title_task" maxlength="45" required>
                 <fmt:message key="label.management.course.description"/>
-                <textarea name="description_task" maxlength="255"></textarea>
+                <textarea name="description_task" maxlength="255" required></textarea>
                 <fmt:message key="label.couch.tasks.deadline"/>
-                <input type="datetime-local" name="deadline">
+                <input type="datetime-local" name="deadline" required>
                     <input type="submit" value="Submit">
             </form>
         </div>
+        <c:if test="${param.successTask eq true}">
+            <div class="label notification">
+                <fmt:message key="label.couch.courses.task.create.successful"/>
+            </div>
+        </c:if>
+        <c:if test="${param.successTask eq 'date'}">
+            <div class="label warning">
+                <fmt:message key="label.couch.courses.task.incorrect.date"/>
+            </div>
+        </c:if>
+        <c:if test="${param.successTask eq 'title'}">
+            <div class="label warning">
+                <fmt:message key="label.couch.courses.task.incorrect.title"/>
+            </div>
+        </c:if>
     </div>
 </div>
 

@@ -3,6 +3,7 @@ package by.bsuir.app.command.action.couch;
 import by.bsuir.app.command.Command;
 import by.bsuir.app.command.CommandEnum;
 import by.bsuir.app.command.CommandResult;
+import by.bsuir.app.encoder.EncoderHandler;
 import by.bsuir.app.exception.ServiceException;
 import by.bsuir.app.service.UserTaskService;
 import by.bsuir.app.validator.DataValidator;
@@ -11,6 +12,7 @@ import org.slf4j.LoggerFactory;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.nio.charset.StandardCharsets;
 
 public class SubmitTaskCheckCommand implements Command {
 
@@ -32,7 +34,8 @@ public class SubmitTaskCheckCommand implements Command {
         try {
             Long taskId = Long.parseLong(request.getParameter("userTaskId"));
             int mark = Integer.parseInt(request.getParameter("mark"));
-            String feedback = request.getParameter("feedback");
+            EncoderHandler encoderHandler = new EncoderHandler();
+            String feedback = encoderHandler.reEncode(request, "feedback");
 
             dataValidator.checkDescription(feedback);
             dataValidator.checkMark(mark);

@@ -58,6 +58,23 @@ ul {
     background-color: #333;
 }
 
+@media screen and (max-width: 1050px) {
+    ul {
+        display: flex;
+        align-items: center;
+    }
+
+    .navbar {
+        height: fit-content;
+    }
+}
+
+@media screen and (max-width: 650px) {
+    ul {
+        display: flex;
+        flex-direction: column;
+    }
+}
 li {
     float: left;
     height: min-content;
@@ -121,14 +138,22 @@ li.dropdown {
 }
 
 .navbar_block:last-child {
-    padding-right: 120px;
+    padding-right: 85px;
     width: 250px;
     justify-content: flex-end;
 }
-
+@media screen and (max-width: 750px) {
+    .navbar_block:first-child {
+        padding-left: 20px;
+    }
+    .navbar_block:last-child {
+        padding-right: 20px;
+    }
+}
 .nickname {
     padding: 7px 10px 0 0;
 }
+
 .button_locale {
     margin: 0;
     padding: 10px 20px;
@@ -139,7 +164,9 @@ li.dropdown {
     background: transparent none;
 }
 
-.button_locale:hover {background-color: #cdcbcb;}
+.button_locale:hover {
+    background-color: #cdcbcb;
+}
 
 .lang_form {
     display: flex;

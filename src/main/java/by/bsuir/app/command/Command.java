@@ -12,6 +12,8 @@ import java.io.IOException;
 public interface Command {
     String FORWARD_ERROR_404_PAGE = "/WEB-INF/view/errors/error404.jsp";
     String LINK_COMMAND = "/controller?command=";
+    String INCORRECT_VALUE = "incorrectValues=true";
+    String SUCCESS_VALUE = "success=true";
 
     /**
      * Execution method for command. Returns path to go to based on the client

@@ -56,4 +56,17 @@ public class TaskServiceImpl extends Service implements TaskService {
             throw new ServiceException(e);
         }
     }
+
+    @Override
+    public Optional<Task> findByTitle(String title) {
+        try (DaoHelper helper = daoHelperFactory.create()) {
+            helper.startTransaction();
+            TaskDao dao = helper.createTaskDao();
+            Optional<Task> task = dao.findByTitle(title);
+            helper.endTransaction();
+            return task;
+        } catch (DaoException e) {
+            throw new ServiceException(e);
+        }
+    }
 }

@@ -3,6 +3,7 @@ package by.bsuir.app.command.action.couch;
 import by.bsuir.app.command.Command;
 import by.bsuir.app.command.CommandEnum;
 import by.bsuir.app.command.CommandResult;
+import by.bsuir.app.encoder.EncoderHandler;
 import by.bsuir.app.entity.Course;
 import by.bsuir.app.entity.enums.CourseFormat;
 import by.bsuir.app.entity.enums.TechnologyType;
@@ -14,14 +15,11 @@ import org.slf4j.LoggerFactory;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 public class EditCourseCommand implements Command {
     private static final Logger LOGGER = LoggerFactory.getLogger(EditCourseCommand.class);
     private static final String REDIRECT_MANAGE_COURSE_PAGE = LINK_COMMAND + CommandEnum.SHOW_MANAGEMENT_COURSE
             .getCommand();
-    private static final String INCORRECT_VALUES = "incorrectValues=false";
-    private static final String SUCCESS_VALUE = "success=true";
     private final CourseService courseService;
     private final DataValidator dataValidator;
 
@@ -35,8 +33,9 @@ public class EditCourseCommand implements Command {
         String attribute = null;
         try {
             Long courseId = Long.parseLong(request.getParameter("courseId"));
-            String title = request.getParameter("title_course");
-            String description = request.getParameter("description_course");
+            EncoderHandler encoderHandler = new EncoderHandler();
+            String title = encoderHandler.reEncode(request, "title_course");
+            String description = encoderHandler.reEncode(request, "description_course");
             int duration = getInt(request.getParameter("duration"));
             int chosenTechnologyCode = getInt(request.getParameter("chosenTechnology"));
             int chosenFormatCode = getInt(request.getParameter("chosenFormat"));
@@ -58,7 +57,7 @@ public class EditCourseCommand implements Command {
             attribute = SUCCESS_VALUE;
         } catch (Exception e) {
             LOGGER.error(e.getMessage(), e);
-            attribute = INCORRECT_VALUES;
+            attribute = INCORRECT_VALUE;
         }
         return CommandResult.redirect(REDIRECT_MANAGE_COURSE_PAGE + "&" + attribute);
     }

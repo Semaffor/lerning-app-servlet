@@ -40,7 +40,7 @@
                     <c:if test="${empty task.feedback}">
                         <fmt:message key="label.couch.tasks.pending"/>
                     </c:if>
-                        ${task.feedback}
+                    <div style="color: green">${task.feedback}</div>
                 </th>
             </c:if>
 

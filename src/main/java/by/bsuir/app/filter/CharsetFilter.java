@@ -1,5 +1,8 @@
 package by.bsuir.app.filter;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import javax.servlet.*;
 import java.io.IOException;
 
@@ -10,15 +13,16 @@ public class CharsetFilter implements Filter {
     @Override
     public void init(FilterConfig filterConfig) {
         requiredEncoding = filterConfig.getInitParameter("requestEncoding");
-        if (requiredEncoding == null) requiredEncoding = "UTF-8";
+        if (requiredEncoding == null) requiredEncoding = "UTF-16";
     }
 
     @Override
     public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain) throws IOException, ServletException {
         String currentEncoding = servletRequest.getCharacterEncoding();
+
         if (currentEncoding == null || !currentEncoding.equals(requiredEncoding)) {
             servletRequest.setCharacterEncoding(requiredEncoding);
-            servletResponse.setContentType("text/html; charset=UTF-8");
+            servletResponse.setContentType("text/html; charset=" + requiredEncoding);
             servletResponse.setCharacterEncoding(requiredEncoding);
         }
         filterChain.doFilter(servletRequest, servletResponse);

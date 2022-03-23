@@ -10,4 +10,6 @@ public interface TaskService {
 
     Optional<Task> findById(Long taskId);
     List<Task> findCourseAvailableTasks(Long courseId);
+
+    Optional<Task> findByTitle(String title);
 }

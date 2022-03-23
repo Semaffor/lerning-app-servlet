@@ -19,9 +19,10 @@ public abstract class AbstractDao<T extends Identifiable> implements Dao<T> {
     private final static String SQL_SELECT_ALL = "select * from %s;";
     private final static String SQL_SELECT_BY_PARAM = "select * from %s where %s=?;";
     private final static String SQL_SELECT_BY_PARAMS = "select * from %s where %s;";
-    private final static String SQL_INSERT = "INSERT INTO %s (%s) VALUES (%s);";
-    private final static String SQL_UPDATE = "UPDATE %s SET %s WHERE id=%d;";
+    private final static String SQL_INSERT = "insert into %s (%s) values (%s);";
+    private final static String SQL_UPDATE = "update %s set %s where id=%d;";
     private final static String SQL_ALIAS = "%s.%s as %s";
+    protected final static String SQL_FIND_WHERE = "select * from %s where %s=?";
 
 
     private final static Logger LOGGER = LogManager.getLogger(AbstractDao.class);
