@@ -108,4 +108,17 @@ public class UserServiceImpl extends Service implements UserService {
             throw new ServiceException(e);
         }
     }
+
+    @Override
+    public boolean createUser(User user) {
+        try (DaoHelper helper = daoHelperFactory.create()) {
+            helper.startTransaction();
+            UserDao dao = helper.createUserDao();
+            boolean result = dao.save(user);
+            helper.endTransaction();
+            return result;
+        } catch (DaoException e) {
+            throw new ServiceException(e);
+        }
+    }
 }

@@ -1,5 +1,7 @@
 package by.bsuir.app.validator;
 
+import by.bsuir.app.exception.IncorrectPasswordException;
+
 import java.util.Date;
 
 public class DataValidator {
@@ -9,6 +11,8 @@ public class DataValidator {
     private static final int MAX_MAX_PUPILS = 100;
     private static final int MIN_MARK = 1;
     private static final int MAX_MARK = 10;
+    private static final int MIN_PASSWORD_LENGTH = 3;
+    private static final int MAX_PASSWORD_LENGTH = 28;
 
     public void checkCourseInputData(String title, String description, int duration, int pupilsCount) {
         checkTitle(title);
@@ -63,5 +67,20 @@ public class DataValidator {
 
     private boolean checkStringLength(String field, int maxLength) {
         return field.isEmpty() || field.length() > maxLength;
+    }
+
+    public void checkPasswords(String password, String repeatedPassword) {
+        if (password == null || repeatedPassword == null) {
+            throw new IncorrectPasswordException("Empty password.");
+        }
+        if (password.length() < MIN_PASSWORD_LENGTH) {
+            throw new IncorrectPasswordException("Min password length: " + MIN_PASSWORD_LENGTH + " characters.");
+        }
+        if (password.length() > MAX_PASSWORD_LENGTH) {
+            throw new IncorrectPasswordException("Max password length: " + MAX_PASSWORD_LENGTH + " characters.");
+        }
+        if (!password.equals(repeatedPassword)) {
+            throw new IncorrectPasswordException("Passwords are not similar.");
+        }
     }
 }

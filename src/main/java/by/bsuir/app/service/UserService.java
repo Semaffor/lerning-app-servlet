@@ -18,4 +18,6 @@ public interface UserService {
     void changeIsDeletedStatus(Long userId);
 
     void changeRole(Long userId, Role role);
+
+    boolean createUser(User user);
 }

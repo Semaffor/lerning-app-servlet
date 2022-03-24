@@ -58,6 +58,10 @@ public class CommandFactory {
                 return new BuildUriCommand();
             case ACTIVATE_COURSE:
                 return new ActivateCourseCommand(new CourseServiceImpl(daoHelper));
+            case REGISTRATION:
+                return new ShowRegistrationCommand();
+            case CREATE_USER:
+                return new CreateUserCommand(new UserServiceImpl(daoHelper));
             case LOGOUT:
                 return new LogoutCommand();
             default:
