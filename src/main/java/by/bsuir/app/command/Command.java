@@ -7,7 +7,9 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 /**
- * Main interface for the Command pattern implementation.
+ * Each new class that implements this interface is
+ * created to extend the web app's functionality
+ * without changing the already existing code
  */
 public interface Command {
     String FORWARD_ERROR_404_PAGE = "/WEB-INF/view/errors/error404.jsp";

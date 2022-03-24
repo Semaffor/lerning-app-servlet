@@ -3,7 +3,7 @@ package by.bsuir.app.command.action.couch;
 import by.bsuir.app.command.Command;
 import by.bsuir.app.command.CommandEnum;
 import by.bsuir.app.command.CommandResult;
-import by.bsuir.app.entity.UserTaskDTO;
+import by.bsuir.app.entity.UserTaskDto;
 import by.bsuir.app.exception.ServiceException;
 import by.bsuir.app.service.UserTaskService;
 
@@ -25,9 +25,9 @@ public class ShowCheckTaskCommand implements Command {
     @Override
     public CommandResult execute(HttpServletRequest request, HttpServletResponse response) throws ServiceException {
         Long userTaskId = Long.valueOf(request.getParameter("userTaskId"));
-        Optional<UserTaskDTO> taskOptional = userTaskService.findUserTaskByTaskId(userTaskId);
+        Optional<UserTaskDto> taskOptional = userTaskService.findUserTaskByTaskId(userTaskId);
         if (taskOptional.isPresent()) {
-            UserTaskDTO task = taskOptional.get();
+            UserTaskDto task = taskOptional.get();
             request.setAttribute("task", task);
             request.setAttribute("command", CommandEnum.SUBMIT_CHECK.getCommand());
             return CommandResult.forward(FORWARD_CHECK_TASK_PAGE);

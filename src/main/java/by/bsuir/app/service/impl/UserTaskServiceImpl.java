@@ -3,7 +3,7 @@ package by.bsuir.app.service.impl;
 import by.bsuir.app.dao.*;
 import by.bsuir.app.entity.User;
 import by.bsuir.app.entity.UserTask;
-import by.bsuir.app.entity.UserTaskDTO;
+import by.bsuir.app.entity.UserTaskDto;
 import by.bsuir.app.exception.DaoException;
 import by.bsuir.app.exception.ServiceException;
 import by.bsuir.app.service.Service;
@@ -21,12 +21,12 @@ public class UserTaskServiceImpl extends Service implements UserTaskService {
     }
 
     @Override
-    public List<UserTaskDTO> findCourseTasksOnReviewByCouchUsername(String login) {
+    public List<UserTaskDto> findCourseTasksOnReviewByCouchUsername(String login) {
         try (DaoHelper helper = daoHelperFactory.create()) {
             helper.startTransaction();
             UserDao userDao = helper.createUserDao();
             Optional<User> couch = userDao.findByUsername(login);
-            List<UserTaskDTO> tasks = new ArrayList<>();
+            List<UserTaskDto> tasks = new ArrayList<>();
             if (couch.isPresent()) {
                 Long couchId = couch.get().getId();
                 UserTaskCustomDao userTaskDao = helper.createUserTaskCustomDao();
@@ -40,11 +40,11 @@ public class UserTaskServiceImpl extends Service implements UserTaskService {
     }
 
     @Override
-    public List<UserTaskDTO> findConfirmedUserCourseTasks(String username, Long courseId) {
+    public List<UserTaskDto> findConfirmedUserCourseTasks(String username, Long courseId) {
         try (DaoHelper helper = daoHelperFactory.create()) {
             helper.startTransaction();
             UserTaskCustomDao userTaskDao = helper.createUserTaskCustomDao();
-            List<UserTaskDTO> tasks = userTaskDao.findConfirmedUserCourseTasks(username, courseId);
+            List<UserTaskDto> tasks = userTaskDao.findConfirmedUserCourseTasks(username, courseId);
             helper.endTransaction();
             return tasks;
         } catch (DaoException e) {
@@ -95,11 +95,11 @@ public class UserTaskServiceImpl extends Service implements UserTaskService {
     }
 
     @Override
-    public Optional<UserTaskDTO> findUserTaskByTaskId(Long userTaskId) {
+    public Optional<UserTaskDto> findUserTaskByTaskId(Long userTaskId) {
         try (DaoHelper helper = daoHelperFactory.create()) {
             helper.startTransaction();
             UserTaskCustomDao dao = helper.createUserTaskCustomDao();
-            Optional<UserTaskDTO> task = dao.findUserTaskByTaskId(userTaskId);
+            Optional<UserTaskDto> task = dao.findUserTaskByTaskId(userTaskId);
             helper.endTransaction();
             return task;
         } catch (DaoException e) {

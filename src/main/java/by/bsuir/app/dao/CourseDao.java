@@ -8,6 +8,7 @@ import java.util.Optional;
 
 /**
  * One of DAO interface that extends main Dao, contains specific class methods.
+ * All method can throw DaoException.
  *
  * @see Course
  */

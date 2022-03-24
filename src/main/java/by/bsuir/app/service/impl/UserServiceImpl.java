@@ -20,7 +20,7 @@ public class UserServiceImpl extends Service implements UserService {
     }
 
     @Override
-    public Optional<User> login(String login, String password) throws ServiceException {
+    public Optional<User> authorize(String login, String password) throws ServiceException {
         try (DaoHelper helper = daoHelperFactory.create()) {
             helper.startTransaction();
             UserDao dao = helper.createUserDao();

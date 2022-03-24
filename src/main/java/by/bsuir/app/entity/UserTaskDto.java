@@ -8,7 +8,7 @@ import java.util.Objects;
  *
  * @see BaseEntity
  */
-public class UserTaskDTO extends BaseEntity {
+public class UserTaskDto extends BaseEntity {
     private static final long serialVersionUID = 42L;
 
     private String title;
@@ -21,7 +21,7 @@ public class UserTaskDTO extends BaseEntity {
     private Date checkDate;
     private Date submittedDate;
 
-    private UserTaskDTO() {
+    private UserTaskDto() {
     }
 
     public String getStudentUsername() {
@@ -60,66 +60,66 @@ public class UserTaskDTO extends BaseEntity {
         return checkDate;
     }
 
-    public static UserTaskDTO.Builder getBuilder() {
-        return new UserTaskDTO().new Builder();
+    public static UserTaskDto.Builder getBuilder() {
+        return new UserTaskDto().new Builder();
     }
 
     public class Builder {
         private Builder() {
         }
 
-        public UserTaskDTO.Builder setTitle(String title) {
-            UserTaskDTO.this.title = title;
+        public UserTaskDto.Builder setTitle(String title) {
+            UserTaskDto.this.title = title;
             return this;
         }
 
-        public UserTaskDTO.Builder setDescription(String description) {
-            UserTaskDTO.this.description = description;
+        public UserTaskDto.Builder setDescription(String description) {
+            UserTaskDto.this.description = description;
             return this;
         }
 
-        public UserTaskDTO.Builder setStudentUsername(String studentUsername) {
-            UserTaskDTO.this.studentUsername = studentUsername;
+        public UserTaskDto.Builder setStudentUsername(String studentUsername) {
+            UserTaskDto.this.studentUsername = studentUsername;
             return this;
         }
 
-        public UserTaskDTO.Builder setAnswer(String answer) {
-            UserTaskDTO.this.solution = answer;
+        public UserTaskDto.Builder setAnswer(String answer) {
+            UserTaskDto.this.solution = answer;
             return this;
         }
 
-        public UserTaskDTO.Builder setMark(int mark) {
-            UserTaskDTO.this.mark = mark;
+        public UserTaskDto.Builder setMark(int mark) {
+            UserTaskDto.this.mark = mark;
             return this;
         }
 
-        public UserTaskDTO.Builder setDeadline(Date deadline) {
-            UserTaskDTO.this.deadline = deadline;
+        public UserTaskDto.Builder setDeadline(Date deadline) {
+            UserTaskDto.this.deadline = deadline;
             return this;
         }
 
-        public UserTaskDTO.Builder setSubmittedDate(Date submittedDate) {
-            UserTaskDTO.this.submittedDate = submittedDate;
+        public UserTaskDto.Builder setSubmittedDate(Date submittedDate) {
+            UserTaskDto.this.submittedDate = submittedDate;
             return this;
         }
 
-        public UserTaskDTO.Builder setFeedback(String feedback) {
-            UserTaskDTO.this.feedback = feedback;
+        public UserTaskDto.Builder setFeedback(String feedback) {
+            UserTaskDto.this.feedback = feedback;
             return this;
         }
 
-        public UserTaskDTO.Builder setId(Long id) {
-            UserTaskDTO.super.id = id;
+        public UserTaskDto.Builder setId(Long id) {
+            UserTaskDto.super.id = id;
             return this;
         }
 
-        public UserTaskDTO.Builder setCheckDate(Date checkDate) {
-            UserTaskDTO.this.checkDate = checkDate;
+        public UserTaskDto.Builder setCheckDate(Date checkDate) {
+            UserTaskDto.this.checkDate = checkDate;
             return this;
         }
 
-        public UserTaskDTO build() {
-            return UserTaskDTO.this;
+        public UserTaskDto build() {
+            return UserTaskDto.this;
         }
     }
 
@@ -134,7 +134,7 @@ public class UserTaskDTO extends BaseEntity {
         if (!super.equals(o)) {
             return false;
         }
-        UserTaskDTO that = (UserTaskDTO) o;
+        UserTaskDto that = (UserTaskDto) o;
         return mark == that.mark && Objects.equals(title, that.title) && Objects
                 .equals(description, that.description) && Objects
                 .equals(studentUsername, that.studentUsername) && Objects

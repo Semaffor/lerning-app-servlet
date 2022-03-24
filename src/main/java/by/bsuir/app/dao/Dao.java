@@ -9,6 +9,7 @@ import java.util.Optional;
 /**
  * Main interface for all DAO objects with operations of creating, updating,
  * deleting and finding some specific object by their id.
+ * All method can throw DaoException.
  *
  * @param <T> type of the object which should extends interface {@link Identifiable}.
  */
@@ -26,7 +27,7 @@ public interface Dao<T extends Identifiable> {
      *
      * @return list of generic entities.
      */
-    List<T> getAll() throws DaoException;
+    List<T> getAll();
 
     /**
      * Saves specified object in database.

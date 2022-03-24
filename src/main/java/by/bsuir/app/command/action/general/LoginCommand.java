@@ -36,7 +36,7 @@ public class LoginCommand implements Command {
         String login = encoderHandler.reEncode(request, PARAM_NAME_LOGIN);
         String password = encoderHandler.reEncode(request, PARAM_NAME_PASSWORD);
 
-        Optional<User> optionalUser = service.login(login, password);
+        Optional<User> optionalUser = service.authorize(login, password);
 
         String errorMessageLabel = "errorInvalid";
         if (optionalUser.isPresent()) {

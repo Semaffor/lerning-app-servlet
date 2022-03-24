@@ -3,7 +3,7 @@ package by.bsuir.app.command.action.user;
 import by.bsuir.app.command.Command;
 import by.bsuir.app.command.CommandResult;
 import by.bsuir.app.entity.Task;
-import by.bsuir.app.entity.UserTaskDTO;
+import by.bsuir.app.entity.UserTaskDto;
 import by.bsuir.app.exception.ServiceException;
 import by.bsuir.app.service.TaskService;
 import by.bsuir.app.service.UserTaskService;
@@ -28,7 +28,7 @@ public class ShowAvailableCourseTasksCommand implements Command {
         String username = (String) request.getSession().getAttribute("username");
 
         List<Task> tasks = taskService.findCourseAvailableTasks(courseId);
-        List<UserTaskDTO> confirmedTasks = userTaskService.findConfirmedUserCourseTasks(username, courseId);
+        List<UserTaskDto> confirmedTasks = userTaskService.findConfirmedUserCourseTasks(username, courseId);
         request.setAttribute("tasks", tasks);
         request.setAttribute("userTasks", confirmedTasks);
         return CommandResult.forward(FORWARD_SHOW_AVAILABLE_COURSE_TASKS);

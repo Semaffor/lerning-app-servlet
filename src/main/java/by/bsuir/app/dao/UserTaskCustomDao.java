@@ -1,7 +1,6 @@
 package by.bsuir.app.dao;
 
-import by.bsuir.app.entity.UserTaskDTO;
-import by.bsuir.app.exception.DaoException;
+import by.bsuir.app.entity.UserTaskDto;
 
 import java.util.List;
 import java.util.Optional;
@@ -9,16 +8,16 @@ import java.util.Optional;
 /**
  * One of DAO interface that extends main Dao, contains specific class methods.
  *
- * @see UserTaskDTO
+ * @see UserTaskDto
  */
-public interface UserTaskCustomDao extends Dao<UserTaskDTO> {
+public interface UserTaskCustomDao extends Dao<UserTaskDto> {
     /**
      * Finds tasks that couch hasn't reviewed before.
      *
      * @param couchId - equals user PK.
      * @return list of available to review courses.
      */
-    List<UserTaskDTO> findCourseTasksOnReviewByCouchId(Long couchId);
+    List<UserTaskDto> findCourseTasksOnReviewByCouchId(Long couchId);
 
     /**
      * Finds task special user task in many-to-many table.
@@ -26,7 +25,7 @@ public interface UserTaskCustomDao extends Dao<UserTaskDTO> {
      * @param userTaskId - row PK.
      * @return if exists, not nullable optional value.
      */
-    Optional<UserTaskDTO> findUserTaskByTaskId(Long userTaskId);
+    Optional<UserTaskDto> findUserTaskByTaskId(Long userTaskId);
 
     /**
      * Finds course tasks that user has confirmed before.
@@ -35,5 +34,5 @@ public interface UserTaskCustomDao extends Dao<UserTaskDTO> {
      * @param courseId - course PK.
      * @return list of custom entities.
      */
-    List<UserTaskDTO> findConfirmedUserCourseTasks(String username, Long courseId);
+    List<UserTaskDto> findConfirmedUserCourseTasks(String username, Long courseId);
 }

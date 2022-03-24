@@ -7,9 +7,9 @@ import java.sql.SQLException;
 import java.text.ParseException;
 import java.util.Date;
 
-public class UserTaskCustomRowMapper implements RowMapper<UserTaskDTO> {
+public class UserTaskCustomRowMapper implements RowMapper<UserTaskDto> {
     @Override
-    public UserTaskDTO map(ResultSet resultSet) throws SQLException, ParseException {
+    public UserTaskDto map(ResultSet resultSet) throws SQLException, ParseException {
         Long id = resultSet.getLong(BaseEntity.ID);
         String title = resultSet.getString(Task.TITLE);
         String description = resultSet.getString(Task.DESCRIPTION);
@@ -22,7 +22,7 @@ public class UserTaskCustomRowMapper implements RowMapper<UserTaskDTO> {
         Date checkDate = resultSet.getDate(UserTask.CHECK_DATE);
         Date submittedDate =  resultSet.getDate(UserTask.SUBMITTED_DATE);
 
-        return UserTaskDTO.getBuilder()
+        return UserTaskDto.getBuilder()
                 .setId(id)
                 .setTitle(title)
                 .setDescription(description)
