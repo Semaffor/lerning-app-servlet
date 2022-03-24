@@ -3,6 +3,7 @@ package by.bsuir.app.command.action.general;
 import by.bsuir.app.command.Command;
 import by.bsuir.app.command.CommandEnum;
 import by.bsuir.app.command.CommandResult;
+import by.bsuir.app.encoder.EncoderHandler;
 import by.bsuir.app.entity.User;
 import by.bsuir.app.entity.enums.Role;
 import by.bsuir.app.exception.ServiceException;
@@ -31,8 +32,9 @@ public class LoginCommand implements Command {
 
     @Override
     public CommandResult execute(HttpServletRequest request, HttpServletResponse response) throws ServiceException {
-        String login = request.getParameter(PARAM_NAME_LOGIN);
-        String password = request.getParameter(PARAM_NAME_PASSWORD);
+        EncoderHandler encoderHandler = new EncoderHandler();
+        String login = encoderHandler.reEncode(request, PARAM_NAME_LOGIN);
+        String password = encoderHandler.reEncode(request, PARAM_NAME_PASSWORD);
 
         Optional<User> optionalUser = service.login(login, password);
 
