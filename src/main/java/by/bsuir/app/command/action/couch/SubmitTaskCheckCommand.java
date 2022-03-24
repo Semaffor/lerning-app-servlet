@@ -3,16 +3,15 @@ package by.bsuir.app.command.action.couch;
 import by.bsuir.app.command.Command;
 import by.bsuir.app.command.CommandEnum;
 import by.bsuir.app.command.CommandResult;
-import by.bsuir.app.encoder.EncoderHandler;
+import by.bsuir.app.encoder.Utf8Handler;
 import by.bsuir.app.exception.ServiceException;
 import by.bsuir.app.service.UserTaskService;
-import by.bsuir.app.validator.DataValidator;
+import by.bsuir.app.validator.FormDataValidator;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.nio.charset.StandardCharsets;
 
 public class SubmitTaskCheckCommand implements Command {
 
@@ -22,9 +21,9 @@ public class SubmitTaskCheckCommand implements Command {
     private static final String FORWARD_SUBMIT_TASK_PAGE = "/WEB-INF/view/change-task.jsp";
     private static final String ERROR_ATTRIBUTE = "invalidData";
     private final UserTaskService userTaskService;
-    private final DataValidator dataValidator;
+    private final FormDataValidator dataValidator;
 
-    public SubmitTaskCheckCommand(UserTaskService userTaskService, DataValidator dataValidator) {
+    public SubmitTaskCheckCommand(UserTaskService userTaskService, FormDataValidator dataValidator) {
         this.userTaskService = userTaskService;
         this.dataValidator = dataValidator;
     }
@@ -34,7 +33,7 @@ public class SubmitTaskCheckCommand implements Command {
         try {
             Long taskId = Long.parseLong(request.getParameter("userTaskId"));
             int mark = Integer.parseInt(request.getParameter("mark"));
-            EncoderHandler encoderHandler = new EncoderHandler();
+            Utf8Handler encoderHandler = new Utf8Handler();
             String feedback = encoderHandler.reEncode(request, "feedback");
 
             dataValidator.checkDescription(feedback);

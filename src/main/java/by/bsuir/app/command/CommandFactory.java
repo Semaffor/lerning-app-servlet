@@ -6,7 +6,7 @@ import by.bsuir.app.command.action.general.*;
 import by.bsuir.app.command.action.user.*;
 import by.bsuir.app.dao.DaoHelperFactory;
 import by.bsuir.app.service.impl.*;
-import by.bsuir.app.validator.DataValidator;
+import by.bsuir.app.validator.FormDataValidator;
 
 public class CommandFactory {
 
@@ -39,13 +39,13 @@ public class CommandFactory {
             case SHOW_SUBMITTED_TASKS:
                 return new ShowSubmittedTasksCommand(new UserTaskServiceImpl(daoHelper));
             case EDIT_COURSE:
-                return new EditCourseCommand(new CourseServiceImpl(daoHelper), new DataValidator());
+                return new EditCourseCommand(new CourseServiceImpl(daoHelper), new FormDataValidator());
             case CREATE_TASK:
-                return new CreateTaskCommand(new TaskServiceImpl(daoHelper), new DataValidator());
+                return new CreateTaskCommand(new TaskServiceImpl(daoHelper), new FormDataValidator());
             case CHECK_TASK:
                 return new ShowCheckTaskCommand(new UserTaskServiceImpl(daoHelper));
             case SUBMIT_CHECK:
-                return new SubmitTaskCheckCommand(new UserTaskServiceImpl(daoHelper), new DataValidator());
+                return new SubmitTaskCheckCommand(new UserTaskServiceImpl(daoHelper), new FormDataValidator());
             case SHOW_MY_COURSES:
                 return new ShowMyCoursesCommand(new CourseServiceImpl(daoHelper));
             case SHOW_COURSE_TASKS:

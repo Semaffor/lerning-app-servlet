@@ -2,26 +2,26 @@ package by.bsuir.app.command.action.general;
 
 import by.bsuir.app.command.Command;
 import by.bsuir.app.command.CommandResult;
-import by.bsuir.app.encoder.EncoderHandler;
+import by.bsuir.app.encoder.Utf8Handler;
 import by.bsuir.app.encription.EncryptorMd5;
 import by.bsuir.app.entity.User;
 import by.bsuir.app.entity.enums.Role;
 import by.bsuir.app.exception.IncorrectPasswordException;
 import by.bsuir.app.exception.ServiceException;
 import by.bsuir.app.service.UserService;
-import by.bsuir.app.validator.DataValidator;
+import by.bsuir.app.validator.FormDataValidator;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.util.Optional;
 
 public class CreateUserCommand implements Command {
-    private final EncoderHandler encoderHandler = new EncoderHandler();
+    private final Utf8Handler encoderHandler = new Utf8Handler();
     private final static String FORWARD_REGISTRATION_PAGE = "/controller?command=registration";
     private final static String SUCCESS_ATTRIBUTE = "registration=true";
     private final static String ALREADY_EXISTS = "alreadyExists=true";
     private final static String PASSWORD_ERROR = "invalidPassword=true";
-    private final DataValidator dataValidator = new DataValidator();
+    private final FormDataValidator dataValidator = new FormDataValidator();
     private final UserService userService;
 
     public CreateUserCommand(UserService userService) {

@@ -4,7 +4,7 @@ import by.bsuir.app.command.Command;
 import by.bsuir.app.command.CommandEnum;
 import by.bsuir.app.command.CommandResult;
 import by.bsuir.app.command.action.couch.EditCourseCommand;
-import by.bsuir.app.encoder.EncoderHandler;
+import by.bsuir.app.encoder.Utf8Handler;
 import by.bsuir.app.exception.ServiceException;
 import by.bsuir.app.service.UserTaskService;
 import org.slf4j.Logger;
@@ -30,7 +30,7 @@ public class ConfirmTaskCommand implements Command {
         String username = (String) request.getSession().getAttribute("username");
 
         try {
-            EncoderHandler encoderHandler = new EncoderHandler();
+            Utf8Handler encoderHandler = new Utf8Handler();
             String solution = encoderHandler.reEncode(request, "solution");
             userTaskService.confirmTask(username, taskId, solution);
             attribute = SUCCESS_VALUE;

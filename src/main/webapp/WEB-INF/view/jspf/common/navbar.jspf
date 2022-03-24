@@ -1,45 +1,16 @@
+<fmt:message key="label.nav.menu.page" var="menuPage"/>
+<fmt:message key="label.nav.menu.logIn" var="logIn"/>
+<fmt:message key="label.nav.menu.user.courses" var="userCourses"/>
+<fmt:message key="label.nav.menu.admin.management.courses" var="manageCourses"/>
+<fmt:message key="label.nav.menu.admin.management.users" var="manageUsers"/>
+<fmt:message key="label.nav.menu.couch.management.course" var="manageCourse"/>
+<fmt:message key="label.nav.menu.couch.courses.review" var="review"/>
 <nav class="navbar">
     <div class="navbar_block">
         <img class="dropdown_header_icon" src="${pageContext.request.contextPath}/static/images/logo.png"/>
     </div>
     <div class="navbar_block">
-        <ul>
-            <li><a href="${pageContext.request.contextPath}/controller?command=showMain"><fmt:message
-                    key="label.nav.menu.page"/></a>
-            </li>
-            <c:if test="${empty userRole}">
-            <li>
-                <a href="${pageContext.request.contextPath}/"><fmt:message key="label.nav.menu.logIn"/></a>
-                </c:if></li>
-            <c:if test="${userRole eq 'USER'}">
-                <li>
-                    <a href="${contextPath}/controller?command=showMyCourses"><fmt:message
-                            key="label.nav.menu.user.courses"/></a>
-                </li>
-            </c:if>
-
-            <c:if test="${userRole eq 'ADMIN'}">
-                <li>
-                    <a href="${contextPath}/controller?command=manageCourses"><fmt:message
-                            key="label.nav.menu.admin.management.courses"/></a>
-                </li>
-                <li>
-                    <a href="${contextPath}/controller?command=manageUsers"><fmt:message
-                            key="label.nav.menu.admin.management.users"/></a>
-                </li>
-            </c:if>
-
-            <c:if test="${userRole eq 'COUCH'}">
-                <li>
-                    <a href="${contextPath}/controller?command=manageCourse"><fmt:message
-                            key="label.nav.menu.couch.management.course"/></a>
-                </li>
-                <li>
-                    <a href="${contextPath}/controller?command=checkTasks"><fmt:message
-                            key="label.nav.menu.couch.courses.review"/></a>
-                </li>
-            </c:if>
-        </ul>
+        <ctg:navbarMenu role="${userRole}"/>
     </div>
     <div class="navbar_block">
         <%@ include file="/WEB-INF/view/jspf/common/language-box.jspf" %>
@@ -54,14 +25,6 @@
                     </a>
                 </c:if>
             </li>
-            <%--            <li class="dropdown">--%>
-            <%--                <div class="dropdown-content">--%>
-            <%--                    <c:if test="${not empty userRole}">--%>
-            <%--                        <a ><fmt:message--%>
-            <%--                                key="label.nav.menu.logout"/></a>--%>
-            <%--                    </c:if>--%>
-            <%--                </div>--%>
-            <%--            </li>--%>
         </ul>
     </div>
 </nav>

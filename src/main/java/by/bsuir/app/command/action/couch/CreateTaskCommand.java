@@ -3,12 +3,12 @@ package by.bsuir.app.command.action.couch;
 import by.bsuir.app.command.Command;
 import by.bsuir.app.command.CommandEnum;
 import by.bsuir.app.command.CommandResult;
-import by.bsuir.app.encoder.EncoderHandler;
+import by.bsuir.app.encoder.Utf8Handler;
 import by.bsuir.app.entity.Task;
 import by.bsuir.app.exception.ServiceException;
 import by.bsuir.app.validator.DateHandler;
 import by.bsuir.app.service.TaskService;
-import by.bsuir.app.validator.DataValidator;
+import by.bsuir.app.validator.FormDataValidator;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -26,10 +26,10 @@ public class CreateTaskCommand implements Command {
     private static final String INCORRECT_DATE = "successTask=date";
     private static final String DUPLICATE_TASK_TITLE = "successTask=title";
     private static final String SUCCESS_VALUE = "successTask=true";
-    private final DataValidator dataValidator;
+    private final FormDataValidator dataValidator;
     private final TaskService taskService;
 
-    public CreateTaskCommand(TaskService taskService, DataValidator dataValidator) {
+    public CreateTaskCommand(TaskService taskService, FormDataValidator dataValidator) {
         this.dataValidator = dataValidator;
         this.taskService = taskService;
     }
@@ -40,7 +40,7 @@ public class CreateTaskCommand implements Command {
         try {
             Long courseId = Long.valueOf(request.getParameter("courseId"));
             String dateString = request.getParameter("deadline");
-            EncoderHandler encoderHandler = new EncoderHandler();
+            Utf8Handler encoderHandler = new Utf8Handler();
             String title = encoderHandler.reEncode(request, "title_task");
             String description = encoderHandler.reEncode(request, "description_task");
 

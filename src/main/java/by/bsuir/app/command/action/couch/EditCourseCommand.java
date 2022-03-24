@@ -3,13 +3,13 @@ package by.bsuir.app.command.action.couch;
 import by.bsuir.app.command.Command;
 import by.bsuir.app.command.CommandEnum;
 import by.bsuir.app.command.CommandResult;
-import by.bsuir.app.encoder.EncoderHandler;
+import by.bsuir.app.encoder.Utf8Handler;
 import by.bsuir.app.entity.Course;
 import by.bsuir.app.entity.enums.CourseFormat;
 import by.bsuir.app.entity.enums.TechnologyType;
 import by.bsuir.app.exception.ServiceException;
 import by.bsuir.app.service.CourseService;
-import by.bsuir.app.validator.DataValidator;
+import by.bsuir.app.validator.FormDataValidator;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -21,9 +21,9 @@ public class EditCourseCommand implements Command {
     private static final String REDIRECT_MANAGE_COURSE_PAGE = LINK_COMMAND + CommandEnum.SHOW_MANAGEMENT_COURSE
             .getCommand();
     private final CourseService courseService;
-    private final DataValidator dataValidator;
+    private final FormDataValidator dataValidator;
 
-    public EditCourseCommand(CourseService courseService, DataValidator dataValidator) {
+    public EditCourseCommand(CourseService courseService, FormDataValidator dataValidator) {
         this.courseService = courseService;
         this.dataValidator = dataValidator;
     }
@@ -33,7 +33,7 @@ public class EditCourseCommand implements Command {
         String attribute = null;
         try {
             Long courseId = Long.parseLong(request.getParameter("courseId"));
-            EncoderHandler encoderHandler = new EncoderHandler();
+            Utf8Handler encoderHandler = new Utf8Handler();
             String title = encoderHandler.reEncode(request, "title_course");
             String description = encoderHandler.reEncode(request, "description_course");
             int duration = getInt(request.getParameter("duration"));

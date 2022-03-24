@@ -7,17 +7,12 @@
     <short-name>ctg</short-name>
     <uri>customtags</uri>
     <tag>
-        <name>table</name>
-        <tag-class>by.bsuir.app.tag.CustomTag</tag-class>
-        <body-content>scriptless</body-content>
+        <name>navbarMenu</name>
+        <tag-class>by.bsuir.app.tag.NavbarMenuTag</tag-class>
+        <body-content>empty</body-content>
         <attribute>
-            <name>rows</name>
-            <required>false</required>
-            <rtexprvalue>true</rtexprvalue>
-        </attribute>
-        <attribute>
-            <name>head</name>
-            <required>false</required>
+            <name>role</name>
+            <required>true</required>
             <rtexprvalue>true</rtexprvalue>
         </attribute>
     </tag>

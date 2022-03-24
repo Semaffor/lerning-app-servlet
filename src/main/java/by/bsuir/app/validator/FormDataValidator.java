@@ -4,7 +4,7 @@ import by.bsuir.app.exception.IncorrectPasswordException;
 
 import java.util.Date;
 
-public class DataValidator {
+public class FormDataValidator {
     private static final int MAX_TITLE_LENGTH = 90;
     private static final int MAX_DESCRIPTION_LENGTH = 255;
     private static final int MAX_DURATION = 100;

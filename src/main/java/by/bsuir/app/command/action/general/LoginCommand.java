@@ -3,7 +3,7 @@ package by.bsuir.app.command.action.general;
 import by.bsuir.app.command.Command;
 import by.bsuir.app.command.CommandEnum;
 import by.bsuir.app.command.CommandResult;
-import by.bsuir.app.encoder.EncoderHandler;
+import by.bsuir.app.encoder.Utf8Handler;
 import by.bsuir.app.entity.User;
 import by.bsuir.app.entity.enums.Role;
 import by.bsuir.app.exception.ServiceException;
@@ -32,7 +32,7 @@ public class LoginCommand implements Command {
 
     @Override
     public CommandResult execute(HttpServletRequest request, HttpServletResponse response) throws ServiceException {
-        EncoderHandler encoderHandler = new EncoderHandler();
+        Utf8Handler encoderHandler = new Utf8Handler();
         String login = encoderHandler.reEncode(request, PARAM_NAME_LOGIN);
         String password = encoderHandler.reEncode(request, PARAM_NAME_PASSWORD);
 
