@@ -1,12 +1,14 @@
 package by.bsuir.app.entity;
 
 import java.util.Date;
+import java.util.Objects;
 
 /**
  * Database table mapping.
  * @see BaseEntity
  */
 public class UserTask extends BaseEntity {
+    private static final long serialVersionUID = 42L;
 
     public static final String TABLE = "user_task";
     public static final String MARK = "mark";
@@ -127,5 +129,29 @@ public class UserTask extends BaseEntity {
         public UserTask build() {
             return UserTask.this;
         }
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+        if (!super.equals(o)) {
+            return false;
+        }
+        UserTask userTask = (UserTask) o;
+        return mark == userTask.mark && Objects.equals(userId, userTask.userId) && Objects
+                .equals(taskId, userTask.taskId) && Objects
+                .equals(submittedDate, userTask.submittedDate) && Objects
+                .equals(checkDate, userTask.checkDate) && Objects
+                .equals(answer, userTask.answer) && Objects.equals(feedback, userTask.feedback);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(super.hashCode(), userId, taskId, mark, submittedDate, checkDate, answer, feedback);
     }
 }

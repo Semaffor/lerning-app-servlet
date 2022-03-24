@@ -1,6 +1,7 @@
 package by.bsuir.app.entity;
 
 import java.util.Date;
+import java.util.Objects;
 
 /**
  * Class which mapping custom sql query result set.
@@ -8,6 +9,7 @@ import java.util.Date;
  * @see BaseEntity
  */
 public class UserTaskDTO extends BaseEntity {
+    private static final long serialVersionUID = 42L;
 
     private String title;
     private String description;
@@ -119,5 +121,33 @@ public class UserTaskDTO extends BaseEntity {
         public UserTaskDTO build() {
             return UserTaskDTO.this;
         }
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+        if (!super.equals(o)) {
+            return false;
+        }
+        UserTaskDTO that = (UserTaskDTO) o;
+        return mark == that.mark && Objects.equals(title, that.title) && Objects
+                .equals(description, that.description) && Objects
+                .equals(studentUsername, that.studentUsername) && Objects
+                .equals(solution, that.solution) && Objects.equals(feedback, that.feedback) && Objects
+                .equals(deadline, that.deadline) && Objects.equals(checkDate, that.checkDate) && Objects
+                .equals(submittedDate, that.submittedDate);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects
+                .hash(super.hashCode(), title, description, studentUsername, solution, feedback, mark, deadline,
+                        checkDate,
+                        submittedDate);
     }
 }

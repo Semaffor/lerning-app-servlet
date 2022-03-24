@@ -1,6 +1,7 @@
 package by.bsuir.app.entity;
 
 import java.util.Date;
+import java.util.Objects;
 
 /**
  * Database table mapping.
@@ -8,6 +9,7 @@ import java.util.Date;
  * @see BaseEntity
  */
 public class UserCourse extends BaseEntity {
+    private static final long serialVersionUID = 42L;
 
     public static final String TABLE = "user_course";
     public final static String STATUS = "status";
@@ -68,5 +70,26 @@ public class UserCourse extends BaseEntity {
         public UserCourse build() {
             return UserCourse.this;
         }
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+        if (!super.equals(o)) {
+            return false;
+        }
+        UserCourse that = (UserCourse) o;
+        return Objects.equals(userId, that.userId) && Objects
+                .equals(courseId, that.courseId) && Objects.equals(startDate, that.startDate);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(super.hashCode(), userId, courseId, startDate);
     }
 }

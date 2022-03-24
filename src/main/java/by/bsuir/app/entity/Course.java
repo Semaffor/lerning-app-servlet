@@ -3,12 +3,15 @@ package by.bsuir.app.entity;
 import by.bsuir.app.entity.enums.CourseFormat;
 import by.bsuir.app.entity.enums.TechnologyType;
 
+import java.util.Objects;
+
 /**
  * Database table mapping.
  *
  * @see BaseEntity
  */
 public class Course extends BaseEntity {
+    private static final long serialVersionUID = 42L;
 
     public static final String TABLE = "course";
     public static final String COUCH_ID = "couch_id";
@@ -166,5 +169,30 @@ public class Course extends BaseEntity {
         public Course build() {
             return Course.this;
         }
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+        if (!super.equals(o)) {
+            return false;
+        }
+        Course course = (Course) o;
+        return duration == course.duration && currentPupilsQuantity == course.currentPupilsQuantity && maxPupilsQuantity == course.maxPupilsQuantity && active == course.active && deleted == course.deleted && Objects
+                .equals(title, course.title) && Objects.equals(description,
+                course.description) && technology == course.technology && courseFormat == course.courseFormat && Objects
+                .equals(couchId, course.couchId) && Objects.equals(photoUri, course.photoUri);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects
+                .hash(super.hashCode(), title, description, duration, technology, courseFormat, currentPupilsQuantity,
+                        maxPupilsQuantity, active, deleted, couchId, photoUri);
     }
 }

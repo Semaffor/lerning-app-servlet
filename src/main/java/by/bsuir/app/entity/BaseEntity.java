@@ -1,6 +1,7 @@
 package by.bsuir.app.entity;
 
 import java.io.Serializable;
+import java.util.Objects;
 
 /**
  * Abstract class to exclude similar fields from entities.
@@ -42,5 +43,22 @@ public abstract class BaseEntity implements Serializable, Identifiable {
 
     public void setDeleted(boolean deleted) {
         this.deleted = deleted;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+        BaseEntity that = (BaseEntity) o;
+        return deleted == that.deleted && Objects.equals(id, that.id);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, deleted);
     }
 }

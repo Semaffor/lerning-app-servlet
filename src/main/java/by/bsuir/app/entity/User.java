@@ -2,12 +2,15 @@ package by.bsuir.app.entity;
 
 import by.bsuir.app.entity.enums.Role;
 
+import java.util.Objects;
+
 /**
  * Database table mapping.
  *
  * @see BaseEntity
  */
 public class User extends BaseEntity {
+    private static final long serialVersionUID = 42L;
 
     public static final String TABLE = "user";
     public static final String NAME = "username";
@@ -93,5 +96,26 @@ public class User extends BaseEntity {
         public User build() {
             return User.this;
         }
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+        if (!super.equals(o)) {
+            return false;
+        }
+        User user = (User) o;
+        return blocked == user.blocked && Objects.equals(username, user.username) && Objects
+                .equals(password, user.password) && role == user.role;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(super.hashCode(), username, password, role, blocked);
     }
 }
