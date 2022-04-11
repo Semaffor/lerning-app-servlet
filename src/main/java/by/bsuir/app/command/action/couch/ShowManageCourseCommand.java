@@ -26,9 +26,9 @@ public class ShowManageCourseCommand implements Command {
         if (courseOptional.isPresent()) {
             Course course = courseOptional.get();
             request.setAttribute("course", course);
-            request.setAttribute("technologies", TechnologyType.values());
-            request.setAttribute("formats", CourseFormat.values());
         }
+        request.setAttribute("technologies", TechnologyType.values());
+        request.setAttribute("formats", CourseFormat.values());
         return CommandResult.forward(FORWARD_MANAGE_COURSE_PAGE);
     }
 }

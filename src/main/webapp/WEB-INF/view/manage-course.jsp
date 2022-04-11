@@ -14,7 +14,7 @@
     <div class="body_elements">
         <c:if test="${empty course}">
             <h2><fmt:message key="label.couch.courses.empty"/></h2>
-            <button class="buttons" id="forOpenEdit"><fmt:message key="label.couch.courses.create.course"/></button>
+            <button class="buttons" id="forOpenCreateCourse"><fmt:message key="label.couch.courses.create.course"/></button>
         </c:if>
         <c:if test="${not empty course}">
             <div class="course_block">
@@ -124,5 +124,6 @@
 
 <%@ include file="jspf/common/footer.jspf" %>
 <script src="${contextPath}/static/js/common.js"></script>
+<script src="${contextPath}/static/js/create-course.js"></script>
 </body>
 </html>

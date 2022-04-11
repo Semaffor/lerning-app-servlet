@@ -28,7 +28,7 @@ public class CourseDaoImpl extends AbstractDao<Course> implements CourseDao {
     private static final String SQL_FIND_USER_SUBSCRIPTIONS = "select * from %s as c\n" +
             "join %s uc on c.id = uc.course_id\n" +
             "join %s u on u.id = uc.user_id\n" +
-            "where username = ?;";
+            "where username = ? and uc.is_deleted = false";
 
     public CourseDaoImpl(Connection connection) {
         super(connection, new CourseRowMapper(), Course.TABLE);
