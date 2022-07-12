@@ -59,7 +59,7 @@ public class UserServiceImpl extends Service implements UserService {
     }
 
     @Override
-    public void changeIsBlockedStatus(Long userId) {
+    public void changeBlockedStatus(Long userId) {
         try (DaoHelper helper = daoHelperFactory.create()) {
             helper.startTransaction();
             UserDao dao = helper.createUserDao();
@@ -76,7 +76,7 @@ public class UserServiceImpl extends Service implements UserService {
     }
 
     @Override
-    public void changeIsDeletedStatus(Long userId) {
+    public void changeDeletedStatus(Long userId) {
         try (DaoHelper helper = daoHelperFactory.create()) {
             helper.startTransaction();
             UserDao dao = helper.createUserDao();

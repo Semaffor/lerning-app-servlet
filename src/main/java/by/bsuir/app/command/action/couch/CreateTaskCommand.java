@@ -6,7 +6,7 @@ import by.bsuir.app.command.CommandResult;
 import by.bsuir.app.encoder.Utf8Handler;
 import by.bsuir.app.entity.Task;
 import by.bsuir.app.exception.ServiceException;
-import by.bsuir.app.validator.DateHandler;
+import by.bsuir.app.validator.DateUtils;
 import by.bsuir.app.service.TaskService;
 import by.bsuir.app.validator.FormDataValidator;
 import org.slf4j.Logger;
@@ -44,8 +44,8 @@ public class CreateTaskCommand implements Command {
             String title = encoderHandler.reEncode(request, "title_task");
             String description = encoderHandler.reEncode(request, "description_task");
 
-            DateHandler dateHandler = new DateHandler();
-            Date date = dateHandler.convertFromString(dateString);
+            DateUtils dateUtils = new DateUtils();
+            Date date = dateUtils.convertFromString(dateString);
 
             Optional<Task> taskOptional = taskService.findByTitle(title);
             dataValidator.checkTaskInputData(title, description, date);

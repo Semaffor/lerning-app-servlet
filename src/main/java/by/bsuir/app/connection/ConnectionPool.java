@@ -18,7 +18,8 @@ public class ConnectionPool {
     private final BlockingQueue<ProxyConnection> availableConnections;
     private final BlockingQueue<ProxyConnection> connectionsInUse;
 
-    private final static Lock lock = new ReentrantLock();
+    //2 лока
+    private final static Lock LOCK = new ReentrantLock();
     private final static ConnectionFactory connectionFactory = new ConnectionFactory();
 
     public ConnectionPool(BlockingQueue<ProxyConnection> availableConnections) {
@@ -29,7 +30,7 @@ public class ConnectionPool {
     public static ConnectionPool getInstance() {
         ConnectionPool localInstance = instance;
         if (localInstance == null) {
-            lock.lock();
+            LOCK.lock();
             localInstance = instance;
             try {
                 if (localInstance == null) {
@@ -40,26 +41,26 @@ public class ConnectionPool {
             } catch (ConnectionException e) {
                 LOGGER.error(e.getMessage(), e);
             } finally {
-                lock.unlock();
+                LOCK.unlock();
             }
         }
         return localInstance;
     }
 
     public void returnConnection(ProxyConnection proxyConnection) {
-        lock.lock();
+        LOCK.lock();
         try {
             if (connectionsInUse.contains(proxyConnection)) {
                 availableConnections.add(proxyConnection);
                 connectionsInUse.remove(proxyConnection);
             }
         } finally {
-            lock.unlock();
+            LOCK.unlock();
         }
     }
 
     public ProxyConnection getConnection() {
-        lock.lock();
+        LOCK.lock();
         ProxyConnection connection = null;
         try {
                 connection = availableConnections.take();
@@ -67,7 +68,7 @@ public class ConnectionPool {
         } catch (InterruptedException e) {
             LOGGER.error(e.getMessage(), e);
         } finally {
-            lock.unlock();
+            LOCK.unlock();
         }
         return connection;
     }

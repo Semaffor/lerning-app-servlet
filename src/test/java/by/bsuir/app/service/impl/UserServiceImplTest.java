@@ -3,8 +3,6 @@ package by.bsuir.app.service.impl;
 import by.bsuir.app.dao.DaoHelper;
 import by.bsuir.app.dao.DaoHelperFactory;
 import by.bsuir.app.dao.UserDao;
-import by.bsuir.app.dao.impl.CourseDaoImpl;
-import by.bsuir.app.dao.impl.UserCourseDaoImpl;
 import by.bsuir.app.entity.User;
 import by.bsuir.app.entity.enums.Role;
 import org.junit.Before;
@@ -12,8 +10,6 @@ import org.junit.Test;
 import org.mockito.Mockito;
 
 import java.util.Optional;
-
-import static org.junit.Assert.*;
 
 public class UserServiceImplTest {
 
@@ -37,7 +33,7 @@ public class UserServiceImplTest {
         User user = Mockito.mock(User.class);
         Mockito.when(userDao.getById(Mockito.anyLong())).thenReturn(Optional.of(user));
 
-        userService.changeIsBlockedStatus(10L);
+        userService.changeBlockedStatus(10L);
         Mockito.verify(user, Mockito.times(1)).setBlocked(Mockito.anyBoolean());
         Mockito.verify(userDao, Mockito.times(1)).save(Mockito.any());
     }
@@ -46,7 +42,7 @@ public class UserServiceImplTest {
     public void testChangeBlockedStatusShouldNotChangeStatusWhenUserNotExists() {
         Mockito.when(userDao.getById(Mockito.anyLong())).thenReturn(Optional.empty());
 
-        userService.changeIsBlockedStatus(10L);
+        userService.changeBlockedStatus(10L);
         Mockito.verify(userDao, Mockito.times(0)).save(Mockito.any());
     }
 
@@ -55,7 +51,7 @@ public class UserServiceImplTest {
         User user = Mockito.mock(User.class);
         Mockito.when(userDao.getById(Mockito.anyLong())).thenReturn(Optional.of(user));
 
-        userService.changeIsDeletedStatus(10L);
+        userService.changeDeletedStatus(10L);
         Mockito.verify(user, Mockito.times(1)).setDeleted(Mockito.anyBoolean());
         Mockito.verify(userDao, Mockito.times(1)).save(Mockito.any());
     }

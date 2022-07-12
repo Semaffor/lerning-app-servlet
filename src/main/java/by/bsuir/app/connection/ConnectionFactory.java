@@ -20,6 +20,7 @@ public class ConnectionFactory {
     private final static String NAME = "jdbc.name";
     private final static String PASSWORD = "jdbc.password";
     private final static String POOL_SIZE = "jdbc.initial_pool_size";
+
     private String url;
     private String name;
     private String password;
@@ -33,6 +34,7 @@ public class ConnectionFactory {
         readProperties(propertiesPath);
     }
 
+    //Replace on one
     public BlockingQueue<ProxyConnection> createProxyConnections(int connectionsCount) throws ConnectionException {
         BlockingQueue<ProxyConnection> proxyConnections = new ArrayBlockingQueue<>(connectionsCount);
         try {
@@ -64,6 +66,8 @@ public class ConnectionFactory {
         try (InputStream inputStream = getClass().getClassLoader().getResourceAsStream(propertiesPath)) {
 
             props.load(inputStream);
+
+            //TODO Not here
             driverName = (props.getProperty(DRIVER));
             Class.forName(driverName);
 

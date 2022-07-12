@@ -7,9 +7,9 @@ import java.text.ParseException;
 import java.time.Instant;
 import java.util.Date;
 
-public class DateHandlerTest {
+public class DateUtilsTest {
 
-    private static final DateHandler dateHandler = new DateHandler();
+    private static final DateUtils DATE_UTILS = new DateUtils();
 
     private static final String CORRECT_DATE = "2004-12-12T12:00";
     private static final String DATE_FOR_INSTANT = "2004-12-12T09:00:00.00Z";
@@ -20,20 +20,20 @@ public class DateHandlerTest {
         Instant instant = Instant.parse(DATE_FOR_INSTANT);
         Date date = Date.from(instant);
 
-        Date result = dateHandler.convertFromString(CORRECT_DATE);
+        Date result = DATE_UTILS.convertFromString(CORRECT_DATE);
         Assert.assertEquals(date, result);
     }
 
     @Test(expected = ParseException.class)
     public void testConvertFromStringShouldThrowExceptionWhenInputInvalidDate() throws ParseException {
-        dateHandler.convertFromString(INCORRECT_DATE);
+        DATE_UTILS.convertFromString(INCORRECT_DATE);
     }
 
     @Test
     public void testCheckOnOldDateShouldReturnTrueWhenDateExpiredOnToday() {
         Instant instant = Instant.parse(DATE_FOR_INSTANT);
         Date date = Date.from(instant);
-        boolean result = dateHandler.checkOnOldDate(date);
+        boolean result = DATE_UTILS.isDateBeforeCurrent(date);
         Assert.assertTrue(result);
     }
 
@@ -41,7 +41,7 @@ public class DateHandlerTest {
     public void testCheckOnOldDateShouldReturnFalseWhenDateAfterCurrentDate() {
         Instant instant = Instant.parse("2034-12-12T09:00:00.00Z");
         Date date = Date.from(instant);
-        boolean result = dateHandler.checkOnOldDate(date);
+        boolean result = DATE_UTILS.isDateBeforeCurrent(date);
         Assert.assertFalse(result);
     }
 }

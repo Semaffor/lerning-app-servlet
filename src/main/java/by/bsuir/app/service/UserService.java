@@ -45,7 +45,7 @@ public interface UserService {
      * @param userId - user PK.
      * @throws ServiceException if a DaoException occurs.
      */
-    void changeIsBlockedStatus(Long userId);
+    void changeBlockedStatus(Long userId);
 
     /**
      * Change user deleted status by changing value in field 'is_deleted'.
@@ -53,7 +53,7 @@ public interface UserService {
      * @param userId - user PK.
      * @throws ServiceException if a DaoException occurs.
      */
-    void changeIsDeletedStatus(Long userId);
+    void changeDeletedStatus(Long userId);
 
     /**
      * Change role of the user in the system.

@@ -27,9 +27,9 @@ public class ManageUsersCommand implements Command {
         Long userId = Long.valueOf(userIdString);
 
         if (FormAction.ENABLE.equals(action) || FormAction.DISABLE.equals(action)) {
-            userService.changeIsBlockedStatus(userId);
+            userService.changeBlockedStatus(userId);
         } else {
-            userService.changeIsDeletedStatus(userId);
+            userService.changeDeletedStatus(userId);
         }
         return CommandResult.redirect(REDIRECT_SHOW_MANAGE_COURSES_PAGE);
     }

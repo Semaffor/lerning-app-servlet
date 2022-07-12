@@ -2,6 +2,7 @@
 
 Description
 ---
+-------
 
 Существует перечень Курсов, за каждым из которых
 закреплен Преподаватель. Студент записывается на один или
@@ -11,17 +12,19 @@ Description
 
 Database schema
 ---
+-------
 
 ![img.png](md-data/img.png)
 
 
 Use-cases(Commands)
 ---
+-------
 1. General
     * Login
     * Registration
     * Course list view
-    * Registration
+    * i18n (EN | RU | BE)
     * Logout
 2. User
     * Course page view
@@ -38,4 +41,21 @@ Use-cases(Commands)
     * Block/Unblock users
     * Enable/disable courses
     * Delete courses, users
+    * Recover courses
     * Edit user roles
+
+Screenshots
+---
+------------
+
+![img.png](img.png)
+![img_1.png](img_1.png)
+![img_2.png](img_2.png)
+![img_3.png](img_3.png)
+![img_9.png](img_9.png)
+![img_4.png](img_4.png)
+![img_5.png](img_5.png)
+![img_6.png](img_6.png)
+![img_7.png](img_7.png)
+![img_10.png](img_10.png)
+![img_8.png](img_8.png)

@@ -41,8 +41,8 @@ public class FormDataValidator {
     }
 
     public void checkDate(Date date) {
-        DateHandler dateHandler = new DateHandler();
-        if (dateHandler.checkOnOldDate(date)) {
+        DateUtils dateUtils = new DateUtils();
+        if (dateUtils.isDateBeforeCurrent(date)) {
             throw new IllegalArgumentException("Incorrect date.");
         }
     }

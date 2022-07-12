@@ -72,8 +72,7 @@ public abstract class AbstractDao<T extends Identifiable> implements Dao<T> {
         }
     }
 
-    protected int executeForSingleResultInt(String query, Object... params) throws
-            DaoException {
+    protected int executeForSingleResultInt(String query, Object... params) throws DaoException {
         try (PreparedStatement statement = createStatement(query, params);
              ResultSet resultSet = statement.executeQuery()) {
             resultSet.next();
