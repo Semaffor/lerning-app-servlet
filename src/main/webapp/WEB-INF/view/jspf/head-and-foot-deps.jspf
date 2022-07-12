@@ -1,0 +1,5 @@
+<link rel="stylesheet" href="${contextPath}/static/css/general.css">
+<link rel="stylesheet" href="${contextPath}/static/css/navbar.css">
+<link rel="stylesheet" href="${contextPath}/static/css/footer.css">
+<link rel="stylesheet" href="${contextPath}/static/css/modal-window.css">
+<link rel="shortcut icon" href="${contextPath}/static/images/logo.png">

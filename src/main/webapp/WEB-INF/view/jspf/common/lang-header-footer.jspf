@@ -1,0 +1,5 @@
+<html lang="${sessionScope.lang}">
+<head>
+    <%@ include file="head.jspf" %>
+    <%@ include file="../head-and-foot-deps.jspf" %>
+    <title><fmt:message key="page.title.site.name"/></title>

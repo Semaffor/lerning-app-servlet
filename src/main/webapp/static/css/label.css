@@ -1,0 +1,33 @@
+.label {
+    margin: 10px auto 0;
+    max-width: 460px;
+    height: 20px;
+    border-radius: 20px;
+    text-align: center;
+    padding-top: 2px;
+}
+
+.error {
+    color: #D8000C;
+    background-color: #FFBABA;
+    /*background-image: url("../images/errorIcon.png");*/
+}
+
+.error:before {
+    font-family: FontAwesome;
+    content: '\f057';
+    font-size: 24px;
+    color: #D8000C;
+}
+
+.warning {
+    color: #9F6000;
+    background-color: #FEEFB3;
+    /*background-image: url('../images/warningIcon.png');*/
+}
+
+.notification {
+    color: black;
+    background-color: #56bfe8;
+    /*background-image: url('../images/lock.png');*/
+}
