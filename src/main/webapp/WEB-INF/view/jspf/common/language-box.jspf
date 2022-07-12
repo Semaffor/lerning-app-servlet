@@ -1,0 +1,15 @@
+<ul>
+    <li class="dropdown">
+        <a href="javascript:void(0)" class="">
+            <img class="dropdown_header_icon" src="static/images/languages.png"/>
+        </a>
+        <div class="dropdown-content">
+            <form class="lang_form"action="${pageContext.request.contextPath}/controller?command=buildURI" method="post">
+                <input type="hidden" name="params" value="${param}">
+                <button class="button_locale" name="lang" value="ru"><fmt:message key="label.lang.RU"/></button>
+                <button class="button_locale" name="lang" value="be"><fmt:message key="label.lang.BE"/></button>
+                <button class="button_locale" name="lang" value="en"><fmt:message key="label.lang.EN"/></button>
+            </form>
+        </div>
+    </li>
+</ul>

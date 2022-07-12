@@ -1,0 +1,30 @@
+<fmt:message key="label.nav.menu.page" var="menuPage"/>
+<fmt:message key="label.nav.menu.logIn" var="logIn"/>
+<fmt:message key="label.nav.menu.user.courses" var="userCourses"/>
+<fmt:message key="label.nav.menu.admin.management.courses" var="manageCourses"/>
+<fmt:message key="label.nav.menu.admin.management.users" var="manageUsers"/>
+<fmt:message key="label.nav.menu.couch.management.course" var="manageCourse"/>
+<fmt:message key="label.nav.menu.couch.courses.review" var="review"/>
+<nav class="navbar">
+    <div class="navbar_block">
+        <img class="dropdown_header_icon" src="${pageContext.request.contextPath}/static/images/logo.png"/>
+    </div>
+    <div class="navbar_block">
+        <ctg:navbarMenu role="${userRole}"/>
+    </div>
+    <div class="navbar_block">
+        <%@ include file="/WEB-INF/view/jspf/common/language-box.jspf" %>
+        <ul>
+            <li>
+                <%-- href="javascript:void(0)"--%>
+                <c:if test="${not empty userRole}">
+                    <a href="${pageContext.request.contextPath}/controller?command=logout" class="dropbtn">
+                        <div class="nickname">${username}</div>
+                        <img class="dropdown_header_icon"
+                             src="${pageContext.request.contextPath}/static/images/logout.png"/>
+                    </a>
+                </c:if>
+            </li>
+        </ul>
+    </div>
+</nav>
