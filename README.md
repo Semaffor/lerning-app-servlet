@@ -1,6 +1,7 @@
 # Online learning app - Final EPAM task
 
-Description
+##Description
+
 ---
 
 Существует перечень Курсов, за каждым из которых
@@ -39,3 +40,4 @@ Use-cases(Commands)
     * Enable/disable courses
     * Delete courses, users
     * Edit user roles
+
