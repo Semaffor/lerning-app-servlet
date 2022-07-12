@@ -1,7 +1,7 @@
 # Online learning app - Final EPAM task
 
 Description
----
+=======
 -------
 
 Существует перечень Курсов, за каждым из которых
